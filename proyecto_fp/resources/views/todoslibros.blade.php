@@ -1,28 +1,18 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Todos los libros</title>
-
-    </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-
-        <header>
-
-            <nav class="-mx-3 flex flex-1 justify-end">
-            </nav>
-        </header>
-
+@extends('layouts.base')
+@section('titulo','Inicio')
+@section('contenido')
         <main class="mt-6">
             <a href='{{route('inicio')}}'> Volver a Inicio </a>
             <h3>Mostrando todos los libros</h3>
-            <a href='{{route('nuevolibro')}}'> Nuevo Libro</a>
+            <a href='{{route('publicarLibro')}}'> Nuevo Libro</a>
+            
+            @if (session('mensaje'))
+                    <div class='alert alert-ok'>
+                        {{ session('mensaje') }}
+                    </div>
+            @endif 
             @if ($libros)
 
-
-            
             <table>
                 <thead>
                     <tr>
@@ -42,9 +32,11 @@
                         <td>{{$l->precio}}</td>
                         <td>
                             <div class="botones">
-                                <a href="/ubicaciones/{{$l->id}}" class="detalle">Detalle Ubicación</a>
-                                <a href="/ubicaciones/{{$l->id}}/edit" class="editar" >Editar Ubicación</a>
-                                <a href="/ubicaciones/{{$l->id}}/destroyconfirm" class="borrar">Borrar Ubicación</a>
+                                <!--<a href="/libro/editar/{{$l->id}}" class="detalle">Detalle Libro</a>-->
+                                <a href="/libro/detalle/{{$l->id}}" class="detalle" >Detalle Libro</a>
+                                <a href="/libro/editar/{{$l->id}}" class="editar" >Editar Libro</a>
+                                <a href="/libro/borrar/{{$l->id}}" class="borrar" >Borrar Libro</a>
+                                <!--<a href="/libro/editar/{{$l->id}}" class="borrar">Borrar Libro</a>-->
                             </div>
                         </td>
                     </tr>
@@ -54,11 +46,6 @@
             @endif
         </main>
 
-        <footer >
-            <p>Lucas Antonio Muñoz Albertos
-        </footer>
+       @endsection
 
-    </body>
-</html>
-<?php
 

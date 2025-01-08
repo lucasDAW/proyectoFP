@@ -1,15 +1,25 @@
+<?php
+
+/* 
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
+ */
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Crear libro</title>
+        <title>Inicio</title>
         
         <style>
             .enlaces{
                 display: flex;
-                flex-direction: column;
+                flex-direction: row;
+                margin: 10px;
             }
             .enlaces a{
                 text-decoration: none;
@@ -44,16 +54,17 @@
                     <header>
                         
                             <nav class="-mx-3 flex flex-1 justify-end">
-                                <div class='enlaces'>
-                            
-                            <a href='{{route('page2')}}'> Volver </a>
-                            <a href='{{route('todoslibros')}}'> Mostrar todos los libros</a>
-                        </div>
                             </nav>
                     </header>
-        <h3>Crear libro </h3>
+
                     <main class="mt-6">
-                        
+                        <h3>Crear Usuario</h3>
+                        <div class='enlaces'>
+                            
+                            <a href='{{route('page2')}}'> Enlace a pagina </a>
+                            <a href='{{route('todoslibros')}}'> Mostrar todos los libros</a>
+<!--                            <a href='{{route('crearUsuario')}}'> Crear Usuario</a>-->
+                        </div>
                     </main>
 
                     <footer >
@@ -62,5 +73,3 @@
           
     </body>
 </html>
-<?php
-
