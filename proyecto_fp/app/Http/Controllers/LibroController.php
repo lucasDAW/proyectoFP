@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Libro;
+use App\Models\Comentario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\DB;
+
 
 class LibroController extends Controller
 {
@@ -25,9 +30,24 @@ class LibroController extends Controller
     }
     
     public function detalle(Libro $libro){
+//        ,Comentario $comentario
+//        $comentarios = Libro::find(1)->comentarios;
+//        var_dump($libro->id);
+//        $comentarios =Comentario::where('libro_id','=',$libro->id)->get();
+//        var_dump($comentarios);
+//        $comentarios='';
+//        var_dump($libro->comentarios);
+//        $comentarios = $libro->comentarios;
+//        var_dump($comentarios->comentarios);
         
+        $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario,u.name as name,u.id as user_id FROM comentarios c , users u, libros l where l.id=c.libro_id and u.id=c.user_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
+//        var_dump(comentarios);
+//        exit();
+        if(empty($comentarios)){
+            $comentarios=null;
+        }
         
-        return view('libro.detalle',['libro'=>$libro]);
+        return view('libro.detalle',['libro'=>$libro,'comentarios'=>$comentarios]);
 
         
     }
@@ -104,7 +124,14 @@ class LibroController extends Controller
 //       $libro=Libro::find($id);
 //       var_dump($libro);
 //       exit();
-       return view('libro.publicar',['libro'=>$libro]);
+        
+        if(Auth::check()){
+            
+            return view('libro.publicar',['libro'=>$libro]);
+        }else{
+            return redirect()->route('login')->with('mensaje', 'Debe iniciar sesión');
+
+        }
 
     }
       public function borrar(Libro $libro){
@@ -121,16 +148,21 @@ class LibroController extends Controller
       public function borrarBBDD(Libro $libro, Request $request){
         
       
-        $id = $request->input('id');
-        if (isset($id)){
-            $libro = Libro::find($id);
-            $libro->delete();
-//            var_dump($libro);
-//            exit();
-            $mensaje =  'Se ha eliminado el libro de forma correcta';
+          if(Auth::check() && Auth::user()->role=='admin'){
+            $id = $request->input('id');
+            if (isset($id)){
+                $libro = Libro::find($id);
+                $libro->delete();
+    //            var_dump($libro);
+    //            exit();
+                $mensaje =  'Se ha eliminado el libro de forma correcta';
+            }else{
+                $mensaje =  'Error al eliminar el libro.';
+
+              }
+          
         }else{
-            $mensaje =  'Error al eliminar el libro.';
-            
+            $mensaje = 'Debe tener permiso de admin para borrar el elemento';
         }
 
         return redirect()->route('todoslibros')->with('mensaje', $mensaje);

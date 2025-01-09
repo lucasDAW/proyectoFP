@@ -6,56 +6,69 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     Created on : 08-ene-2025, 10:22:27
     Author     : Lucas
 */
+*{
+    padding:0px;
+    margin:0px;
+}
+
+.mensaje{
+    background: greenyellow;
+    color:yellow;
+    padding: 10px auto;
+    font-family:'Arial';
+}
+header{
+    background: rgb(252,250,70);
+    background: radial-gradient(circle, rgba(252,250,70,1) 78%, rgba(251,63,67,1) 100%);
+    padding:5px auto;
+    margin-bottom: 15px;
+}
+.enlaces{
+    display: flex;
+    flex-direction: row;
+    /*justify-content: flex-end;*/
+}
+.enlaces a:nth-child(2) {
+    margin-left: auto;
+   
+}
+.enlaces a{
+    text-decoration: none;
+    color: #e5c444;
+    background: black;
+    margin: 5px 5px;
+    width: 120px;
+    padding: 5px 10px;
+    box-shadow: 3px -3px 0px red;
+    transition: 0.4s ease-in-out
+
+}
+.enlaces a:hover:nth-child(1){
+    background: white;
+    color:blue;
+
+}
+.enlaces a:hover{
+    box-shadow: 0px -0px 0px red;
+    color: red;
+    background: white;
+    outline:2px solid black;
+
+}
+.publicarLibro{
+    display: flex;
+    flex-direction: column;
+    border:1px solid burlywood;
+
+}
+.publicarLibro>div{
+    margin:5px auto;
+}
+
+.detalles_libro>div p span{
+    font-weight: bolder;
+    background: yellowgreen;
 
 
-   .mensaje{
-                background: greenyellow;
-                color:yellow;
-                padding: 10px auto;
-                font-family:'Arial';
-            }
-            .enlaces{
-                display: flex;
-                flex-direction: column;
-            }
-            .enlaces a{
-                text-decoration: none;
-                color: #e5c444;
-                background: black;
-                margin: 5px 0px;
-                width: 120px;
-                padding: 5px 10px;
-                box-shadow: 3px -3px 0px red;
-                transition: 0.4s ease-in-out
 
-            }
-            .enlaces a:hover:nth-child(1){
-                background: white;
-                color:blue;
-
-            }
-            .enlaces a:hover{
-                box-shadow: 0px -0px 0px red;
-                color: red;
-                background: white;
-                outline:2px solid black;
-                
-            }
-            .publicarLibro{
-                display: flex;
-                flex-direction: column;
-                border:1px solid burlywood;
-                
-            }
-            .publicarLibro>div{
-                margin:5px auto;
-            }
-            
-            .detalles_libro>div p span{
-                font-weight: bolder;
-                background: yellowgreen;
-                
-                
-                
-            }
-            
+}

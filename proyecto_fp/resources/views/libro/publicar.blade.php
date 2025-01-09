@@ -3,13 +3,15 @@
 
 @section('contenido')
 
+                    <main class="mt-6">
+                        
+                        
 @if (isset($libro))
         <h3>Modificar libro </h3>
 @else
         <h3>Publicar libro </h3>
 @endif
                    
-                    <main class="mt-6">
                         
                  @if ($errors->any())
     <div class="alert alert-danger">

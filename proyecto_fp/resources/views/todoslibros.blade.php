@@ -1,8 +1,6 @@
 @extends('layouts.base')
 @section('titulo','Inicio')
 @section('contenido')
-        <main class="mt-6">
-            <a href='{{route('inicio')}}'> Volver a Inicio </a>
             <h3>Mostrando todos los libros</h3>
             <a href='{{route('publicarLibro')}}'> Nuevo Libro</a>
             
@@ -44,7 +42,7 @@
                 </tbody>
             </table>
             @endif
-        </main>
+        
 
        @endsection
 
