@@ -2,7 +2,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <meta name="csrf-token" content="{{ csrf_token()}}" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href='{{ asset("image/icono.ico") }}' type="image/x-icon">
@@ -14,51 +14,50 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_shopping_cart" />
 <style>
             
-            #perfil{
-                transition: 0.5s;
-            }
-            #perfil:hover{
-                
-                background: #F44336;
-                color: #FFC107;
-                transform: perspective(150px) skewX(5deg) rotateX(360deg);
-            }
-            
-            .enlaces .admin{
-                background: yellow;
-                color:black;
-            }
+           
         </style>
     </head>
     <body class="font-sans antialiased">
         <header>  
-            <nav class="-mx-3 flex flex-1 justify-end">
-                <div class='enlaces'>
-                    <a href='{{route('inicio')}}'> Volver </a>
-                    <a href='{{route('todoslibros')}}'> Mostrar todos los libros</a>                                    
-                    <a href='{{route('busquedalibro')}}'> Busqueda</a>                                    
+            <nav class="enlaces">
+               
+                <ul>
+                    
+                    <li><a href='{{route('inicio')}}'> Volver </a></li>
+                    <li><a href='{{route('todoslibros')}}'> Mostrar todos los libros</a></li>                                    
+                    <li><a href='{{route('busquedalibro')}}'> Busqueda</a></li>
                     @auth
-                        <a href="{{route('verUsuario',['user'=>Auth::user()->id])}}" id='perfil'>Hola {{Auth::user()->name}}</a>
-                        <a href="/miperfil/{{Auth::user()->id}}">Configuración de mi perfil</a>
-                        @if (Auth::user()->role=='admin')
-                            <a href="#" class='admin'>Panel de administrador</a>
-                        @endif
-                        <a href="{{ route('logout')}}">Cerrar Sesión</a>
+                        <li><a href="{{route('verUsuario',['user'=>Auth::user()->id])}}" id='perfil'>Hola {{Auth::user()->name}}</a>
                     @else
-                        <a href="{{ route('login')}}">Iniciar Sesión</a>
+                        <li> <a href="{{ route('login')}}">Iniciar Sesión</a></li>
+                    @endauth
+                <ul class='submenu'>
+                    
+                    @auth
+                        <li><a href="/miperfil/{{Auth::user()->id}}">Configuración de mi perfil</a></li>
+                        <li><a href="{{route('verpedidos',['id' => Auth::user()->id])}}">Mis Pedidos</a></li>
+                        @if (Auth::user()->role=='admin')
+                            <li><a href="#" class='admin'>Panel de administrador</a></li>
+                        @endif
+                            <li><a href="{{ route('logout')}}">Cerrar Sesión</a></li>
+                </ul>
+                    </li>
+                    @else
+                    <li> <a href="{{ route('login')}}">Iniciar Sesión</a></li>
 
                             @if (Route::has('registro'))
-                                <a href="{{ route('registro')}}">Registrarse</a>
+                                <li><a href="{{ route('registro')}}">Registrarse</a></li>
                             @endif
                                     
+                                    
+                    @endauth
+                       <li> <a href="{{ route('mostrarTabla')}}">Ver Cesta</a></li>
                             <!--pruebas-->
                             @if (Route::has('prueba'))
                             <p> contiene la rura prueba</p>
                             @endif
-                                    
-                    @endauth
-                        <a href="{{ route('mostrarTabla')}}">Ver Cesta</a>
-                </div>
+               
+                </ul>
             </nav>
         </header>
         

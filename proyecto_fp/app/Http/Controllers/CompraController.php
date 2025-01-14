@@ -54,6 +54,38 @@ class CompraController extends Controller
         }else{
             return back()->with('mensaje','Debe iniciar sesión para realizar pedido.'); 
         }
-        exit();
+        
+    }
+    
+    
+    
+    public function verPedidos(Request $request){
+        
+//        var_dump($request->id);
+        $compras= DB::table('compras')->where('user_id',$request->id)->get();
+        
+        if(Auth::check()){
+            
+            return view('pedidos.mispedidos',['pedidos'=>$compras]);
+        }else{
+            return back()->with('mensaje','Debe iniciar sesión para realizar pedido.');
+        }
+
+    }
+    
+    public function verLibrosPedido(Request $request){
+        
+        $libros= DB::table('pedidos')
+                ->join('libros','pedidos.libro_id','=','libros.id')
+                ->select('libros.*')->where('compra_id',$request->compra_id)
+                ->get();
+        
+        if(!empty($libros)){
+            return view('pedidos.mislibros',['libros'=>$libros,'id_pedido'=>$request->compra_id]);
+
+        }else{
+            return back()->with('mensaje','Debe iniciar sesión para realizar pedido.');
+
+        }
     }
 }

@@ -112,3 +112,5 @@ Route::post('/compra}',[CompraController::class,'index'])->name('compra');
 
 //pedidos
 Route::get('/pedido',[CompraController::class,'mostrarPedido'])->name('mostrarPedidos');
+Route::get('/pedidos/{id}',[CompraController::class,'verPedidos'])->name('verpedidos');
+Route::get('/pedidos/libros/{compra_id}',[CompraController::class,'verLibrosPedido'])->name('verlibrospedido');
