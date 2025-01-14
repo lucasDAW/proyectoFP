@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\CompraController;
 
 Route::get('/', function () {
     return view('index');
@@ -22,6 +24,8 @@ Route::get('/page2',function () {
 //READ    
 Route::get('/libros',[LibroController::class,'index'])->name('todoslibros');
 Route::get('/libro/detalle/{libro}',[LibroController::class,'detalle'])->name('detallelibro');
+Route::get('/libro/busqueda',[LibroController::class,'busqueda'])->name('busquedalibro');
+Route::post('/libro/busqueda',[LibroController::class,'busquedaBBDD'])->name('busquedaBBDD');
 ////CREATE
 //Route::get('/publicar',[LibroController::class,'crearVistaLibro'])->name('publicarLibro');
 //Route::post('/publicando',[LibroController::class,'publicarlibro'])->name('publicar');
@@ -80,3 +84,31 @@ Route::post('/publicando',[LibroController::class,'publicarlibro'])->name('publi
 Route::post('/libro/comentar',[ComentarioController::class,'comentar'])->name('comentar');
 Route::get('/comentario/borrar/{comentario}',[ComentarioController::class,'delete'])->name('eliminarComentario');
 Route::post('/comentario/borrar/confirmar',[ComentarioController::class,'confirmarBorrado'])->name('confirmareliminarcomentario');
+
+//  CALIFICACIONES
+
+Route::get('/calificaciones', function () {
+return view('calificacion.index');
+
+
+});
+//esto hay que cambiarlo a otro controller
+Route::post('/libro/valorar',[ComentarioController::class,'valorar'])->name('valorar');
+  
+//carrito
+Route::get('/carrito/{libro}',[CarritoController::class,'add'])->name('addCarrito');
+Route::get('/carrito',[CarritoController::class,'showTabla'])->name('mostrarTabla');
+Route::get('/carrito/mostrar',[CarritoController::class,'showProduct'])->name('mostrarcarrito');
+Route::get('/carrito-vaciar',[CarritoController::class,'vaciarcarrito'])->name('vaciar');
+Route::get('/carrito/{id?}/unidadmas',[CarritoController::class,'aumentar'])->name('aumentar_unidad');
+Route::get('/carrito/{id?}/unidadmenos',[CarritoController::class,'descrementar'])->name('decrementar_unidad');
+Route::get('/carrito/{id?}/borrar',[CarritoController::class,'eliminarlibro'])->name('borrarlibro');
+Route::delete('borrar-de-carrito', [CarritoController::class, 'borrarProducto']);
+
+// Compra
+
+Route::post('/compra}',[CompraController::class,'index'])->name('compra');
+
+
+//pedidos
+Route::get('/pedido',[CompraController::class,'mostrarPedido'])->name('mostrarPedidos');

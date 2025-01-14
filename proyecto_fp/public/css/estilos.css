@@ -72,3 +72,305 @@ header{
 
 
 }
+.calificaciones  img{
+    width: 20px;
+    height: 20px;
+    border-radius: 40%;
+    padding:5px;
+    background: none;
+}
+.calificaciones{
+    border:1px solid black;
+    width:fit-content;
+    padding:5px 10px;
+}
+.calificaciones h4{
+    text-align: center;
+}
+.calificaciones img:hover{
+    background-color: #FFC107;
+    cursor:pointer;
+    
+}
+
+.rating{
+    width: 30px;
+    height: 30px;
+    border-radius: 40%;
+    padding:5px;
+    background: none;
+}
+.rating_valor{
+   
+    background-color: #FFC107 !important;
+
+}
+.rating_base{
+    background-color: aquamarine !important;
+    
+}
+/*libros*/
+.libros{
+    display: grid;
+    column-gap: 10px;
+    row-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+}
+
+/*estilos libro*/
+.libro{
+    background-color: #add1b3;
+    float: left;
+    margin: 0 10px 10px 0;
+    width: 205px;
+    padding: 10px;
+    /*height: 290px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.libro>*{
+    margin:10px 0;
+    text-decoration: none;
+    color: black;
+}
+.libro .precio{
+    padding:5px;
+    display: flex;
+    border-radius: 40%;
+    background: white;
+    height: 30px;
+    width: 40px;
+    border: 1px solid black;
+}
+.libro .precio span{
+    font-size: 0.75em;
+    margin:auto;
+    text-align: center;
+    vertical-align: middel;
+}
+.libro .btn_carro{
+   
+    background: #ffad13;
+    color:#2c2c44;
+    font-family: 'Arial';
+    text-decoration: none;
+    padding:5px 0;
+    text-align: center;
+    box-shadow: 3px 3px yellow;
+    transition: 0.5s all;
+    font-weight: bolder;
+   
+}
+.libro .btn_carro:hover{
+    background: yellow;
+    cursor:pointer;
+    outline:1px solid black;
+    box-shadow:none;
+}
+/* portada*/
+.libro img{
+    width: 150px;
+    height: 150px;
+    transition: 0.3s all;
+}
+.libro img:hover {
+    transform: scale(2) translate(10px,5px);
+    outline:1px solid black;
+}
+/*cesta_compra --> tabla*/
+.cesta_compra{
+    width: 75%;
+    margin: 0 auto;
+    margin:25px auto;
+}
+
+.cesta_compra .accion a:hover{
+    background: red;
+    color:black;
+    cursor: pointer;    
+}
+.cesta_compra .accion a{
+    text-decoration: none;
+    color:white;
+    font-weight: bolder;    
+    text-shadow: 1px 1px black;
+   
+    background: #f54848;
+    padding: 5px;
+       
+
+}
+.cesta_compra .cantidad{
+    margin:0 auto;
+    text-align: center;
+}
+.cesta_compra .signo{
+    width: 10px;
+    height: 10px;
+    background: aquamarine;
+    border:1px solid black;
+    margin:0 10px;
+    padding:3px 5px;
+    font-weight: bolder;
+    font-family: sans-serif;
+    
+}
+.cesta_compra .cantidad  a{
+    text-decoration: none;
+    color:black;
+}
+.cesta_compra .accion{
+    padding: 10px;
+}
+.cesta_compra  .signo:hover{
+    color:white;
+    cursor:pointer;
+}
+.cesta_compra  .menos:hover{
+    background: red;
+    
+}
+.cesta_compra .mas:hover{
+    background: green;
+    
+}
+.cesta_compra thead tr{
+    padding:10px;
+}
+.cesta_compra thead tr th:first-child{
+    text-align: left;
+    margin-left: 15px;
+}
+.cesta_compra tbody tr td:first-child{
+    width:50%;
+}
+.cesta_compra tbody tr td:nth-child(2+n){
+    background: red;
+}
+.cesta_compra thead tr{
+    outline: 1px solid black;
+}
+.cesta_compra tbody tr td{
+       padding: 2%;
+}
+.cesta_compra tbody tr td:nth-child(n+2){
+    
+    text-align: center;
+}
+.cesta_compra tbody tr:nth-child(even){
+    background: #dbd8d8;
+    /*outline:1px solid black;*/ 
+      /*line-height: 1px;*/
+      border-bottom: 1px solid black;
+
+}
+.cesta_compra tbody tr:last-child{
+    background: none;
+    font-weight: bolder;
+}
+.cantidadtotal{
+    padding:15px;
+    background: greenyellow;
+    
+}
+/*botones pedidos*/
+.btns_pedido{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin:0px 15px;
+}
+.btns_pedido .btn_vaciar{
+    
+    background: red;
+}
+
+
+
+/* CSS */
+.btns_pedido .btn_vaciar {
+  text-decoration: none;
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.btns_pedido .btn_vaciar:hover,
+.btns_pedido .btn_vaciar:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.btns_pedido .btn_vaciar:active {
+  opacity: .5;
+}
+
+
+
+
+/* CSS */
+.btns_pedido .btn_realizar {
+  text-decoration: none;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #00D775, #00BD68);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 9;
+  border: 0;
+}
+
+.btns_pedido .btn_realizar:hover {
+  background: #00bd68;
+}
+
+.formularioBusqueda{
+    display: flex;
+    align-items: center;
+}
+.formularioBusqueda input{
+    width: 90%; 
+    padding:5px;
+    margin:15px auto;
+}

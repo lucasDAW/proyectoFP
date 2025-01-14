@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Comentario;
 use App\Models\Libro;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 
 class ComentarioController extends Controller
@@ -88,5 +90,22 @@ class ComentarioController extends Controller
         }
         
         return redirect()->route('detallelibro',['libro'=>$libro_id])->with('mensaje', $mensaje);        
+    }
+    
+    public function valorar(Request $request){
+        
+        $valor=$request->input('valoracion');
+        $user_id=$request->input('user_id');
+        $libro_id=$request->input('libro_id');
+        
+        DB::table('calificaciones')
+        ->updateOrInsert(
+         ['user_id' => $user_id,'libro_id' => $libro_id],
+        ['calificacion' => $valor]
+        );
+        
+        
+        return redirect()->route('detallelibro',['libro'=>$libro])->with('mensaje', 'calificación envidada');
+
     }
 }

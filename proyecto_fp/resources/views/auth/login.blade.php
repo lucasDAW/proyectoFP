@@ -2,6 +2,8 @@
 @section('titulo','Iniciar Sesión')
     <!-- Session Status -->
 @section('contenido')
+<div class='login'>
+    
 <h3>Iniciar Sesión</h3>
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -43,4 +45,5 @@
                   <a href="{{ route('registro')}}">Registrarse</a>      
 
 
+</div>
 @endsection

@@ -2,11 +2,17 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href='{{ asset("image/icono.ico") }}' type="image/x-icon">
     <link rel='stylesheet' href='{{ asset("css/estilos.css") }}'>
     <title>SENECALIB - @yield('titulo')</title>
-        <style>
+    <!--icono-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=edit" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete_forever" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_shopping_cart" />
+<style>
             
             #perfil{
                 transition: 0.5s;
@@ -30,6 +36,7 @@
                 <div class='enlaces'>
                     <a href='{{route('inicio')}}'> Volver </a>
                     <a href='{{route('todoslibros')}}'> Mostrar todos los libros</a>                                    
+                    <a href='{{route('busquedalibro')}}'> Busqueda</a>                                    
                     @auth
                         <a href="{{route('verUsuario',['user'=>Auth::user()->id])}}" id='perfil'>Hola {{Auth::user()->name}}</a>
                         <a href="/miperfil/{{Auth::user()->id}}">Configuración de mi perfil</a>
@@ -50,6 +57,7 @@
                             @endif
                                     
                     @endauth
+                        <a href="{{ route('mostrarTabla')}}">Ver Cesta</a>
                 </div>
             </nav>
         </header>
@@ -73,9 +81,7 @@
             
             let iniciotext= etiqueta.text;
 //            console.log(iniciotext);
-            etiqueta.addEventListener(
-                "mouseenter",
-                (event) => {
+            etiqueta.addEventListener("mouseenter",(event) => {
                   // highlight the mouseenter target
                   event.target.text='Mi Perfil';
 
@@ -83,9 +89,7 @@
                   setTimeout(() => {
                     event.target.style.color = "";
                   }, 500);
-                },
-                false,
-              );
+                });
               etiqueta.addEventListener(
                 "mouseout",
                 (event) => {

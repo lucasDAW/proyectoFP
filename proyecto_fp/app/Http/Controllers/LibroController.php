@@ -18,7 +18,7 @@ class LibroController extends Controller
     {       
             $libros=Libro::all();
 //            var_dump($libros)        
-        return view('todoslibros',['libros'=>$libros]);
+        return view('libro.todoslibros',['libros'=>$libros]);
     
     }
     
@@ -41,13 +41,18 @@ class LibroController extends Controller
 //        var_dump($comentarios->comentarios);
         
         $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario,u.name as name,u.id as user_id FROM comentarios c , users u, libros l where l.id=c.libro_id and u.id=c.user_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
-//        var_dump(comentarios);
+//        $valoracion = DB::select('SELECT c.* FROM calificaciones c, users u ,libros l where c.libro_id=l.id and u.id=c.user_id and c.libro_id=:libro_id;', ['libro_id'=>$libro->id]);
+        $valoracionmedia = DB::select("SELECT round(avg(calificacion),0) as media,round(avg(calificacion),2)as mediafloat FROM calificaciones WHERE libro_id=:libro_id", ['libro_id'=>$libro->id]);
+//        var_dump($valoracion);
 //        exit();
         if(empty($comentarios)){
             $comentarios=null;
         }
+         if(empty($valoracion)){
+            $valoracion=null;
+        }
         
-        return view('libro.detalle',['libro'=>$libro,'comentarios'=>$comentarios]);
+        return view('libro.detalle',['libro'=>$libro,'comentarios'=>$comentarios,'valoracion'=>$valoracionmedia[0]]);
 
         
     }
@@ -113,7 +118,7 @@ class LibroController extends Controller
             $mensaje =  'Se ha publicado el libro de forma correcta';
         }
         
-        return redirect()->route('todoslibros')->with('mensaje', $mensaje);
+        return redirect()->route('libro.todoslibros')->with('mensaje', $mensaje);
     }
     
     public function editar(Libro $libro){
@@ -167,5 +172,57 @@ class LibroController extends Controller
 
         return redirect()->route('todoslibros')->with('mensaje', $mensaje);
 
+    }
+    
+    public function busqueda(){
+        return view('libro.busqueda');
+    }
+    
+    public function busquedaBBDD(Request $request){
+        
+//        
+        
+        $campo_busqueda= $request->input('busqueda');
+        $libros = DB::table('libros')->where('titulo','like','%'.$campo_busqueda.'%')->orWhere('autor','like','%'.$campo_busqueda.'%')->orWhere('ISBN','like','%'.$campo_busqueda.'%')->get();
+            
+        $arrayLibros=[];
+            
+        foreach($libros as $l){
+            $libroObject = new Libro;
+            $libroObject->id= $l->id;
+            $libroObject->titulo = $l->titulo;
+            $libroObject->descripcion = $l->descripcion;
+            $libroObject->isbn = $l->ISBN;
+            $libroObject->autor = $l->autor;
+            $libroObject->numero_paginas = $l->numero_paginas;
+            $libroObject->fecha_lanzamiento = $l->fecha_lanzamiento;
+            $libroObject->precio = $l->precio;
+
+            $arrayLibros[$l->id]=$libroObject;
+        }
+            
+            
+        return view('libro.busqueda',['libros'=>$arrayLibros]);
+                
+                    
+                    
+         
+                    //        ESTO es para FECTJ con js
+                    //        
+                    //        
+                                        //        $response = [
+                    //            "success"=>false,
+                    //            "mensaje"=>'Ha ocurrido un error.'
+                    //        ];
+//        
+                    //            $response = [
+                    //            "success"=>true,
+                    //            "mensaje"=>'Consulta correcta.',
+                    //            "data"=>$libros
+                    //             ];
+                    //        return response()->json($response);
+            
+
+        
     }
 }

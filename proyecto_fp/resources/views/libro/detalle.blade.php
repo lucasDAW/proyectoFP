@@ -4,7 +4,6 @@
 @section('contenido')
 
 
-                   
                         
     @if (isset($libro))
         <h3>Detalles libro </h3>
@@ -29,10 +28,17 @@
         <h6>No exite el libro.</h6>
     @endif
                        
-                        
-@include('comentarios.crearcomentario')
-
+    <div class='valoracion'>
+        
+        @include('calificacion.index')
+    </div>    
+    <div class='comentario'>
+        
+        @include('comentarios.crearcomentario')
+    </div>
 @endsection
+
+
 
 
  
