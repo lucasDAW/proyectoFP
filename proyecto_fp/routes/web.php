@@ -9,6 +9,8 @@ use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\CompraController;
 
+use App\Http\Controllers\EmailController;
+
 Route::get('/', function () {
     return view('index');
 });
@@ -43,13 +45,15 @@ Route::post('/libro/busqueda',[LibroController::class,'busquedaBBDD'])->name('bu
 
 Route::get('/create',[UsuarioController::class,'crear'])->name('crearUsuario');
 Route::get('/miperfil/{user}',[UsuarioController::class,'show'])->name('verUsuario');
+Route::post('/user/libro/listadeseos',[UsuarioController::class,'addlistadeseos'])->name('agregalistadeseos');
+Route::get('/user/listadeseos',[UsuarioController::class,'showlistadeseos'])->name('verdeseos');
 //Route::get('/', function () {
 //    return view('welcome');
 //});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -106,11 +110,30 @@ Route::get('/carrito/{id?}/borrar',[CarritoController::class,'eliminarlibro'])->
 Route::delete('borrar-de-carrito', [CarritoController::class, 'borrarProducto']);
 
 // Compra
-
-Route::post('/compra}',[CompraController::class,'index'])->name('compra');
+Route::get('/compra',[CompraController::class,'confirmarPedido'])->name('confirmarcompra');
+Route::post('/compra/confirmar',[CompraController::class,'realizarcompra'])->name('realizarcompra');
 
 
 //pedidos
 Route::get('/pedido',[CompraController::class,'mostrarPedido'])->name('mostrarPedidos');
 Route::get('/pedidos/{id}',[CompraController::class,'verPedidos'])->name('verpedidos');
 Route::get('/pedidos/libros/{compra_id}',[CompraController::class,'verLibrosPedido'])->name('verlibrospedido');
+
+
+//correos
+Route::get('/send-welcome-email',[EmailController::class,'sendWelcomeEmail']);
+//pdf-facturas
+Route::post('/factura/consulta',[EmailController::class,'sendFactura'])->name('facturaorden');
+
+//prueba de subir archivos
+Route::get('/libro/subir',[LibroController::class,'publicar'])->name('subirarchivo');
+Route::post('/libro/subir',[LibroController::class,'subir'])->name('almacenandoarchivo');
+Route::post('/libro/bajar',[LibroController::class,'bajar'])->name('descargar');
+
+
+//ver factura
+Route::get('/facutra/ver',
+        function(){
+    
+    return view('emails.factura');
+        })->name('verfactura');

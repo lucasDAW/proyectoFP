@@ -29,12 +29,38 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        
+        
+        var_dump($request->id_usuario);
+        var_dump($request->name);
+        var_dump($request->email);
+        if($request->id_usuario and Auth::check()){
+            
+            $request->validate([
+                  'name' => ['required', 'string', 'max:255'],
+                'password' => ['required'],
+            ]);
+            $usuario = User::find($request->id_usuario);
+            $usuario->name=$request->name;
+            $usuario->password=Hash::make($request->password);
+            $usuario->save();
+            
+            
+            return redirect('/miperfil/'.Auth::user()->id)->with('mensaje', 'Se han modificado los datos del usuario correctamente');
+ 
+        }else{
+            
+        }
+        exit();
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
 //            'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'password' => ['required'],
         ]);
+        
+        
+        
 
         $user = User::create([
             'name' => $request->name,
@@ -44,12 +70,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-//        var_dump($user);
-//        exit();
+//       
         event(new Registered($user));
 
-//        Auth::login($user);
 
-        return redirect(route('inicio', absolute: false));
+        return redirect(route('todoslibros', absolute: false));
     }
 }

@@ -33,9 +33,16 @@ header{
     background: rgb(252,250,70);
     background: radial-gradient(circle, rgba(252,250,70,1) 78%, rgba(251,63,67,1) 100%);
     padding:80px auto;
-    margin-bottom: 15px;
+    margin-bottom: 50px;
+    background-image: url("../image/banner.webp");
+    position: fixed;
+    width: 100%;
+    top:0px;
 }
-
+header img{
+    width: 500px;
+    height: 250px;
+}
 .enlaces{
     display: flex;
     justify-content: flex-end;
@@ -112,9 +119,42 @@ header{
      background: yellow;
      color:black;
  }
-     
- 
+ .enlaces .nombre a{
+    /*width: 200px;  Ancho fijo*/ 
+    overflow: hidden;  
+ }
+/* .enlaces .nombre a{
+    font-size: calc(10px + 1vw);  Tamaño dinámico de fuente 
+    white-space: nowrap;  Impedir el salto de línea 
+    overflow: hidden;  Ocultar el desbordamiento 
+    text-overflow: ellipsis;  Añadir "..." si el texto es muy largo 
+ }*/
+.enlaces ul li:hover > ul .btn_cerrar_sesion a{    
+    background: #d79635;
+    box-shadow: 3px 3px #9f0808;
+    transition: 0.3s all ease-in-out;
+}
+.enlaces ul li:hover > ul .btn_cerrar_sesion:hover a{    
+    background: #9f0808;
+    box-shadow: 0px 0px #9f0808;
+}
 /*-----   CABECERA +++ HEADER ++ -----*/
+/*mensajes*/
+.mensaje{
+    
+    border: 3px solid #7e9f4c;
+    padding: 25px 50px;
+    margin: 20px 100px;
+    background: #d6f9a1;
+    font-size: 1.3em;
+    font-family: sans-serif;
+    box-shadow: 5px 5px #136e13;
+    color: #083008;
+}
+/*main*/
+main{
+        margin-top: 100px;
+}
 .publicarLibro{
     display: flex;
     flex-direction: column;
@@ -143,6 +183,7 @@ header{
     border:1px solid black;
     width:fit-content;
     padding:5px 10px;
+    margin-top:20px;
 }
 .calificaciones h4{
     text-align: center;
@@ -153,6 +194,110 @@ header{
     
 }
 
+/*icono lista de deseos*/
+.marcado{
+    background: #c54b60;
+    border-radius: 6px;
+}
+
+
+/* The actual popup */
+.popup .popuptext {
+    background: #555;
+    padding: 10px 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    bottom: 0px;
+    left: 10px;
+    visibility: hidden;
+}
+
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+/*  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;*/
+}
+
+/* Add animation (fade in the popup) */
+/*@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}*/
+
+/*tabla lista deseos*/
+.lista_deseos{
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    font-family: OpensSans-Regular;
+    font-size:18px;
+    margin:10px 50px;
+}
+.lista_deseos thead tr{
+    
+    height: 60px;
+    background: #36304a;
+    color:white;
+    font-style: italic;
+} 
+.lista_deseos tbody tr{
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.2;
+    font-weight: unset;
+    text-align: center;
+    border-collapse: collapse;
+
+}
+.lista_deseos tbody tr{
+    
+    height: 80px;
+    transition: 0.3s ease;
+}
+.lista_deseos tbody tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+.lista_deseos tbody tr:nth-child(odd){
+    background-color: #c5efef;
+}
+
+.lista_deseos tbody tr:hover{
+    color: #3c0909;
+    background: #ebeb67;
+    transform: scale(1.15);
+    border: 1px solid black;
+    
+}
+.lista_deseos tbody tr:hover td:last-child{
+    text-align: left;
+
+}
+
+/*icono lista de deseos FIN*/
+.listadeseos:hover{
+    background: #c54b60;
+    border-radius: 20%;
+    cursor:pointer;
+    transform: scale(1.5);
+    animation: agitar  ease 0.5s;
+}
 .rating{
     width: 30px;
     height: 30px;
@@ -434,7 +579,53 @@ header{
     padding:5px;
     margin:15px auto;
 }
+/*configuracion de mi perfil*/
+.acciones_usuario
+{
+    border: 1px solid black;
+    padding-bottom: 50px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;    
+}
+.acciones_usuario div{
+      background: aquamarine;
+    color:black;
+    box-shadow: 3px 3px yellow;
+    text-decoration: none;
+    padding:5px 10px;
+    margin:0 10px;
+    transition: 0.5s all ease;
+       
+    
+}
 
+.acciones_usuario div:hover{
+    background: yellow;
+    color:black;
+    box-shadow: 0px 0px yellow;
+    text-decoration: none;
+    padding:5px 10px;
+    margin:0 10px;
+    cursor: pointer;
+    outline:1px solid black;
+    animation: agitar  ease 0.5s;
+    animation-iteration-count: 10;
+    
+}
+.acciones_usuario div a{
+    text-decoration: none;
+    color:black
+}
+@keyframes agitar {
+  0% {transform: rotate(0deg)}
+  33% {transform: rotate(25deg)}
+  66% {transform: rotate(-25deg)}
+  100% {transform: rotate(0deg)}
+}
 /*A PARTIR DE AQUI ESTO ES ALGO QUE HABIA ANTES Y HE BORRADO*/
 /*.enlaces .admin{
     background: yellow;

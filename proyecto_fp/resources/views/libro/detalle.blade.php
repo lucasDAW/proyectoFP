@@ -27,11 +27,23 @@
     @else
         <h6>No exite el libro.</h6>
     @endif
-                       
+           <div class="">
+               @auth
+                <div class="popup">
+                @if (isset($listadeseos->existe) and $listadeseos->existe==1)
+                    <span class="listadeseos marcado material-symbols-outlined">favorite</span>
+                @else
+                    <span class="listadeseos  material-symbols-outlined">favorite</span>
+                @endif
+                    <span class="popuptext" id="myPopup">Se ha añadido el libro a la lista de deseos!</span>
+               </div>
+               @endauth
+    </div>             
     <div class='valoracion'>
         
         @include('calificacion.index')
-    </div>    
+    </div>
+       
     <div class='comentario'>
         
         @include('comentarios.crearcomentario')

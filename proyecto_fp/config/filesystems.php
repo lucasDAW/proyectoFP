@@ -44,7 +44,15 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
-
+//        Archivos
+        'archivos' =>[
+            'driver'=>'local',
+            'root' => storage_path('app/documentos'),
+            'url'=>env('APP_URL').'/archivos_libros',
+            'visibility'=>'public',
+        ],
+//        fin archivos
+        
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -72,6 +80,10 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+    ],
+    
+    'links' => [
+        public_path('archivos_libros') => storage_path('app/documentos'),
     ],
 
 ];

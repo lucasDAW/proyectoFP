@@ -6,7 +6,7 @@
 </div>
 @if (isset($carro))
    @if (count($carro)>0)
-        <h5>Contenido de la cesta.</h5>
+        <h5>Contenido de la cesta</h5>
         <table  class="cesta_compra">
             <thead>
                 <tr>  
@@ -45,13 +45,10 @@
         </table>
         <div class='btns_pedido'> 
     <a href="{{route('vaciar')}}" class="btn_vaciar">Vaciar carrito</a>
-    <form method='post' action='{{route('compra')}}'>
-        @csrf
-        <input type='hidden' value='{{http_build_query($carro)}}' id='carro' name='carro'>
-        <input type='submit' value='Realizar pedido' id='btn_carro' name='btn_carro' class="btn_realizar">
-    </form>
-
+   
+    <a href="{{route('confirmarcompra')}}" id='btn_carro' name='btn_carro' class="btn_realizar">Realizar Pedido</a>
     <a href="{{route('todoslibros')}})">volver</a>
+
 </div>
    @else
         <h5>La cesta se encuentra vacía.</h5>

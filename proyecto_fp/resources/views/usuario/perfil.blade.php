@@ -9,9 +9,19 @@
                         
                         
                         @if ($user)
-                        <p>El usuario existe</p>
+                        <div class="acciones_usuario">
+                            <div>
+                                <a href="#">Mis lista de deseos</a>
+                            </div>
+                            <div>
+                                <a href="#">Mis comentario</a>
+                            </div>
+                            <div>
+                                <a href="{{route('registro')}}">Editar mi perfil</a>
+                            </div>
+                        </div>
                         
-                        {{$user}}
+                        
                         @endif
                        
                        

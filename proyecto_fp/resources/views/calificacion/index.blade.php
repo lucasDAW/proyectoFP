@@ -22,9 +22,11 @@
   
 </div>
 <script>
-  let ratings = document.querySelectorAll('.rating');
-  let contenedor= document.getElementById('calificaciones');
-  let texto = document.getElementById('output');
+ 
+// calificacion del libro
+let ratings = document.querySelectorAll('.rating');
+let contenedor= document.getElementById('calificaciones');
+let texto = document.getElementById('output');
 //  let valor=0;
   
   @if(isset($valoracion->media))valor={{$valoracion->media}}@endif

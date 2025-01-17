@@ -63,7 +63,7 @@
                             
                             <a href='{{route('page2')}}'> Enlace a pagina </a>
                             <a href='{{route('todoslibros')}}'> Mostrar todos los libros</a>
-<!--                            <a href='{{route('crearUsuario')}}'> Crear Usuario</a>-->
+                            <a href='{{route('crearUsuario')}}'> Crear Usuario</a>
                         </div>
                     </main>
 

@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
+//subida archivos
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\File;
 
 
 class LibroController extends Controller
@@ -43,16 +46,28 @@ class LibroController extends Controller
         $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario,u.name as name,u.id as user_id FROM comentarios c , users u, libros l where l.id=c.libro_id and u.id=c.user_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
 //        $valoracion = DB::select('SELECT c.* FROM calificaciones c, users u ,libros l where c.libro_id=l.id and u.id=c.user_id and c.libro_id=:libro_id;', ['libro_id'=>$libro->id]);
         $valoracionmedia = DB::select("SELECT round(avg(calificacion),0) as media,round(avg(calificacion),2)as mediafloat FROM calificaciones WHERE libro_id=:libro_id", ['libro_id'=>$libro->id]);
-//        var_dump($valoracion);
-//        exit();
+        $valoracionmedia = DB::select("SELECT round(avg(calificacion),0) as media,round(avg(calificacion),2)as mediafloat FROM calificaciones WHERE libro_id=:libro_id", ['libro_id'=>$libro->id]);
+//       
+        if(Auth::check()){
+//            $listadeseos = DB::select("SELECT count(*) FROM `listadeseos` WHERE user_id=:user_id and libro_id=:libro_id", ['libro_id'=>$libro->id,'user_id'=>Auth::user()->id]);
+            $listadeseos = DB::table('listadeseos')
+            
+            ->select(DB::raw('count(*) as existe'))
+                    ->where('user_id','=',Auth::user()->id)->where('libro_id','=',$libro->id)
+            ->get()[0];
+           
+        }
+        
         if(empty($comentarios)){
             $comentarios=null;
         }
-         if(empty($valoracion)){
+        if(empty($valoracion)){
             $valoracion=null;
+        } if(empty($listadeseos)){
+            $listadeseos=null;
         }
         
-        return view('libro.detalle',['libro'=>$libro,'comentarios'=>$comentarios,'valoracion'=>$valoracionmedia[0]]);
+        return view('libro.detalle',['libro'=>$libro,'comentarios'=>$comentarios,'valoracion'=>$valoracionmedia[0],'listadeseos'=>$listadeseos]);
 
         
     }
@@ -139,7 +154,7 @@ class LibroController extends Controller
         }
 
     }
-      public function borrar(Libro $libro){
+    public function borrar(Libro $libro){
         
       
 //       $id = GET['id'];
@@ -150,7 +165,7 @@ class LibroController extends Controller
        return view('libro.eliminar',['libro'=>$libro]);
 
     }
-      public function borrarBBDD(Libro $libro, Request $request){
+    public function borrarBBDD(Libro $libro, Request $request){
         
       
           if(Auth::check() && Auth::user()->role=='admin'){
@@ -225,4 +240,107 @@ class LibroController extends Controller
 
         
     }
+    
+//    TEST, probando para subida de archivos y adjuntado a email
+    public function publicar(){
+        
+        $libros = DB::table('archivos_test')->get();
+        
+        
+        foreach($libros as $libro){
+//            var_dump($libro);
+            $urlarchivo = Storage::disk('archivos')->url($libro->archivo);
+            if($libro->portada){
+                
+                $urlportada = Storage::disk('archivos')->url($libro->portada);
+                $libro->imagen_url = $urlportada;
+            }
+            
+            $libro->archivo_url = $urlarchivo;
+        }
+        
+//            var_dump($libros);
+//            $libros->imagen_url=$url;
+//        exit();
+        
+        return view('libro.archivo',['libros'=>$libros])->with('mensaje','Pagina de publicar libro');
+    }
+    
+    public function subir(Request $request){
+        
+        $reglas=[
+            'titulo'=>'required|max:100',
+            
+            'archivo'=>'required|mimes:pdf',
+        ];
+        $mensajeError = [
+            'required' => 'Cuidado!! el campo :attribute no se puede dejar vacío',
+            'mimes' => 'El archivo deber un PDF.'
+        ];  
+//      si no se rellenan los campos
+        $datosvalidados=$request->validate($reglas,$mensajeError);
+    
+        $titulo = $request->titulo;
+        $precio = $request->precio;
+      
+        
+        //archivo PDF
+        $documento = $request->file('archivo');
+        
+        if($request->file('portada')){
+            
+            $imagen_portada = $request->file('portada');
+            
+        }else{
+            $imagen_portada = null;
+        }
+//        var_dump($documento,$imagen_portada);
+//        
+        if(!empty($documento)){
+            $nombreArchivo = $documento->store('/archivo','archivos');
+            if($imagen_portada){
+                
+                $portadaArchivo = $imagen_portada->store('/portada','archivos');
+            }else{
+                $portadaArchivo=null;
+            }
+        }
+
+//        exit();
+        //        BBDD
+        
+        $tituloLibro=$titulo;
+        $precioLibro=$precio;
+        $archivoLibro=$nombreArchivo;
+        $portadaLibro=$portadaArchivo;
+        DB::table('archivos_test')->insert([
+            'titulo' => $tituloLibro,
+            'precio' => $precioLibro,
+            'archivo'=>$nombreArchivo,
+            'portada' =>$portadaArchivo,
+        ]);
+        return redirect()->route('subirarchivo')->with('mensaje', 'SE HA SUBIDO EL LIBRO');//        
+        
+    }
+    
+    public function bajar(Request $request){
+        
+        var_dump($request->tituloLibro);
+        $libro = DB::table('archivos_test')->where('id',$request->tituloLibro)->get()[0];
+        var_dump($libro);
+        
+        $nombre=$libro->archivo;
+        $nombre = explode('/',$nombre);
+//        var_dump($nombre[count($nombre)-1]);
+        $nombrealamacen = $nombre[count($nombre)-1];
+//        $url = Storage::url($nombre);
+//        
+//        
+//      
+//        var_dump($url);
+        $contents = Storage::disk('public')->get($nombrealamacen);
+        var_dump($contents);
+//        return Storage::download($nombrealamacen);
+    }
+    public function correo(){}
 }

@@ -58,4 +58,8 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
     Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+    //editar datos de usuario
+    Route::get('registro', [RegisteredUserController::class, 'create'])
+        ->name('registro');
+    Route::post('registro', [RegisteredUserController::class, 'store']);
 });
