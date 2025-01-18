@@ -164,13 +164,17 @@ main{
 .publicarLibro>div{
     margin:5px auto;
 }
-
+/*detalles libro*/
 .detalles_libro>div p span{
     font-weight: bolder;
     background: yellowgreen;
 
 
 
+}
+.detalles_libro .portada img{
+    width: 250px;
+    height: auto    ;
 }
 .calificaciones  img{
     width: 20px;
@@ -357,7 +361,7 @@ main{
     text-align: center;
     vertical-align: middel;
 }
-.libro .btn_carro{
+.btn_carro{
    
     background: #ffad13;
     color:#2c2c44;
@@ -370,11 +374,59 @@ main{
     font-weight: bolder;
    
 }
-.libro .btn_carro:hover{
+
+
+ .btn_carro:hover{
     background: yellow;
     cursor:pointer;
     outline:1px solid black;
     box-shadow:none;
+}
+
+/* Contenedor principal */
+.add-to-cart {
+    width: 200px; /* Ancho del div */
+    height: 50px; /* Alto del div */
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    display: flex; /* Usar flexbox para centrar contenido */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    border-radius: 5px; /* Bordes redondeados */
+    position: relative; /* Necesario para posicionar elementos dentro */
+    overflow: hidden; /* Evitar desbordamiento */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el div */
+    transition: background-color 0.3s ease; /* Transición de color */
+}
+
+/* Estilo del texto inicial */
+.cart-text {
+    font-size: 16px;
+    font-weight: bold;
+    transition: opacity 0.3s ease; /* Transición de opacidad */
+}
+
+/* Estilo del icono del carrito */
+.cart-icon {
+    font-size: 24px; /* Tamaño del icono */
+    opacity: 0; /* Ocultar inicialmente */
+    transform: scale(0.5); /* Reducir tamaño inicial */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición del tamaño y opacidad */
+    position: absolute; /* Posicionarlo sobre el texto */
+}
+
+/* Efecto al pasar el ratón */
+.add-to-cart:hover {
+    background-color: #45a049; /* Cambiar el color de fondo */
+}
+
+.add-to-cart:hover .cart-text {
+    opacity: 0; /* Ocultar el texto */
+}
+
+.add-to-cart:hover .cart-icon {
+    opacity: 1; /* Mostrar el icono */
+    transform: scale(1); /* Agrandar el icono */
 }
 /* portada*/
 .libro img{

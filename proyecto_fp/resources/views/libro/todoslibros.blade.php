@@ -12,6 +12,7 @@
                     @foreach ($libros as $libro)
 
                         <div class='libro'>
+                            
                         <a href="/libro/detalle/{{$libro->id}}">
                             <h3>{{$libro->titulo}}</h3>
                             @if (isset($libro->portada))
@@ -22,13 +23,17 @@
                             <h5>{{$libro->autor}}</h5>
                             <div class="precio">
                                 <span>{{$libro->precio}} €</span>
-                            </div>                        
+                            </div>      
                     <!--boton añadir al carrito, este es muy importante-->
-                            <a href='{{route("addCarrito",['libro'=>$libro])}}' class='btn_carro'>
-                                <span class="material-symbols-outlined">add_shopping_cart</span> 
-                            </a>
-
-                        </a>
+                                <a href='{{route("addCarrito",['libro'=>$libro])}}'>
+                            <div class="add-to-cart">
+                                    <span class="cart-text">Añadir a la cesta</span>
+                                    <div class="cart-icon">
+                                        🛒
+                                    </div>
+                            </div>
+                                </a>
+                               
                         </div>
                        
                     @endforeach

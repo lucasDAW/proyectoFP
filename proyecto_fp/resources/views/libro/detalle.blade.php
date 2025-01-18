@@ -7,7 +7,14 @@
                         
     @if (isset($libro))
         <h3>Detalles libro </h3>
-        <div class="detalles_libro">               
+        <div class="detalles_libro">  
+            <div class="portada">
+                                 @if (isset($libro->portada))
+                                <img src="{{$libro->portada}}"/>
+                            @else
+                                <img src="{{asset("image/libro_not_found.png")}}"/>
+                            @endif
+                            </div>
             <div class="titulo">
                 <p>Titulo: <span>{{$libro->titulo}}</span></p>
             </div>
@@ -23,6 +30,15 @@
             <div class="precio">
                 <p>Precio: <span>{{$libro->precio}} €</span></p>
             </div>
+            
+           <a href='{{route("addCarrito",['libro'=>$libro])}}' style='text-decoration: none;'>
+                            <div class="add-to-cart">
+                                    <span class="cart-text">Añadir a la cesta</span>
+                                    <div class="cart-icon">
+                                        🛒
+                                    </div>
+                            </div>
+                                </a>
         </div>
     @else
         <h6>No exite el libro.</h6>

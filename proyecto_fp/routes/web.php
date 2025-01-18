@@ -25,9 +25,15 @@ Route::get('/page2',function () {
 //    LIBRO
 //READ    
 Route::get('/libros',[LibroController::class,'index'])->name('todoslibros');
-Route::get('/libro/detalle/{libro}',[LibroController::class,'detalle'])->name('detallelibro');
-Route::get('/libro/busqueda',[LibroController::class,'busqueda'])->name('busquedalibro');
-Route::post('/libro/busqueda',[LibroController::class,'busquedaBBDD'])->name('busquedaBBDD');
+Route::prefix('libro')->group(function () {
+    
+//    Route::get('/libro/detalle/{libro}',[LibroController::class,'detalle'])->name('detallelibro');
+//    Route::get('/libro/busqueda',[LibroController::class,'busqueda'])->name('busquedalibro');
+//    Route::post('/libro/busqueda',[LibroController::class,'busquedaBBDD'])->name('busquedaBBDD');
+    Route::get('/detalle/{libro}',[LibroController::class,'detalle'])->name('detallelibro');
+    Route::get('/busqueda',[LibroController::class,'busqueda'])->name('busquedalibro');
+    Route::post('/busqueda',[LibroController::class,'busquedaBBDD'])->name('busquedaBBDD');
+});
 ////CREATE
 //Route::get('/publicar',[LibroController::class,'crearVistaLibro'])->name('publicarLibro');
 //Route::post('/publicando',[LibroController::class,'publicarlibro'])->name('publicar');
