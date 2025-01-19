@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('registro', [RegisteredUserController::class, 'create'])
-        ->name('registro');
+        ->name('registroeditar');
 
     Route::post('registro', [RegisteredUserController::class, 'store']);
 

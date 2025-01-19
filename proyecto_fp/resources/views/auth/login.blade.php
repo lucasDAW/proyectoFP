@@ -42,7 +42,7 @@
             </x-primary-button>
         </div>
     </form>
-                  <a href="{{ route('registro')}}">Registrarse</a>      
+                  <a href="{{ route('registroeditar')}}">Registrarse</a>      
 
 
 </div>
