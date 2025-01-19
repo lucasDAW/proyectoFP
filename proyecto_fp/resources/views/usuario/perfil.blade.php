@@ -17,7 +17,7 @@
                                 <a href="#">Mis comentario</a>
                             </div>
                             <div>
-                                <a href="{{route('registro')}}">Editar mi perfil</a>
+                                <a href="{{route('registroeditar')}}">Editar mi perfil</a>
                             </div>
                         </div>
                         

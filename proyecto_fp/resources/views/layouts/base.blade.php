@@ -6,7 +6,8 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href='{{ asset("image/icono.ico") }}' type="image/x-icon">
-    <link rel='stylesheet' href='{{ asset("css/estilos.css") }}'>
+    <!--<link rel='stylesheet' href='{{ asset("css/estilos.css") }}'>-->
+    <link rel='stylesheet' href='css/estilos.css'>
     <title>SENECALIB - @yield('titulo')</title>
     <!--iconos-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=edit" />

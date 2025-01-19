@@ -1,0 +1,767 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 08-ene-2025, 10:22:27
+    Author     : Lucas
+*/
+*{
+    padding:0px;
+    margin:0px;
+}
+#perfil{
+    transition: 0.5s;
+}
+#perfil:hover{
+
+    background: #F44336;
+    color: #FFC107;
+    transform: perspective(150px) skewX(5deg) rotateX(360deg);
+}
+
+
+.mensaje{
+    background: greenyellow;
+    color:yellow;
+    padding: 10px auto;
+    font-family:'Arial';
+}
+/*-----   CABECERA +++ HEADER ++ -----*/
+
+header{
+    background: rgb(252,250,70);
+    background: radial-gradient(circle, rgba(252,250,70,1) 78%, rgba(251,63,67,1) 100%);
+    padding:80px auto;
+    margin-bottom: 50px;
+    background-image: url("../image/banner.webp");
+    position: fixed;
+    width: 100%;
+    top:0px;
+}
+header img{
+    width: 500px;
+    height: 250px;
+}
+.enlaces{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.enlaces ul{
+    list-style: none;
+    margin:0;
+    padding: 0;
+}
+.enlaces ul li a, .enlaces ul ul a{
+    display:block;
+ color:#fff;
+ text-decoration:none;
+ font-weight:400;
+ font-size:15px;
+ padding:10px;
+ font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+ text-transform:uppercase;
+ letter-spacing:1px;
+ background: #5b5866;
+ margin:0 5px;
+ box-shadow: 3px 3px #6fa6d5;
+ transition: 0.2s all ease-in;
+    
+}
+.enlaces ul li{
+    position:relative;
+    float:left;
+    margin:0;
+    padding:10px 0;
+}
+.enlaces ul li:hover a{
+     /*background:red;*/
+     background: #6fa6d5;
+      box-shadow: none;
+      outline:1px solid black;
+
+}
+.enlaces ul ul{
+    display:none;
+ position:absolute;
+ top:100%;
+ left:0;
+ background:#eee;
+ padding:0;
+}
+.enlaces ul ul li{
+    float:none;
+    width: 150px;
+}
+.enlaces ul ul a{
+    line-height: 120%;
+    padding:10px 15px;
+}
+.enlaces ul li:hover > ul{
+    display: block;
+    background: none;
+}
+.enlaces ul li:hover > ul li a{
+    background: #5b5866;
+    font-size: 10px;
+ margin:0 5px;
+ box-shadow: 3px 3px #2e72ad;
+ transition: 0.2s all ease-in;
+}
+
+.enlaces ul li:hover > ul li a:hover{
+     background: #2e72ad;
+      box-shadow: none;
+      outline:1px solid black;
+ }
+ .enlaces .submenu .admin{
+     background: yellow;
+     color:black;
+ }
+ .enlaces .nombre a{
+    /*width: 200px;  Ancho fijo*/ 
+    overflow: hidden;  
+ }
+/* .enlaces .nombre a{
+    font-size: calc(10px + 1vw);  Tamaño dinámico de fuente 
+    white-space: nowrap;  Impedir el salto de línea 
+    overflow: hidden;  Ocultar el desbordamiento 
+    text-overflow: ellipsis;  Añadir "..." si el texto es muy largo 
+ }*/
+.enlaces ul li:hover > ul .btn_cerrar_sesion a{    
+    background: #d79635;
+    box-shadow: 3px 3px #9f0808;
+    transition: 0.3s all ease-in-out;
+}
+.enlaces ul li:hover > ul .btn_cerrar_sesion:hover a{    
+    background: #9f0808;
+    box-shadow: 0px 0px #9f0808;
+}
+/*-----   CABECERA +++ HEADER ++ -----*/
+/*mensajes*/
+.mensaje{
+    
+    border: 3px solid #7e9f4c;
+    padding: 25px 50px;
+    margin: 20px 100px;
+    background: #d6f9a1;
+    font-size: 1.3em;
+    font-family: sans-serif;
+    box-shadow: 5px 5px #136e13;
+    color: #083008;
+}
+/*main*/
+main{
+        margin-top: 100px;
+}
+.publicarLibro{
+    display: flex;
+    flex-direction: column;
+    border:1px solid burlywood;
+
+}
+.publicarLibro>div{
+    margin:5px auto;
+}
+/*detalles libro*/
+.detalles_libro>div p span{
+    font-weight: bolder;
+    background: yellowgreen;
+
+
+
+}
+.detalles_libro .portada img{
+    width: 250px;
+    height: auto    ;
+}
+.calificaciones  img{
+    width: 20px;
+    height: 20px;
+    border-radius: 40%;
+    padding:5px;
+    background: none;
+}
+.calificaciones{
+    border:1px solid black;
+    width:fit-content;
+    padding:5px 10px;
+    margin-top:20px;
+}
+.calificaciones h4{
+    text-align: center;
+}
+.calificaciones img:hover{
+    background-color: #FFC107;
+    cursor:pointer;
+    
+}
+
+/*icono lista de deseos*/
+.marcado{
+    background: #c54b60;
+    border-radius: 6px;
+}
+
+
+/* The actual popup */
+.popup .popuptext {
+    background: #555;
+    padding: 10px 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    bottom: 0px;
+    left: 10px;
+    visibility: hidden;
+}
+
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+/*  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;*/
+}
+
+/* Add animation (fade in the popup) */
+/*@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}*/
+
+/*tabla lista deseos*/
+.lista_deseos{
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    font-family: OpensSans-Regular;
+    font-size:18px;
+    margin:10px 50px;
+}
+.lista_deseos thead tr{
+    
+    height: 60px;
+    background: #36304a;
+    color:white;
+    font-style: italic;
+} 
+.lista_deseos tbody tr{
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.2;
+    font-weight: unset;
+    text-align: center;
+    border-collapse: collapse;
+
+}
+.lista_deseos tbody tr{
+    
+    height: 80px;
+    transition: 0.3s ease;
+}
+.lista_deseos tbody tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+.lista_deseos tbody tr:nth-child(odd){
+    background-color: #c5efef;
+}
+
+.lista_deseos tbody tr:hover{
+    color: #3c0909;
+    background: #ebeb67;
+    transform: scale(1.15);
+    border: 1px solid black;
+    
+}
+.lista_deseos tbody tr:hover td:last-child{
+    text-align: left;
+
+}
+
+/*icono lista de deseos FIN*/
+.listadeseos:hover{
+    background: #c54b60;
+    border-radius: 20%;
+    cursor:pointer;
+    transform: scale(1.5);
+    animation: agitar  ease 0.5s;
+}
+.rating{
+    width: 30px;
+    height: 30px;
+    border-radius: 40%;
+    padding:5px;
+    background: none;
+}
+.rating_valor{
+   
+    background-color: #FFC107 !important;
+
+}
+.rating_base{
+    background-color: aquamarine !important;
+    
+}
+/*libros*/
+.libros{
+    display: grid;
+    column-gap: 10px;
+    row-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+}
+
+/*estilos libro*/
+.libro{
+    background-color: #add1b3;
+    float: left;
+    margin: 0 10px 10px 0;
+    width: 205px;
+    padding: 10px;
+    /*height: 290px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.libro>*{
+    margin:10px 0;
+    text-decoration: none;
+    color: black;
+}
+.libro .precio{
+    padding:5px;
+    display: flex;
+    border-radius: 40%;
+    background: white;
+    height: 30px;
+    width: 40px;
+    border: 1px solid black;
+}
+.libro .precio span{
+    font-size: 0.75em;
+    margin:auto;
+    text-align: center;
+    vertical-align: middel;
+}
+.btn_carro{
+   
+    background: #ffad13;
+    color:#2c2c44;
+    font-family: 'Arial';
+    text-decoration: none;
+    padding:5px 0;
+    text-align: center;
+    box-shadow: 3px 3px yellow;
+    transition: 0.5s all;
+    font-weight: bolder;
+   
+}
+
+
+ .btn_carro:hover{
+    background: yellow;
+    cursor:pointer;
+    outline:1px solid black;
+    box-shadow:none;
+}
+
+/* Contenedor principal */
+.add-to-cart {
+    width: 200px; /* Ancho del div */
+    height: 50px; /* Alto del div */
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    display: flex; /* Usar flexbox para centrar contenido */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    border-radius: 5px; /* Bordes redondeados */
+    position: relative; /* Necesario para posicionar elementos dentro */
+    overflow: hidden; /* Evitar desbordamiento */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el div */
+    transition: background-color 0.3s ease; /* Transición de color */
+}
+
+/* Estilo del texto inicial */
+.cart-text {
+    font-size: 16px;
+    font-weight: bold;
+    transition: opacity 0.3s ease; /* Transición de opacidad */
+}
+
+/* Estilo del icono del carrito */
+.cart-icon {
+    font-size: 24px; /* Tamaño del icono */
+    opacity: 0; /* Ocultar inicialmente */
+    transform: scale(0.5); /* Reducir tamaño inicial */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición del tamaño y opacidad */
+    position: absolute; /* Posicionarlo sobre el texto */
+}
+
+/* Efecto al pasar el ratón */
+.add-to-cart:hover {
+    background-color: #45a049; /* Cambiar el color de fondo */
+}
+
+.add-to-cart:hover .cart-text {
+    opacity: 0; /* Ocultar el texto */
+}
+
+.add-to-cart:hover .cart-icon {
+    opacity: 1; /* Mostrar el icono */
+    transform: scale(1); /* Agrandar el icono */
+}
+/* portada*/
+.libro img{
+    width: 150px;
+    height: 150px;
+    transition: 0.3s all;
+}
+.libro img:hover {
+    transform: scale(2) translate(10px,5px);
+    outline:1px solid black;
+}
+/*cesta_compra --> tabla*/
+.cesta_compra{
+    width: 75%;
+    margin: 0 auto;
+    margin:25px auto;
+}
+
+.cesta_compra .accion a:hover{
+    background: red;
+    color:black;
+    cursor: pointer;    
+}
+.cesta_compra .accion a{
+    text-decoration: none;
+    color:white;
+    font-weight: bolder;    
+    text-shadow: 1px 1px black;
+   
+    background: #f54848;
+    padding: 5px;
+       
+
+}
+.cesta_compra .cantidad{
+    margin:0 auto;
+    text-align: center;
+}
+.cesta_compra .signo{
+    width: 10px;
+    height: 10px;
+    background: aquamarine;
+    border:1px solid black;
+    margin:0 10px;
+    padding:3px 5px;
+    font-weight: bolder;
+    font-family: sans-serif;
+    
+}
+.cesta_compra .cantidad  a{
+    text-decoration: none;
+    color:black;
+}
+.cesta_compra .accion{
+    padding: 10px;
+}
+.cesta_compra  .signo:hover{
+    color:white;
+    cursor:pointer;
+}
+.cesta_compra  .menos:hover{
+    background: red;
+    
+}
+.cesta_compra .mas:hover{
+    background: green;
+    
+}
+.cesta_compra thead tr{
+    padding:10px;
+}
+.cesta_compra thead tr th:first-child{
+    text-align: left;
+    margin-left: 15px;
+}
+.cesta_compra tbody tr td:first-child{
+    width:50%;
+}
+.cesta_compra tbody tr td:nth-child(2+n){
+    background: red;
+}
+.cesta_compra thead tr{
+    outline: 1px solid black;
+}
+.cesta_compra tbody tr td{
+       padding: 2%;
+}
+.cesta_compra tbody tr td:nth-child(n+2){
+    
+    text-align: center;
+}
+.cesta_compra tbody tr:nth-child(even){
+    background: #dbd8d8;
+    /*outline:1px solid black;*/ 
+      /*line-height: 1px;*/
+      border-bottom: 1px solid black;
+
+}
+.cesta_compra tbody tr:last-child{
+    background: none;
+    font-weight: bolder;
+}
+.cantidadtotal{
+    padding:15px;
+    background: greenyellow;
+    
+}
+/*botones pedidos*/
+.btns_pedido{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin:0px 15px;
+}
+.btns_pedido .btn_vaciar{
+    
+    background: red;
+}
+
+
+
+/* CSS */
+.btns_pedido .btn_vaciar {
+  text-decoration: none;
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.btns_pedido .btn_vaciar:hover,
+.btns_pedido .btn_vaciar:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.btns_pedido .btn_vaciar:active {
+  opacity: .5;
+}
+
+
+
+
+/* CSS */
+.btns_pedido .btn_realizar {
+  text-decoration: none;
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #00D775, #00BD68);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+  height: 44px;
+  line-height: 44px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 100%;
+  z-index: 9;
+  border: 0;
+}
+
+.btns_pedido .btn_realizar:hover {
+  background: #00bd68;
+}
+
+.formularioBusqueda{
+    display: flex;
+    align-items: center;
+}
+.formularioBusqueda input{
+    width: 90%; 
+    padding:5px;
+    margin:15px auto;
+}
+/*configuracion de mi perfil*/
+.acciones_usuario
+{
+    border: 1px solid black;
+    padding-bottom: 50px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;    
+}
+.acciones_usuario div{
+      background: aquamarine;
+    color:black;
+    box-shadow: 3px 3px yellow;
+    text-decoration: none;
+    padding:5px 10px;
+    margin:0 10px;
+    transition: 0.5s all ease;
+       
+    
+}
+
+.acciones_usuario div:hover{
+    background: yellow;
+    color:black;
+    box-shadow: 0px 0px yellow;
+    text-decoration: none;
+    padding:5px 10px;
+    margin:0 10px;
+    cursor: pointer;
+    outline:1px solid black;
+    animation: agitar  ease 0.5s;
+    animation-iteration-count: 10;
+    
+}
+.acciones_usuario div a{
+    text-decoration: none;
+    color:black
+}
+@keyframes agitar {
+  0% {transform: rotate(0deg)}
+  33% {transform: rotate(25deg)}
+  66% {transform: rotate(-25deg)}
+  100% {transform: rotate(0deg)}
+}
+/*A PARTIR DE AQUI ESTO ES ALGO QUE HABIA ANTES Y HE BORRADO*/
+/*.enlaces .admin{
+    background: yellow;
+    color:black;
+}
+.enlaces{
+    padding: 2%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.enlaces ul{
+    display: flex;
+    list-style:none;
+}
+.enlaces a:nth-child(2) {
+    margin-left: auto;
+   
+}
+.enlaces ul li a{
+    text-decoration: none;
+    color: #e5c444;
+    background: black;
+    margin: 5px 5px;
+    width: 120px;
+    padding: 5px 10px 0px 10px ;
+    box-shadow: 3px -3px 0px red;
+    transition: 0.4s ease-in-out
+
+}
+.enlaces a:hover:nth-child(1){
+    background: white;
+    color:blue;
+
+}
+.enlaces a:hover{
+    box-shadow: 0px -0px 0px red;
+    color: red;
+    background: white;
+    outline:2px solid black;
+
+}
+.enlaces .submenu{
+    display:flex;
+    flex-direction: column;
+}
+.enlaces .submenu  li {
+ position:relative;
+ float:right;
+ margin:0;
+ padding:0;
+}
+.enlaces ul a{
+    height: 100%;
+    display:block;
+ color:#fff;
+ text-decoration:none;
+ font-weight:400;
+ font-size:12px;
+ padding:10px 20px;
+ font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+ text-transform:uppercase;
+ letter-spacing:1px;
+}
+.enlaces ul ul{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    background:#eee;
+    padding:0;
+}
+.enlaces .submenu li{
+    float:none;
+    width:150px
+
+}
+
+.enlaces .submenu li a {
+    line-height:120%;
+    padding:10px 15px;
+}
+.enlaces ul li:hover ul  {
+    display: block; 
+    
+}*/
