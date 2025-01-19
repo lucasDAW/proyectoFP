@@ -56,6 +56,8 @@ Route::get('/user/listadeseos',[UsuarioController::class,'showlistadeseos'])->na
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+oute::get('registro', [RegisteredUserController::class, 'create'])
+        ->name('registroeditar');
 
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
