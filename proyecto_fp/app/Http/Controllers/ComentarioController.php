@@ -32,13 +32,14 @@ class ComentarioController extends Controller
         if(Auth::check()){
             $comentario = $request->input('comentario');
             $user_id= $request->input('user_id');
-            var_dump($comentario,$libro_id,$user_id);
+//            var_dump($comentario,$libro_id,$user_id);
             
             $comentarioBBDD = new Comentario;
             $comentarioBBDD->comentario = $comentario;
             $comentarioBBDD->libro_id = $libro_id;
             $comentarioBBDD->user_id= $user_id;
-            
+//            var_dump($comentarioBBDD);
+//            exit();
             $comentarioBBDD->save();
             
             $mensaje = 'Comentario realizado.';

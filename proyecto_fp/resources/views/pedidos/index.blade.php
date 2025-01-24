@@ -5,9 +5,9 @@
   <h2>Pedidos</h2>
 </div>
 
-<div class='pedidos'>
+<div class='mensaje'>
     <h3>Pedido realizado correctamente. </h3>
-    <h6>Se ha enviado a su correo los archivos.</h6>
+    <h6>Se ha enviado a su correo la factura.</h6>
     
 </div>
 

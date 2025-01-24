@@ -10,6 +10,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
     padding:0px;
     margin:0px;
 }
+body{
+   font-family: "Lato", serif;
+   background-image: url("../image/fondo.png");
+   background-position: center;
+   background-size: contain;
+   background-attachment: fixed;
+  
+   height: 100vh;
+}
+
 #perfil{
     transition: 0.5s;
 }
@@ -30,19 +40,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this t
 /*-----   CABECERA +++ HEADER ++ -----*/
 
 header{
-    background: rgb(252,250,70);
-    background: radial-gradient(circle, rgba(252,250,70,1) 78%, rgba(251,63,67,1) 100%);
     padding:80px auto;
-    margin-bottom: 50px;
-    background-image: url("../image/banner.webp");
+    margin-bottom: 100px;
+    background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
     position: fixed;
     width: 100%;
+    /*height: 200px;*/
     top:0px;
+    z-index: 100;
+}
+.cabecera-banner{
+    background-image: url("../image/banner.webp"), url("../image/portadaheader.webp");
+    background-size: contain,cover;
+    background-repeat: no-repeat;
+    background-position: center,right;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+nav{
+    background: #1f2424;
 }
 header img{
-    width: 500px;
-    height: 250px;
+    height: 100px;
+    transition: opacity 0.3s ease;
+}header img:hover{
+    height: 100px;
+    cursor: pointer;
 }
+
+/*enlaces de nav*/
 .enlaces{
     display: flex;
     justify-content: flex-end;
@@ -52,9 +81,10 @@ header img{
     list-style: none;
     margin:0;
     padding: 0;
+    display:flex;
 }
 .enlaces ul li a, .enlaces ul ul a{
-    display:block;
+ display:block;
  color:#fff;
  text-decoration:none;
  font-weight:400;
@@ -69,11 +99,36 @@ header img{
  transition: 0.2s all ease-in;
     
 }
+.enlaces ul .cesta{
+    order:4;
+}
 .enlaces ul li{
     position:relative;
     float:left;
     margin:0;
     padding:10px 0;
+}
+.enlaces >ul .volver{
+    position: absolute;
+    left: 0px;
+}
+.enlaces ul li:first-child a span{
+    visibility: hidden;
+    
+}
+.enlaces ul li:first-child a{
+    background: #d9b639;
+    box-shadow: 3px 3px #b1780c;
+    /*color: black;*/
+    
+}
+.enlaces ul li:first-child a:hover{
+    background: #b1780c;
+    box-shadow: none;
+    
+}
+.enlaces ul li:first-child a:hover span{
+    visibility: visible;
 }
 .enlaces ul li:hover a{
      /*background:red;*/
@@ -118,17 +173,36 @@ header img{
  .enlaces .submenu .admin{
      background: yellow;
      color:black;
+     transition: all 0.2s ease-in-out;
+ }
+ .enlaces .submenu .admin:hover{
+     background: #5bede7;
+     
  }
  .enlaces .nombre a{
     /*width: 200px;  Ancho fijo*/ 
     overflow: hidden;  
  }
-/* .enlaces .nombre a{
-    font-size: calc(10px + 1vw);  Tamaño dinámico de fuente 
-    white-space: nowrap;  Impedir el salto de línea 
-    overflow: hidden;  Ocultar el desbordamiento 
-    text-overflow: ellipsis;  Añadir "..." si el texto es muy largo 
- }*/
+ .enlaces .lista_deseos_enlace span, .enlaces .submenu li a span{
+     visibility: hidden;
+     float:right;
+     
+ }
+ .enlaces .lista_deseos_enlace a:hover span, .enlaces .submenu li a:hover span{
+     visibility: visible;
+     
+ }
+.enlaces .submenu .lista_deseos_enlace a:hover{
+    /*border:1px solid black;*/
+    background: #d72343;
+    /*color:black;*/
+ }
+
+ .enlaces .submenu .publicar a:hover{
+     background: #6e1b5c;
+ }
+ 
+ 
 .enlaces ul li:hover > ul .btn_cerrar_sesion a{    
     background: #d79635;
     box-shadow: 3px 3px #9f0808;
@@ -138,6 +212,30 @@ header img{
     background: #9f0808;
     box-shadow: 0px 0px #9f0808;
 }
+
+.accionesadmin  {
+    justify-content: flex-start;
+}
+.enlaces .administrador li a:nth-child(1){
+    background: #edeaea;
+    color:#222121;
+    box-shadow: 3px 3px #222121;
+    
+}
+.enlaces .administrador li a:nth-child(1):hover{
+
+    background: #222121;
+    color:#edeaea;
+    box-shadow: none;
+}
+.btn_administrador_pulsado{
+    background: #222121 !important;
+    color:#edeaea !important;
+    box-shadow: none !important;
+}
+
+
+
 /*-----   CABECERA +++ HEADER ++ -----*/
 /*mensajes*/
 .mensaje{
@@ -153,7 +251,8 @@ header img{
 }
 /*main*/
 main{
-        margin-top: 100px;
+   margin-top: 250px;
+   height: 100vh;
 }
 .publicarLibro{
     display: flex;
@@ -164,80 +263,7 @@ main{
 .publicarLibro>div{
     margin:5px auto;
 }
-/*detalles libro*/
-.detalles_libro>div p span{
-    font-weight: bolder;
-    background: yellowgreen;
 
-
-
-}
-.detalles_libro .portada img{
-    width: 250px;
-    height: auto    ;
-}
-.calificaciones  img{
-    width: 20px;
-    height: 20px;
-    border-radius: 40%;
-    padding:5px;
-    background: none;
-}
-.calificaciones{
-    border:1px solid black;
-    width:fit-content;
-    padding:5px 10px;
-    margin-top:20px;
-}
-.calificaciones h4{
-    text-align: center;
-}
-.calificaciones img:hover{
-    background-color: #FFC107;
-    cursor:pointer;
-    
-}
-
-/*icono lista de deseos*/
-.marcado{
-    background: #c54b60;
-    border-radius: 6px;
-}
-
-
-/* The actual popup */
-.popup .popuptext {
-    background: #555;
-    padding: 10px 5px;
-    border-radius: 6px;
-    font-size: 12px;
-    color: #fff;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    bottom: 0px;
-    left: 10px;
-    visibility: hidden;
-}
-
-
-/* Toggle this class - hide and show the popup */
-.popup .show {
-  visibility: visible;
-/*  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;*/
-}
-
-/* Add animation (fade in the popup) */
-/*@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}*/
 
 /*tabla lista deseos*/
 .lista_deseos{
@@ -322,15 +348,16 @@ main{
 .libros{
     display: grid;
     column-gap: 10px;
-    row-gap: 15px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 50px;
+    grid-template-columns: 1fr  1fr 1fr;
     grid-template-rows: auto;
     justify-items: center;
+    margin: 0 10%;
 }
 
 /*estilos libro*/
 .libro{
-    background-color: #add1b3;
+    background-color: #e6f1f3;
     float: left;
     margin: 0 10px 10px 0;
     width: 205px;
@@ -340,6 +367,22 @@ main{
     flex-direction: column;
     justify-content: space-between;
     
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    overflow: hidden;
+    align-items: anchor-center;
+    text-decoration: none;
+    
+    
+    
+}
+.libro:hover{
+    background-color: #9dc4cb;
+    border:1px solid blue;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 .libro>*{
     margin:10px 0;
@@ -348,10 +391,11 @@ main{
 }
 .libro .precio{
     padding:5px;
-    display: flex;
-    border-radius: 40%;
+    margin: 0 auto;
+    /*display: flex;*/
+    border-radius: 5px;
     background: white;
-    height: 30px;
+    /*height: 30px;*/
     width: 40px;
     border: 1px solid black;
 }
@@ -361,6 +405,26 @@ main{
     text-align: center;
     vertical-align: middel;
 }
+/*animacion al mostrar libros basado en el video de https://www.youtube.com/watch?v=AbCYziNyjvk&t=175s&ab_channel=midudev*/
+.libro{
+    view-timeline-name:--animacionlibros;
+    view-timeline-axis: block;
+    
+    animation-timeline:--animacionlibros;
+    animation-name: show;
+    animation-range:entry 10% cover 40%;
+    animation-fill-mode: both;
+}
+@keyframes show{
+    from{opacity:0;
+    scale:25%;
+    }
+    to{opacity:1;
+    scale:100%;
+    }
+}
+
+/*libros------------------------------------------------------------------*/
 .btn_carro{
    
     background: #ffad13;
@@ -397,6 +461,7 @@ main{
     overflow: hidden; /* Evitar desbordamiento */
     cursor: pointer; /* Cambiar el cursor al pasar sobre el div */
     transition: background-color 0.3s ease; /* Transición de color */
+    z-index: 1;
 }
 
 /* Estilo del texto inicial */
@@ -435,9 +500,65 @@ main{
     transition: 0.3s all;
 }
 .libro img:hover {
-    transform: scale(2) translate(10px,5px);
+    transform: scale(200%) translate(0px,20px);
+    border-radius: 15px;
     outline:1px solid black;
+    z-index: 99;
 }
+
+
+
+.paginacion{
+    display: flex;
+    flex-direction: row;
+    /*margin: 0 auto;*/
+    background: none;
+    /*width: 100%;*/
+    /*height: 50px;*/
+    justify-content:  center;  
+    margin:20px 0;
+    
+}
+.paginacion nav{
+    background: none;
+    margin-bottom: 50px;
+}
+.paginacion nav a{
+    font-weight: bold;
+    text-decoration: none;
+    background: white;
+    color:black;
+    margin: 0 5px;
+    padding: 5px 10px;
+    transition: all 0.3s;
+    box-shadow: 3px 3px black;
+}
+.paginacion nav a:last-child{
+    text-decoration: none;
+    background: white;
+    color:black;
+    margin: 0 5px;
+    padding: 5px 10px;
+    transition: all 0.3s;
+    box-shadow: -3px 3px black;
+}
+.paginacion nav span{
+    background: #0f005a;
+    color:white;
+    margin: 0 5px;
+    padding: 5px 10px;
+    
+}
+
+.paginacion nav a:hover{
+    cursor:pointer;
+    background: black;
+    color: white;
+    box-shadow: none;
+
+    outline: 1px solid black;
+}
+
 /*cesta_compra --> tabla*/
 .cesta_compra{
     width: 75%;
@@ -466,10 +587,10 @@ main{
     text-align: center;
 }
 .cesta_compra .signo{
-    width: 10px;
-    height: 10px;
+    width: 5px;
+    height: 5px;
     background: aquamarine;
-    border:1px solid black;
+/*    border:1px solid black;*/
     margin:0 10px;
     padding:3px 5px;
     font-weight: bolder;
@@ -503,7 +624,7 @@ main{
     margin-left: 15px;
 }
 .cesta_compra tbody tr td:first-child{
-    width:50%;
+    width:25%;
 }
 .cesta_compra tbody tr td:nth-child(2+n){
     background: red;
@@ -627,7 +748,7 @@ main{
     align-items: center;
 }
 .formularioBusqueda input{
-    width: 90%; 
+    width: 100%; 
     padding:5px;
     margin:15px auto;
 }
@@ -678,6 +799,913 @@ main{
   66% {transform: rotate(-25deg)}
   100% {transform: rotate(0deg)}
 }
+
+
+/*formulario de edicion de usuario*/
+.miperfil{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    
+}
+.miperfil ul{
+    margin: 0 auto;
+    list-style: none;
+    padding:10px 5px;
+}
+.miperfil ul li{
+    font-size: 1.5em;
+    background: #f1e1e1;
+    box-shadow: 3px 3px blanchedalmond;
+        padding:10px 25px;
+       margin:5px auto;
+
+}
+.miperfil .switch{
+    
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 20px;
+  margin:10px auto;
+
+}
+
+.miperfil .switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.miperfil .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  z-index: 1;
+}
+
+.miperfil .slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 5px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.miperfil input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.miperfil input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.miperfil input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(35px);
+}
+
+/* Rounded sliders */
+.miperfil .slider.round {
+  border-radius: 34px;
+}
+
+.miperfil .slider.round:before {
+  border-radius: 50%;
+}
+.miperfil h3{
+    background: goldenrod;
+}
+.miperfil .switch span:first-child{
+    z-index: 99;
+}
+.miperfil h3:hover{
+    animation-name: desaparecer;
+    animation-iteration-count: 1;
+}
+.hidden{
+    display: none;
+    animation-name: desaparecer;
+    animation-iteration-count: 1;
+    
+}
+@keyframes desaparecer {
+  0% {transform: scale(1)}
+  33% {transform: scale(0.75)}
+  66% {transform: scale(0.5)}
+  100% {transform: scale(0)}
+}
+
+
+/*formularios*/
+form{
+    margin:0 auto;
+    padding: 30px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+     display: flex;
+    flex-direction: column;
+    background: #f6ff80;
+}
+form >div{
+        margin-bottom: 20px;
+
+}
+form label, form textarea{
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: #555555;
+    display: block;
+}
+form input{
+    
+    width: 90%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}  
+form input[type='submit'],.inputsubmit{
+    background: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s, transform 0.2s;
+}
+form input[type='submit']:hover,.inputsubmit:hover{
+    background: #357abd;
+    transform: translateY(-2px);
+}
+
+form legend{
+        margin: 0 auto;
+    font-size: 1.5em;
+    font-family: cursive;
+}
+form input[type='checkbox']{
+    width: 15px;
+}
+
+.registrarse{
+    align-self: center;
+    width:250px;
+    background: #b9911b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.registrarse:hover{
+    background: #8d6c0c;
+    transform: translateY(-2px);
+}
+.btn_eliminarusuario{
+    background: #eb4f4f;
+    text-align: center; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn_eliminarusuario:hover{
+    background: #951c1c;
+    transform: translateY(-2px);
+}
+/*boton que muestra mis publicaciones*/
+
+
+/* CSS */
+.btn_mostrar_publicaciones {
+    margin: 0 auto;
+    text-decoration: none;
+    color:black;
+  font-size: 16px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn_mostrar_publicaciones:after {
+  content: "";
+  background-color: #ffe54c;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.btn_mostrar_publicaciones:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+/*--------------------------------------------------------------    DETALLES DE LIBRO --------------------------------------------------------------*/
+.contenedor-libro-detalle{
+    
+    display: grid;
+    grid-template-areas: 
+        "portada detalles"
+        "comentarios comentarios";
+    grid-template-columns: 1fr 2fr;
+    gap:20px;
+    max-width: 800px;
+    margin:40px auto;
+    padding: 20px;
+    background: rgba(205, 205, 200, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 70%;
+    margin:0 auto;
+   
+}
+.contenedor-libro-detalle .portada-libro{
+    grid-area: portada;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+.contenedor-libro-detalle .portada-libro .imagen{
+    width:100%;
+    max-width: 300px;
+    height: fit-content;
+    transition: 0.2s all ease-in-out;
+    z-index: 99;
+    text-align: center;
+}
+
+.contenedor-libro-detalle .portada-libro .imagen:hover{
+    transform: scale(1.5) translate(0%,10%);
+    
+}
+.contenedor-libro-detalle .libro-detalles{
+    grid-area:detalles;
+}
+
+.contenedor-libro-detalle .libro-detalles .libro-titulo{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin:0 0 10px;
+    color:#222;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.contenedor-libro-detalle .libro-detalles .libro-titulo span:nth-child(2){
+    color:#f7f769;
+    text-shadow:1px 1px 1px black;
+}
+.contenedor-libro-detalle .libro-detalles .libro-autor{
+    font-size: 0.8em;
+    font-weight: bold;
+    margin:20px 0 20px;
+    color:#0b0060;
+}
+.contenedor-libro-detalle .libro-detalles .libro-descripcion{
+    font-size: 1.12em;
+    line-height: 1.5;
+    color:#555;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+.contenedor-libro-detalle .libro-detalles  .btn_leermas{
+    color: #222;
+    margin-top: 3px;
+    border-top: 1px dashed lightgrey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contenedor-libro-detalle .libro-detalles  .btn_leermas span:hover{
+    cursor: pointer;
+}
+.contenedor-libro-detalle .libro-detalles  .btn_leermas span:last-child{
+    display:none;
+}
+.mostrar_todo{
+    height: 500px;
+}
+
+.contenedor-libro-detalle .libro-detalles .portada-libro .libro-calificacion{
+    margin:15px 0;
+    font-size: 1em;
+    color:#333;
+    display: flex;
+    flex-direction: row;
+}
+.contenedor-libro-detalle .libro-detalles .libro-acciones{
+    
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+.contenedor-libro-detalle .libro-comentarios{
+    grid-area: comentarios;
+    margin-top:5%;
+    margin-bottom: 10%;
+
+}
+.contenedor-libro-detalle .libro-comentarios h2{
+    font-size: 20px;
+    margin-bottom: 20px;
+    color:#333;
+    text-align: center;
+}
+.contenedor-libro-detalle .libro-comentarios .comentario{
+    padding:10px;
+    /*border-radius: 4px;*/
+    margin-bottom: 10px;
+    background: rgba(231,231,231,0.9);
+    box-shadow: 3px 3px #878787;
+}
+.contenedor-libro-detalle .libro-comentarios .comentarios{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    padding: 5px;
+    border-radius: 5px;
+    background: rgba(215,230,237,0.9);
+}
+
+.contenedor-libro-detalle .libro-comentarios .comentario p{
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+    display: flex;
+    justify-content: flex-start;
+}
+.contenedor-libro-detalle .libro-comentarios .comentario:hover{
+    background: rgba(235 204 145 / 90%);
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span{
+        margin-left: auto;
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a{
+    text-decoration: none;
+    color:#fff;
+    padding: 5px 10px;
+    background: #eb4242;
+    box-shadow: 2px 2px #700f0f;
+    transition: 0.2s all;
+    
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a:hover{
+    
+    background: #700f0f;
+    box-shadow: none;
+    cursor: pointer;
+    
+}
+.contenedor-libro-detalle .libro-comentarios form{
+    margin: 5% auto;
+}
+.contenedor-libro-detalle .libro-comentarios form textarea{
+    resize: none;
+    padding:10px;
+    font-size: 1.125;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    height: 80px;
+    width: 100%;
+    font-family: 'Arial',sans-serif;
+    color: #333;
+    margin:15px 0;
+}
+
+.contenedor-libro-detalle .portada-libro img{
+    max-width: 150px;
+    height: fit-content;
+}
+
+/*botones eliminar y editar libro*/
+.accionesdetallelibro{
+    margin:25px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}
+.accionesdetallelibro a{
+    margin:0 15px;
+}
+/* CSS */
+.btn_edit {
+    text-decoration: none;
+    color:black;
+  font-size: 16px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn_edit:hover,
+.btn_edit:active {
+  outline: 0;
+}
+
+.btn_edit:hover{
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn_edit:before{
+  background-color: #D5EDF6;
+  content: "";
+  height: calc(100% + 3px);
+  position: absolute;
+  right: -7px;
+  top: -9px;
+  transition: background-color 300ms ease-in;
+  width: 100%;
+  z-index: -1;
+}
+
+.btn_edit:hover:before {
+  background-color: #6DCFF6;
+  top: 0px;
+  left: 0px;
+}
+.btn_eliminar
+{
+    text-decoration: none;
+    color:black;
+    font-size: 16px;
+  font-weight: bolder;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.btn_eliminar:hover{
+     background-color: #a90000;
+     color:white;   
+  cursor: pointer;
+}
+.btn_eliminar:hover:before {
+  background-color: #6DCFF6;
+  top: 0px;
+  left: 0px;
+}
+.btn_eliminar:hover:before {
+  background-color: #ebabab;
+  top: 0px;
+  left: 0px;
+}
+.btn_eliminar:before{
+    background-color: #ebabab;
+  content: "";
+  height: calc(100% + 3px);
+  position: absolute;
+  right: -7px;
+  top: -9px;
+  transition: background-color 300ms ease-in;
+  width: 100%;
+  z-index: -1;
+}
+
+
+.calificaciones  img{
+    width: 20px;
+    height: 20px;
+    border-radius: 40%;
+    padding:5px;
+    background: none;
+}
+.calificaciones{
+    border:1px solid black;
+    width:fit-content;
+    padding:5px 10px;
+    margin-top:20px;
+    background: white;
+    border-radius: 5px;
+}
+.calificaciones h4{
+    text-align: center;
+}
+.calificaciones img:hover{
+    background-color: #FFC107;
+    cursor:pointer;
+    
+}
+
+/*icono lista de deseos*/
+.marcado{
+    background: #c54b60;
+    border-radius: 6px;
+}
+
+
+/* The actual popup */
+.popup .popuptext {
+    background: #555;
+    padding: 10px 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    bottom: 0px;
+    left: 10px;
+    visibility: hidden;
+}
+
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+/*  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;*/
+}
+
+/* Add animation (fade in the popup) */
+/*@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}*/
+
+
+/*--------------------------------------------------------------    DETALLES DE LIBRO FIN --------------------------------------------------------------*/
+
+/*formulario de busqueda*/
+.busqueda_libros{
+    margin:1% 0;
+}
+.busqueda_libros form{
+    background: none;
+    padding:0;
+    margin:0 auto;
+}
+.busqueda_libros form input{
+    width: 100%;
+}
+
+
+/*estilos para tablas*/
+table{
+    margin: 40px auto;
+    max-width: 700px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Para manejar tablas en pantallas pequeñas */
+    
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: left;
+}
+table thead tr{
+    background: #222;
+    color:#eee;
+}
+table thead td{
+    
+    background-color: #007bff;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+}
+table th,table td{
+     padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+table tbody tr:nth-child(even) {
+    background-color: #f3f3f3; /* Color alterno para las filas */
+
+}
+table  tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 2px solid #007bff;
+}
+
+table tbody td {
+    transition: all 0.3s ease;
+}
+table .accionesadmin{
+    display: flex;
+    flex-direction: column;
+}
+table .accionesadmin a{
+    max-width: 100px;
+    width:100px;
+    text-align: center;
+    color:white;
+    text-decoration: none;
+    padding:5px 10px;
+    background: #06f;
+    box-shadow: 2px 2px #3385ff;
+    margin:3px auto;
+    transition: 0.2s all;
+}
+table .accionesadmin a:hover{
+    box-shadow: none;
+    background: #3385ff;
+    cursor: pointer;
+    outline:1px solid #222;
+    transform: translate(1px,-2px);
+}
+
+table .accionesadmin a:nth-child(2){
+    box-shadow: 2px 2px #48cb7f;
+    background: #27ae60;
+}
+table .accionesadmin a:nth-child(3){
+    box-shadow: 2px 2px #f58a4e;
+    background: #ff7426 ;
+}
+table .accionesadmin a:nth-child(4){
+    box-shadow: 2px 2px #c71820;
+    background: #e1585e ;
+}
+table .accionesadmin a:nth-child(2):hover{
+    box-shadow: none;
+    background: #48cb7f;
+    cursor: pointer;
+}
+table .accionesadmin a:nth-child(3):hover{
+    box-shadow: none;
+    background: #f58a4e;
+    cursor: pointer;
+}
+table .accionesadmin a:nth-child(4):hover{
+    box-shadow: none;
+    background: #c71820 ;
+    cursor: pointer;
+}
+/*estilos para tablas FIN*/
+
+/*estilos de ADMINISTRADOR*/
+.cabecera_administracion{
+    background: #bfbfbf;
+    padding-left: 15%;
+    padding: 25px;
+    box-shadow: 35px 5px #222;
+    text-shadow: 3px 1px 2px #000000;
+    color: white;
+}
+form .botones_formulario{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin:10px 0;
+    
+}
+form .botones_formulario a{
+    text-decoration: none;
+    padding: 5px 15px;
+    width: 100px;
+    background: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    transition: 0.1s all;   
+    
+    
+    
+}
+form .botones_formulario a:first-child{
+   background:#e52f36;
+}
+form .botones_formulario a:first-child span:nth-child(2){
+    display: none;
+}
+form .botones_formulario a:first-child:hover{
+   background:#cd2127;
+   transform: translate(0px,-5px);
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+form .botones_formulario a:first-child:hover span:nth-child(2){
+    display: block;
+}
+form .botones_formulario a:first-child:hover span:nth-child(1){
+    display: none;
+}
+form .botones_formulario a:first-child:active{
+    background: red;
+}
+form .botones_formulario a:last-child{
+    background:#106834;
+}
+form .botones_formulario a:last-child:hover{
+    
+   transform: translate(0px,-5px);
+    background:#05381a;
+}
+
+/*formulario busqueda pedidos*/
+.form_busqueda_pedidos_admin form{
+    background: none;
+    box-shadow: none;
+}
+/*formulario busqueda pedidos FIN*/
+
+/*------------------------------------ estilos de interacciones ------------------------------------*/
+
+.interacciones{
+    margin-top: 50px;
+    padding:0px;
+    position:relative;
+}
+.interacciones .btn_interacciones{
+    position: absolute;
+    top: 1%;
+    left: 30%;
+}
+.interacciones .btn_interacciones span{
+    padding: 5px 20px;
+    background: #222;
+    color:#EEE;
+    border-bottom:white 1px solid;
+    box-shadow: -3px -3px #EEE;
+    transition: 0.1s all ease-out;
+    
+}
+.interacciones .btn_interacciones span:hover{
+    border-bottom:black 1px solid;
+    cursor: pointer;
+    background: #8fb6ff;
+    color:#222;
+    box-shadow: none;
+    outline: 1px solid #222;
+
+}
+.interacciones{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn_pulsado{
+    
+    font-size: 2em;
+    border-bottom:black 1px solid !important;
+    cursor: pointer !important;
+    background: #DDD !important;
+    color:#222 !important;
+    box-shadow: none !important;
+    outline: 1px solid #222 !important;
+        
+}
+.ocultar_tabla{
+    display: none;
+}
+
+/*-----------------------------estilos de interacciones FIN ------------------------------------*/
+
+
+/*Estilos para ver los pedidos por parte del administrador*/  
+
+
+table tbody .fila_detalles {
+    background: #222;
+}
+table tbody .fila_detalles td {
+    background: #222; 
+    display:none;
+    transition: 5s display ease;
+
+}
+table .fila_detalles .detalles_compra_libros ul{
+    list-style: none;
+    
+}
+table .fila_detalles .detalles_compra_libros ul li a{
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    margin-left: 50px;
+    color:#eee;
+    margin-top: 5px;
+    border:1px solid white;
+    padding:5px 10px;
+    transition: all 0.2s ease;
+    /*background: #222;*/
+}
+table .fila_detalles .detalles_compra_libros ul li a:hover{
+    cursor: pointer;
+    color:#1e1e20;
+    background: #e7d2d2;
+    font-style: italic;
+}
+
+table tbody tr td .accionesadmin .verdetallespedidos{
+    background: #a35289;
+    color: white;
+    padding: 5px 10px;
+    width: fit-content;
+    text-align: center;
+    box-shadow: 2px 2px #bb88aa;
+    transition: all 0.2s ease;
+}
+table tbody tr td .accionesadmin .verdetallespedidos:hover{
+    background: #bb88aa;
+    color: white;
+    box-shadow: none;
+    outline:1px solid black;    
+    
+}
+
+.vermasdetalles{
+    display: table-cell !important;
+    /*transition: 2s display ease;*/
+    animation-name: motrarfila;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+}
+
+@keyframes motrarfila{
+    from{opacity:10%;transform:scale(10%);display:none;}
+    to{opacity:100%;transform:scale(100%);display:table-cell !important;}
+}
+table tbody .detalles_compra_libros h6{
+    color:white;
+}
+/*Estilos para ver los pedidos por parte del administrador  FIN*/
+
+
+
+/*busqueda libros admin*/ 
+.form_busqueda_libro_admin form{
+    background: none !important;
+    box-shadow: none;
+    margin:0 auto;
+    margin-bottom: 0px;
+}
+/*busqueda libros admin FIN*/ 
+/*estilos de ADMINISTRADOR FIN*/
+
+
 /*A PARTIR DE AQUI ESTO ES ALGO QUE HABIA ANTES Y HE BORRADO*/
 /*.enlaces .admin{
     background: yellow;

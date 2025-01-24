@@ -16,15 +16,15 @@ class LibroSeeder extends Seeder
         
         for ($i = 0;$i<5;$i++){
             
-            $libro = new Libro();
-            $libro ->titulo ='TITULO EJEMPLO';
-            $libro ->descripcion ='DESCRIPCION EJEMPLO';
-            $libro ->autor='AUTOR EJEMPLO';
-            $libro ->numero_paginas=99;
-            $libro ->ISBN='ISBN EJEMPLO';
-            $libro ->fecha_lanzamiento='FECHA EJEMPLO';
-            $libro ->precio=99.99;
-            $libro->save();
+//            $libro = new Libro();
+//            $libro ->titulo ='TITULO EJEMPLO';
+//            $libro ->descripcion ='DESCRIPCION EJEMPLO';
+//            $libro ->autor='AUTOR EJEMPLO';
+//            $libro ->numero_paginas=99;
+//            $libro ->ISBN='ISBN EJEMPLO';
+//            $libro ->fecha_lanzamiento='FECHA EJEMPLO';
+//            $libro ->precio=99.99;
+//            $libro->save();
         }
         
         DB::table('libros')->insert([

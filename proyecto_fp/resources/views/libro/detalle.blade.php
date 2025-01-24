@@ -3,66 +3,70 @@
 
 @section('contenido')
 
-
-                        
     @if (isset($libro))
-        <h3>Detalles libro </h3>
-        <div class="detalles_libro">  
-            <div class="portada">
-                                 @if (isset($libro->portada))
-                                <img src="{{$libro->portada}}"/>
-                            @else
-                                <img src="{{asset("image/libro_not_found.png")}}"/>
-                            @endif
-                            </div>
-            <div class="titulo">
-                <p>Titulo: <span>{{$libro->titulo}}</span></p>
+    @auth
+        @if (isset($autor) and ($autor->existe==1 or Auth::user()->role = 'admin'))
+            <div class="accionesdetallelibro">
+
+                <a href="{{route('editarlibro',['libro'=>$libro])}}" class="btn_edit">Modificar libro</a>
+                <a href="{{route('borrarlibroBBDD',['id'=>$libro->id])}}" class="btn_eliminar">Eliminar libro</a>
             </div>
-            <div class="autor">
-                 <p>Autor: <span>{{$libro->autor}}</span></p>
+        @endif
+    @endauth
+    <div class="contenedor-libro-detalle">
+        <div class="portada-libro">
+            
+            @if (isset($archivo['imagen_url']))
+            <a class='imagen' href="{{$archivo['imagen_url']}}">
+                    <img src="{{$archivo['imagen_url']}}" alt='{{$libro->titulo}}'/>
+            </a>
+            @else
+            <a class='imagen'>
+                <img src="{{asset("image/libro_not_found.png")}}"/>
+            </a>
+            @endif
+            <div class="libro-calificacion">
+                @include('calificacion.index')
             </div>
-            <div class="descripcion">
-                <p>Descripción: <span>{{$libro->descripcion}}</span></p>
+        </div>
+        <div class="libro-detalles">            
+            <h2 class="libro-titulo"><span>{{$libro->titulo}}</span><span>{{$libro->precio}}€</span>
+            </h2>
+                            <!--añadir a lista de deseos-->
+            <div class="popup">
+                    @if (isset($listadeseos->existe) and $listadeseos->existe==1)
+                        <span class="listadeseos marcado material-symbols-outlined">favorite</span>
+                    @else
+                        <span class="listadeseos  material-symbols-outlined">favorite</span>
+                    @endif
+                        <span class="popuptext" id="myPopup">Se ha añadido el libro a la lista de deseos!</span>
             </div>
-            <div class="isbn">
-                <p>ISBN: <span>{{$libro->ISBN}}</span></p>
-            </div>
-            <div class="precio">
-                <p>Precio: <span>{{$libro->precio}} €</span></p>
+            <!--agregar al carro de compra-->
+            <div class="carrocompra">
+                    <a href='{{route("addCarrito",['libro'=>$libro])}}' style='text-decoration: none;'>
+                        <div class="add-to-cart">
+                            <span class="cart-text">Añadir a la cesta</span>
+                            <div class="cart-icon">🛒</div>
+                        </div>
+                     </a>
+            </div>              
+            <h4 class="libro-autor">{{$libro->autor}}</h4>
+            <p class="libro-descripcion">{{$libro->descripcion}}</p>
+            <div class="btn_leermas">
+                <span>Ver más &#8595;</span>
+                <span>Ver menos &#8593;</span>
             </div>
             
-           <a href='{{route("addCarrito",['libro'=>$libro])}}' style='text-decoration: none;'>
-                            <div class="add-to-cart">
-                                    <span class="cart-text">Añadir a la cesta</span>
-                                    <div class="cart-icon">
-                                        🛒
-                                    </div>
-                            </div>
-                                </a>
+            
         </div>
+        
     @else
-        <h6>No exite el libro.</h6>
+    <!--esto no haría falta, se produciria un error 404-->
+        <h5>El libro no existe</h5>
     @endif
-           <div class="">
-               @auth
-                <div class="popup">
-                @if (isset($listadeseos->existe) and $listadeseos->existe==1)
-                    <span class="listadeseos marcado material-symbols-outlined">favorite</span>
-                @else
-                    <span class="listadeseos  material-symbols-outlined">favorite</span>
-                @endif
-                    <span class="popuptext" id="myPopup">Se ha añadido el libro a la lista de deseos!</span>
-               </div>
-               @endauth
-    </div>             
-    <div class='valoracion'>
-        
-        @include('calificacion.index')
-    </div>
-       
-    <div class='comentario'>
-        
-        @include('comentarios.crearcomentario')
+        <div class="libro-comentarios">
+            @include('comentarios.crearcomentario')
+        </div>
     </div>
 @endsection
 

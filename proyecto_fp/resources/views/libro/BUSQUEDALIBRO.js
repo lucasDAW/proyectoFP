@@ -11,7 +11,8 @@
         
               
         window.addEventListener('load', function(){
-            var input = document.getElementById("busqueda");
+            alert('hoa');
+            var input = document.getElementById("busquedapagina");
             var log = document.getElementById("textobusqueda");
             var libros = document.body.querySelector(".libros");
             input.addEventListener('keyup',consulta)

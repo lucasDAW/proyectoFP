@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        
+        
+        return view('auth.register');    
+        
     }
 
     /**
@@ -31,9 +35,9 @@ class RegisteredUserController extends Controller
     {
         
         
-        var_dump($request->id_usuario);
-        var_dump($request->name);
-        var_dump($request->email);
+//        var_dump($request->id_usuario);
+//        var_dump($request->name);
+//        var_dump($request->email);
         if($request->id_usuario and Auth::check()){
             
             $request->validate([
@@ -44,14 +48,14 @@ class RegisteredUserController extends Controller
             $usuario->name=$request->name;
             $usuario->password=Hash::make($request->password);
             $usuario->save();
-            
+           
             
             return redirect('/miperfil/'.Auth::user()->id)->with('mensaje', 'Se han modificado los datos del usuario correctamente');
  
         }else{
             
         }
-        exit();
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -74,6 +78,6 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
 
-        return redirect(route('todoslibros', absolute: false));
+        return redirect()->route('login')->with('mensaje', 'Se ha creado el usuario correctamente, por favor verifica tu correo');
     }
 }

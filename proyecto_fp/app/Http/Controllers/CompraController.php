@@ -134,8 +134,8 @@ class CompraController extends Controller
                     //borra la sesion del carro de compra
                     $request->session()->forget('cart');
                     
-                    return redirect()->route('todoslibros')->with('mensaje', 'Compra efectuada correctamente!! :)');
-//                   return view('emails.welcome',['title'=>'compra','body'=>$body])->with('mensaje', 'Se ha enviado el correo!!');
+//                    return redirect()->route('todoslibros')->with('mensaje', 'Compra efectuada correctamente!! :)');
+                   return view('pedidos.index');
                 }
                 
             }

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('calificaciones', function (Blueprint $table) {
             $table->id();
             $table->integer('calificacion');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('libro_id')->references('id')->on('libros');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('null');
+            $table->foreignId('libro_id')->references('id')->on('libros')->onDelete('null');
             
             $table->timestamps();
         });

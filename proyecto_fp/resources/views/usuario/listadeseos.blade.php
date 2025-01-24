@@ -4,7 +4,7 @@
 <div class="container mt-5">
   <h2>Mi Lista de deseos</h2>
 </div>
-@if ($libros)
+@if ($libros && count($libros)>0)
         <table  class="lista_deseos">
             <thead>
                 <tr>  

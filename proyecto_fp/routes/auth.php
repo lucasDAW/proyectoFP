@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
@@ -12,10 +12,10 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('registro', [RegisteredUserController::class, 'create'])
-        ->name('registroeditar');
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
 
-    Route::post('registro', [RegisteredUserController::class, 'store']);
+    Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
@@ -56,10 +56,5 @@ Route::middleware('auth')->group(function () {
 
     Route::match(['GET', 'POST'],'logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
-//    Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
-//        ->name('logout.get');
-    //editar datos de usuario
-    Route::get('registro', [RegisteredUserController::class, 'create'])
-        ->name('registroeditar');
-    Route::post('registro', [RegisteredUserController::class, 'store']);
+//  
 });

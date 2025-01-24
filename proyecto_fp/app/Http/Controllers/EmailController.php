@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Mail\WelcomeMail;
 use App\Mail\FacturaMail;
+use App\Mail\AdministradorMail;
 
 class EmailController extends Controller
 {
@@ -22,10 +23,15 @@ class EmailController extends Controller
     
     public function sendEmail($email,$titulo,$cuerpo){
         
-        $email = 'dawlucas1993@gmail.com';
+//        $email = 'dawlucas1993@gmail.com';
         Mail::to($email)->send(new WelcomeMail($titulo,$cuerpo));
 //        Mail::to($email)->send(new WelcomeMail($titulo,$cuerpo));
 //        return redirect()->route('todoslibros')->with('mensaje', 'Se ha enviado el correo !!'); 
+    }
+    public function sendEmailAdmin($email,$titulo,$cuerpo){
+        
+        $email = 'dawlucas1993@gmail.com';
+        Mail::to($email)->send(new AdministradorMail($titulo,$cuerpo));
     }
     
     public function sendFactura($id_compra,$usuario,$email,$direcion,$carro){
@@ -57,7 +63,7 @@ class EmailController extends Controller
 //        enviamos el correo
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //            !!!!!!!!!!!!!!!!!!!!!!!!HAY QUE ELIMINAR ESTA LINEA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        $email = 'dawlucas1993@gmail.com';
+//        $email = 'dawlucas1993@gmail.com';
         //se envia al mismo correo siempre si no se boora
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ATENCION!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

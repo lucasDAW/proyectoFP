@@ -2,9 +2,9 @@
 @section('titulo','Buscar')
 @section('contenido')
             <h3>Buscar  libros</h3>
-            <form method="POST" action="{{route('busquedaBBDD')}}" class="formularioBusqueda">
+            <form method="POST" action="#" class="formularioBusqueda">
                 @csrf
-                <input type="text" placeholder="Busqueda" id="busqueda" name="busqueda">
+                <input type="text" placeholder="Busqueda" id="busquedapagina" name="busquedapagina">
                 <!--<input type="submit" value="Buscar">-->
                 
             </form>
@@ -44,7 +44,58 @@
 
             </div>
        
+       <script>
+   
+      
+//     ESTO LO DEJO DE UTILIZAR PORQUE NO ME CONVENCE SU FUNCIONAMIENTO
+     
+        
+              
+//        window.addEventListener('DOMContentLoaded', function(){
+            var input = document.getElementById("busquedapagina");
+            var log = document.getElementById("textobusqueda");
+            var libros = document.body.querySelector(".libros");
+            
+            if(input){
+                
+                input.addEventListener('keyup',consulta);
+            }
+//            console.log(input);
+            
+        
+           async function consulta() {
+               
+                let texto = input.value;
+                let busqueda ={'busqueda':texto};
+//                libros.innerHTML='';
+//                               
+//                console.log(texto);
+//                console.log(document.head.querySelector("[name='csrf-token']").getAttribute('content'));
+                fetch('/libros/busqueda',{
+                    method:'POST',
+                    body:JSON.stringify(busqueda),
+                    headers:{
+                        'Content-Type': 'application/json;charset=utf-8',
+                        "X-Requested-Width":"XMLHttpRequest",
+                        "X-CSRF-Token":document.head.querySelector("[name='csrf-token']").getAttribute('content')
+                    }
+                })
+                .then(response =>  response.json())
+                .then(data => {
+//                    
+//        
+                    console.log(data.data);
+                    console.log(data.data.length);
+////                    
+//                
+//                
+                });
+//          
+            }   
+//        });
+  
        
+       </script>
        @endsection
 
 
