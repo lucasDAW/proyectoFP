@@ -5,8 +5,8 @@
         <meta name="csrf-token" content="{{ csrf_token()}}" />
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href='{{ asset("image/icono.ico") }}' type="image/x-icon">
-    <link rel='stylesheet' href='{{ asset("css/estilos.css") }}'>
+        <link rel="icon" href='{{ mix("image/icono.ico") }}' type="image/x-icon">
+    <link rel='stylesheet' href='{{ mix("css/estilos.css") }}'>
     <link rel='stylesheet' href='../../css/estilos.css'>
 
     <title>SENECALIB - @yield('titulo')</title>
@@ -103,6 +103,6 @@
     
   </div>
         </footer>   
-        <script src="../../js/main.js"></script>
+        <script src="{{ mix("js/main.js") }}"></script>
     </body>
 </html>
