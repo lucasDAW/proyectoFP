@@ -29,6 +29,11 @@ Route::get('/cookies',function(){
     return redirect()->route('todoslibros');
 
 })->name('cookies');
+Route::get('/politica-cookies',function(){
+    
+            return view('administracion.cookies');
+
+})->name('cookies-politicas');
 //CONTACTO
 Route::get('/contacto',function(){
             return view('usuario.contacto');
@@ -38,7 +43,7 @@ Route::get('/contacto',function(){
 Route::get('/terminos-servicio',function(){
             return view('administracion.terminos');
 
-})->name('contactoadmin');
+})->name('terminos-servicio');
 Route::post('/contacto',[UsuarioController::class,'contactoCorreo'])->name('contactoadminpost');
 
 Route::get('/politica-cookies',function(){

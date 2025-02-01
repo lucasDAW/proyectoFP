@@ -97,8 +97,8 @@
     <nav>
       <ul>
         <li><a href="{{route('contactoadmin')}}">Contacto</a></li>
-        <li><a href="#">Política de Privacidad</a></li>
-        <li><a href="#">Términos de Servicio</a></li>
+        <li><a href="{{route('politicas')}}">Política de Privacidad</a></li>
+        <li><a href="{{route('terminos-servicio')}}">Términos de Servicio</a></li>
       </ul>
     </nav>
     

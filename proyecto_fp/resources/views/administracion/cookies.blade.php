@@ -1,4 +1,5 @@
   @extends('administracion.index')
+  @section('titulo','Cookies')
   @section('contenido')
   <div class="cookies-politicas">
             
