@@ -50,7 +50,8 @@ class AutorController extends Controller
             }
             
            
-            return view('autor.mostrarautores',['autores'=>$autores]);
+//            return view('autor.mostrarautores',['autores'=>$autores]);
+            return view('autor.todos',['autores'=>$autores]);
         }
 
     }
