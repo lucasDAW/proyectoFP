@@ -50,7 +50,6 @@ class AutorController extends Controller
             }
             
            
-//            $autor->perfil();
             return view('autor.mostrarautores',['autores'=>$autores]);
         }
 
