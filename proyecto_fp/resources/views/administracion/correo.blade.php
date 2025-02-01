@@ -5,7 +5,7 @@
                 <form method='post' action='{{route('enviarcorreoadminpost')}}'>
                     @csrf
                     <label from='destinatario'>Destinatario:</label>
-                    <input type='text' id='destinatario' name='destinatario' value="{{$usuario->email}} - {{$usuario->name}}" disabled="true"/>
+                    <input type='text' id='destinatario' name='destinatario' value="{{$usuario->email}} - {{$usuario->nombre}}" disabled="true"/>
                     <label from='asunto'>Asunto:</label>
                     <input type='text' id='asunto' name='asunto' placeholder='Asunto...' autofocus/>
                     <label from='cuerpo'>Mensaje:</label>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\EmailController;
+use Illuminate\Support\Facades\Storage;
 
 class CompraController extends Controller
 {
@@ -17,7 +18,7 @@ class CompraController extends Controller
     public function verPedidos(Request $request){
         
 //        var_dump($request->id);
-        $compras= DB::table('compras')->where('user_id',$request->id)->get();
+        $compras= DB::table('compras')->where('usuario_id',$request->id)->get();
         
         if(Auth::check()){
             
@@ -30,16 +31,35 @@ class CompraController extends Controller
     
     public function verLibrosPedido(Request $request){
         
-        $libros= DB::table('pedidos')
-                ->join('libros','pedidos.libro_id','=','libros.id')
-                ->select('libros.*')->where('compra_id',$request->compra_id)
+        $libros= DB::table('libro')
+                ->join('pedidos','pedidos.libro_id','=','libro.id')
+                ->join('autor','autor.id','=','libro.autor_id')
+                ->select('libro.*','autor.nombre as autor_nombre')->where('compra_id',$request->compra_id)
                 ->get();
+        foreach($libros as $libro){
+           $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
+//                var_dump($documentos);
+           if($documentos){//si existe el archivo del libro en la bbdd
+               if($documentos->archivo){
+                   $urlarchivo = Storage::disk('archivos')->url($documentos->archivo);
+                   if($documentos->portada){
+                       $urlportada = Storage::disk('archivos')->url($documentos->portada);
+                   }else{
+                       $urlportada=null;
+                   }
+
+               }
+               $libro->imagen_url = $urlportada;
+               $libro->archivo_url = $urlarchivo;
+               }
+        
+        }
         
         if(!empty($libros)){
             return view('pedidos.mislibros',['libros'=>$libros,'id_pedido'=>$request->compra_id]);
 
         }else{
-            return back()->with('mensaje','Debe iniciar sesión para realizar pedido.');
+            return back()->with('mensaje','Debe iniciar sesión.');
 
         }
     }
@@ -105,7 +125,7 @@ class CompraController extends Controller
 //            var_dump($total_compra);
 
             $id= DB::table('compras')->insertGetId([
-                'user_id' => Auth::user()->id,
+                'usuario_id' => Auth::user()->id,
                 'total_compra' => $total_compra
             ]);
             if($id){//se ha guardado en la tabla de compras de la base de datos

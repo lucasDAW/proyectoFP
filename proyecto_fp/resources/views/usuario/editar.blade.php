@@ -1,6 +1,9 @@
 @extends('layouts.base')
-
-@section('titulo','Resgistrarse')
+@if(isset($usuario))
+    @section('titulo','Modificar Usuario')
+@else
+    @section('titulo','Resgistrarse')
+@endif
     <!-- Session Status -->
 @section('contenido')
 
@@ -27,9 +30,9 @@
         <div>
             <label for="name"> Nombre</label>
             @if (isset($usuario))
-                <input type='text' id='name' name="name" placeholder="Nombre...." value="{{$usuario->name}}"/>
+                <input type='text' id='name' name="name" placeholder="Nombre...." value="{{$usuario->nombre}}"/>
             @else
-                <input type='text' id='name' name="name" placeholder="Nombre...." value="{{Auth::user()->name}}"/>
+                <input type='text' id='name' name="name" placeholder="Nombre...." value="{{Auth::user()->nombre}}"/>
             @endif
         </div>
         

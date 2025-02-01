@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Comentario extends Model
 {
     // // Asociación de la tabla 'comentarios' con el modelo.
-    protected $table = 'comentarios';
+    protected $table = 'comentario';
     protected $fillable = ['comentario'];
     
     use HasFactory;
@@ -21,7 +21,11 @@ class Comentario extends Model
      */
     public function libro(): BelongsTo
     {
-        return $this->belongsTo(Libro::class,'foreign_key');
+        return $this->belongsTo(Libro::class);
+    } 
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(Usuario::class);
     } 
     
 }

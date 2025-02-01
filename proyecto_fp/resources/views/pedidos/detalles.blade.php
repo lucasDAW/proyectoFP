@@ -7,35 +7,51 @@
   @php 
     $total = 0.0
   @endphp
-  <ul>
-      
-    @foreach($carro as $libro)
-          <li>Titulo: {{$libro['titulo']}}  |  Cantidad: {{$libro['cantidad']}}  |  Precio: {{$libro['precio']}} € | Total:  {{$libro['precio'] * $libro['cantidad']}} €</li>
-      @php $total +=    $libro['precio'] * $libro['cantidad'] @endphp
-    @endforeach
-  </ul>  
-  <h3>Total compra: {{$total}} € </h3>
+ 
+      <table class="tabla_usuarios">
+          <thead>
+              <tr>
+                  <th>Titulo</th>
+                  <th>Cantidad</th>
+                  <th>Precio €</th>
+                  <th>Total € </th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+              @foreach($carro as $item)
+              <tr>
+                  <td>{{$item['titulo']}}</td>
+                  <td>{{$item['cantidad']}}</td>
+                  <td>{{$item['precio']}}</td>
+                  <td>{{$item['precio'] * $item['cantidad']}}</td>
+                        @php $total +=   $item['precio'] * $item['cantidad'] @endphp
+              </tr>
+              @endforeach
+              <tr><td colspan="3">Total</td><td>{{$total}}</td></tr>
+          </tbody>
+      </table>
   @endif
 </div>
 
 
-<div class="alert alert-danger">
+<form method='POST' action='{{route('realizarcompra')}}'>
+    <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
-<form method='POST' action='{{route('realizarcompra')}}'>
         @csrf
         
      <!--Nombre-->
      <div>
         <label for="nombre">Nombre: </label>
-       @if(isset(Auth::user()->name))
-        <input type="text" id='nombre' name="nombre" placeholder="Introduzca titulo..." value='{{Auth::user()->name}}'>
+       @if(isset(Auth::user()->nombre))
+        <input type="text" id='nombre' name="nombre" placeholder="Introduzca Nombre..." value='{{Auth::user()->nombre}}'>
        @else 
-        <input type="text" id='nombre' name="nombre" placeholder="Introduzca titulo...">
+        <input type="text" id='nombre' name="nombre" placeholder="Introduzca Nombre...">
        @endif
      </div>
      <!--email-->

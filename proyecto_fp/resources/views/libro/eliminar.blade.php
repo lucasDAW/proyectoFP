@@ -4,8 +4,11 @@
 @section('contenido')
 
 @if (isset($id_libro))
+        @if(Auth::user()->role==2)
+            <h6>Tienes el rol de admin </h6>
+        @endif
         <h3>Eliminar libro </h3>
-        <h6>Se va eliminar el libro de la base de datos, pulse en eliminar para confirmar la eliminación.</h6>
+        <h4>Se va eliminar el libro de la base de datos, pulse en eliminar para confirmar la eliminación.</h4>
 @endif
                    
                         

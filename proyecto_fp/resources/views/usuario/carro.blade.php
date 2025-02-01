@@ -1,12 +1,11 @@
 @extends('layouts.base')
 @section('titulo','Cesta')
 @section('contenido')
-<div class="container mt-5">
+<div class="cesta">
   <h2>Cesta</h2>
-</div>
+
 @if (isset($carro))
    @if (count($carro)>0)
-        <h5>Contenido de la cesta</h5>
         <table  class="cesta_compra">
             <thead>
                 <tr>  
@@ -47,7 +46,6 @@
     <a href="{{route('vaciar')}}" class="btn_vaciar">Vaciar carrito</a>
    
     <a href="{{route('confirmarcompra')}}" id='btn_carro' name='btn_carro' class="btn_realizar">Realizar Pedido</a>
-    <a href="{{route('todoslibros')}})">volver</a>
 
 </div>
    @else
@@ -58,6 +56,7 @@
   
     
 @endif
+</div>  
 
 @endsection
 

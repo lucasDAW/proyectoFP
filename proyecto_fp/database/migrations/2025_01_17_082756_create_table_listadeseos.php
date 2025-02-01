@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('listadeseos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('libro_id')->references('id')->on('libros');
-            $table->timestamps();
+            $table->foreignId('usuario_id')->references('id')->on('usuario')->onDelete('cascade');;
+            $table->foreignId('libro_id')->references('id')->on('libro')->onDelete('cascade');;
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

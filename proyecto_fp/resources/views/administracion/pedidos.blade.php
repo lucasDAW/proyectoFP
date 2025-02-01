@@ -1,5 +1,6 @@
 
 @extends('administracion.index')
+@section('titulo','Panel de administración - Pedidos')
 
 @section('accion')
     <div class="form_busqueda_pedidos_admin">
@@ -24,7 +25,7 @@
               @foreach($compras as $item)
               <tr>
                   <td>{{$item->id}}</td>
-                  <td>{{$item->name}} | {{$item->email}}</td>
+                  <td>{{$item->nombre}} | {{$item->email}}</td>
                   <td>{{$item->total_compra}}</td>
                   <td>{{$item->created_at}}</td>
                   <td>

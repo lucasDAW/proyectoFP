@@ -1,17 +1,16 @@
 @extends('layouts.base')
 @section('titulo','Lista deseos')
 @section('contenido')
-<div class="container mt-5">
+<div class="listadeseoscontenedor">
   <h2>Mi Lista de libros publicados</h2>
 </div>
 @if ($libros)
-        <table  class="lista_deseos">
+        <table  class="lista_deseos_tabla">
             <thead>
                 <tr>  
                     <th>Titulo</th>
                     <th>Autor</th>
                     <th>Precio</th>
-                    <th>Acciones</th>
                     <th></th>
                 </tr>
             </thead>

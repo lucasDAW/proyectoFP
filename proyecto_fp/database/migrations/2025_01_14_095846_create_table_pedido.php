@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('compra_id')->references('id')->on('compras');
-            $table->foreignId('libro_id')->references('id')->on('libros');
+            $table->foreignId('libro_id')->references('id')->on('libro');
             $table->float('precio');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

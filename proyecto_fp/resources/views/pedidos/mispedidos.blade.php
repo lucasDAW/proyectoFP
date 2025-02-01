@@ -8,13 +8,33 @@
 <div class='pedidos'>
     @if ($pedidos)
 
-           
-        @foreach ($pedidos as $p)
-        <div class='pedidosenlace'>
-            
-            <p> <a href='{{route('verlibrospedido',['compra_id'=>$p->id])}}'>Número pedido: {{$p->id}} </a>Total: {{$p->total_compra}}€</p>
-        </div>
-        @endforeach
+        <table class='tabla_pedidos_usuario'>
+          <thead>
+              <tr>
+                  <th>ID Pedido</th>
+                  <th>Total €</th>
+                  <th>Fecha</th>
+                  <th></th>
+                  
+              </tr>
+          </thead>
+          <tbody>
+              @foreach($pedidos as $item)
+              <tr>
+                  <td>{{$item->id}}
+                  <td>{{$item->total_compra}}</td>
+                  <td>{{$item->created_at}}</td>
+                  <td>
+                      <div class='accionesadmin'>
+                        <a class="verdetallespedidos" href='{{route('verlibrospedido',['compra_id'=>$item->id])}}'>
+                            <span >Ver detalles</span>
+                        </a>
+                      </div>
+                  </td>
+              </tr>
+              @endforeach
+          </tbody>
+      </table>
     @else
         <p>No existend pedidos</p>
     @endif

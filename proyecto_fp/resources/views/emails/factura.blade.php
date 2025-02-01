@@ -74,10 +74,8 @@
     </head>
     <body>
         <div class="factura-header">
-            <h1>Hola,<span class="nombre"> @isset ($usuario)
-                            {{$usuario}}
-                      @else
-                            ejemplo nombre
+            <h1>Hola<span class="nombre"> @isset ($usuario)
+                            ,{{$usuario->nombre}}
                       @endisset
                 </span>
             </h1>

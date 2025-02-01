@@ -11,7 +11,6 @@
      </div>
         
         <input type='hidden' name='libro_id' id='libro_id' value='{{$libro->id}}'/>
-        <input type='hidden' name='user_id' id='user_id' value='{{Auth::id()}}'/>
         <input type="submit" value="Comentar" class="boton"/>
    
  </form>
@@ -20,10 +19,11 @@
     <h2>Comentarios</h2>
         @foreach ($comentarios as $comentario)
             <div class="comentario">
-                        <p><strong>{{$comentario->name}}</strong>      | {{$comentario->comentario}} <span>
+                <p><strong>{{$comentario->name}}</strong>      | <span>{{$comentario->comentario}}</span> <span>
                                     @auth
-                                        @if (Auth::user()->id==$comentario->user_id or Auth::user()->role=='admin')
-                                            <a href="/comentario/borrar/{{$comentario->id}}" class="borrar" >Eliminar</a>
+                                        @if (Auth::user()->id==$comentario->usuario_id or Auth::user()->role=='admin')
+                                            <a href="{{route('eliminarComentario',['comentario'=>$comentario->id])}}" class="borrar" >Eliminar</a>
+                                            <a href="{{route('editarcomentario',['comentario'=>$comentario->id])}}" class="borrar" >Editar</a>
                                         @endif
                                     @endauth  
                                       </span>

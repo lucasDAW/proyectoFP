@@ -16,8 +16,53 @@ body{
    background-position: center;
    background-size: contain;
    background-attachment: fixed;
+    height: 100%;
+    margin: 0;
+   /*height: 100vh;*/
+}
+/*main*/
+main{
+   margin-top: 200px;
+   position: relative;
+   min-height: 100%;
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   height: 100%;
   
-   height: 100vh;
+}
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+footer nav{
+    background: none;
+}
+
+footer nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+footer nav li {
+  margin: 0 10px;
+}
+footer nav ul li a
+{
+   color:#eee;
+}
+footer nav ul li a:hover{
+    color:#ffff66;
+    cursor:pointer;
 }
 
 #perfil{
@@ -60,15 +105,17 @@ header{
     height: 100%;
     transition: all 0.3s ease;
 }
-nav{
-    background: #1f2424;
-}
+
 header img{
     height: 100px;
     transition: opacity 0.3s ease;
-}header img:hover{
+}
+header img:hover{
     height: 100px;
     cursor: pointer;
+}
+nav{
+    background: #222;
 }
 
 /*enlaces de nav*/
@@ -141,7 +188,7 @@ header img{
     display:none;
  position:absolute;
  top:100%;
- left:0;
+ right: 0;
  background:#eee;
  padding:0;
 }
@@ -160,9 +207,9 @@ header img{
 .enlaces ul li:hover > ul li a{
     background: #5b5866;
     font-size: 10px;
- margin:0 5px;
- box-shadow: 3px 3px #2e72ad;
- transition: 0.2s all ease-in;
+    margin:0 5px;
+    box-shadow: 3px 3px #2e72ad;
+    transition: 0.2s all ease-in;
 }
 
 .enlaces ul li:hover > ul li a:hover{
@@ -179,6 +226,7 @@ header img{
      background: #5bede7;
      
  }
+     
  .enlaces .nombre a{
     /*width: 200px;  Ancho fijo*/ 
     overflow: hidden;  
@@ -234,8 +282,30 @@ header img{
     box-shadow: none !important;
 }
 
+.autores_aviso:hover .aviso{
+    background: yellow;
+    color:black;
+    transition: 0.5s all ease-in;
+}
+    
 
 
+.aviso{
+    padding: 5%;
+    position: absolute;
+    background: red;
+    color: #eee;
+    width: 10px;
+    height: fit-content;
+    border-radius: 100%;
+    /* font-size: 1.25em; */
+    /* width: 10px; */
+    top: 0%;
+    right: 0%;
+    vertical-align: center;
+    text-align: center;
+    text-transform: uppercase;
+}
 /*-----   CABECERA +++ HEADER ++ -----*/
 /*mensajes*/
 .mensaje{
@@ -249,11 +319,7 @@ header img{
     box-shadow: 5px 5px #136e13;
     color: #083008;
 }
-/*main*/
-main{
-   margin-top: 250px;
-   height: 100vh;
-}
+
 .publicarLibro{
     display: flex;
     flex-direction: column;
@@ -263,7 +329,21 @@ main{
 .publicarLibro>div{
     margin:5px auto;
 }
+.publicarLibro textarea{
+    width: 100%;
+    
+}
 
+.publicarLibro .mensajePublicacion{
+    display: none;
+    text-align: center;
+    border: 1px solid black;
+    padding: 50px;
+    background: #f5f5f5;
+    margin: 10px 0px;
+    box-shadow: 1px 1px 10px #555, -1px -1px 10px #555;
+    transition: 0.5s all ease-in;
+}
 
 /*tabla lista deseos*/
 .lista_deseos{
@@ -311,7 +391,7 @@ main{
 .lista_deseos tbody tr:hover{
     color: #3c0909;
     background: #ebeb67;
-    transform: scale(1.15);
+    /*transform: scale(1.15);*/
     border: 1px solid black;
     
 }
@@ -319,7 +399,12 @@ main{
     text-align: left;
 
 }
-
+.listadeseoscontenedor,encabezado{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
 /*icono lista de deseos FIN*/
 .listadeseos:hover{
     background: #c54b60;
@@ -328,6 +413,28 @@ main{
     transform: scale(1.5);
     animation: agitar  ease 0.5s;
 }
+.listadeseos:hover{
+    background: #c54b60;
+    border-radius: 20%;
+    cursor:pointer;
+    transform: scale(1.5);
+    animation: agitar  ease 0.5s;
+}
+.lista_deseos_tabla tbody tr td a{
+    text-decoration: none;
+    box-shadow: 2px 2px #b5d33d;
+    background: #7f9b10;
+    padding: 5px 10px;
+    color: #ffffff;
+    font-weight: bolder;
+}
+.lista_deseos_tabla tbody tr td a:hover{
+    box-shadow: none;
+    background: #b5d33d;
+    cursor: pointer;
+    outline:1px solid black;
+}
+/*calificaciones libros*/
 .rating{
     width: 30px;
     height: 30px;
@@ -337,13 +444,97 @@ main{
 }
 .rating_valor{
    
-    background-color: #FFC107 !important;
+    background-color: #FFC107 !important ;
 
 }
 .rating_base{
-    background-color: aquamarine !important;
+    background-color: aquamarine !important ;
     
 }
+
+
+.calificaciones  img{
+    width: 20px;
+    height: 20px;
+    border-radius: 40%;
+    padding:5px;
+    margin:0 5px;
+}
+.calificaciones{
+    border:1px solid black;
+    width:fit-content;
+    padding:1px 20px;
+    margin-top:20px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;    
+}
+.calificaciones h4{
+    text-align: center;
+}
+.calificaciones img:hover{
+    background-color: #FFC107;
+    cursor:pointer;
+    
+}
+.calificaciones  img{
+    width: 20px;
+    height: 20px;
+    border-radius: 40%;
+    padding:5px;
+    background: none;
+}
+.calificaciones{
+    border:1px solid black;
+    width:fit-content;
+    padding:5px 10px;
+    margin-top:20px;
+}
+.calificaciones h4{
+    text-align: center;
+}
+.calificaciones img:hover{
+    background-color: #FFC107 !important;
+    cursor:pointer;
+    
+}
+
+.mensajecalificacion{
+    display:flex;
+    justify-content: center;
+    color: gold;
+    background: #000000;
+    margin: 15px auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px gold;
+}
+.desaparecercalificacion{
+   
+    animation-name: desaparecermensaje;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    display:flex;
+    justify-content: center;
+    color: gold;
+    background: #000000;
+    margin: 15px auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px gold;
+}
+@keyframes desaparecermensaje {
+    from{
+opacity:1;
+        scale:100%;
+    }
+    to{ 
+opacity:0.0;
+        scale:0%;
+    }
+}
+/*FIN calificacion libros*/
 /*libros*/
 .libros{
     display: grid;
@@ -352,32 +543,40 @@ main{
     grid-template-columns: 1fr  1fr 1fr;
     grid-template-rows: auto;
     justify-items: center;
-    margin: 0 10%;
+    margin: 0 5%;
 }
 
 /*estilos libro*/
 .libro{
     background-color: #e6f1f3;
     float: left;
-    margin: 0 10px 10px 0;
-    width: 205px;
-    padding: 10px;
-    /*height: 290px;*/
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+/*    width: 300px;*/
     text-align: center;
     overflow: hidden;
-    align-items: anchor-center;
+    align-items: center;
     text-decoration: none;
     
     
     
 }
+.libro a, .autor a{
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:5px 0px;
+    padding:0px 30px;
+    
+}
+
 .libro:hover{
     background-color: #9dc4cb;
     border:1px solid blue;
@@ -396,7 +595,7 @@ main{
     border-radius: 5px;
     background: white;
     /*height: 30px;*/
-    width: 40px;
+    width: fit-content;
     border: 1px solid black;
 }
 .libro .precio span{
@@ -411,15 +610,17 @@ main{
     view-timeline-axis: block;
     
     animation-timeline:--animacionlibros;
-    animation-name: show;
+    animation-name: mostrarlibros;
     animation-range:entry 10% cover 40%;
     animation-fill-mode: both;
 }
-@keyframes show{
-    from{opacity:0;
+@keyframes mostrarlibros{
+    from{
+opacity:0;
     scale:25%;
     }
-    to{opacity:1;
+    to{
+opacity:1;
     scale:100%;
     }
 }
@@ -560,6 +761,26 @@ main{
 }
 
 /*cesta_compra --> tabla*/
+.cesta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cesta h2{
+    background: #222;
+    color:#fff;
+    width: 100%;
+    text-align: center;
+    padding:20px 0; 
+}
+
+.cesta h5{
+    background: #222;
+    color:#fff;
+    width: 100%;
+    text-align: center;
+    padding:20px 0; 
+}
 .cesta_compra{
     width: 75%;
     margin: 0 auto;
@@ -661,88 +882,50 @@ main{
     flex-direction: row;
     padding: 5px;
     margin:0px 15px;
+    width: fit-content;
+    height: fit-content;
+    background: none;
+}
+.btns_pedido a{
+    text-decoration: none;
+    font-family: 'Arial';
+    font-weight: bolder;
+    margin:0 20px;
+    padding: 10px 20px;
+    border-radius: 10px; 
+    color:#eee;
+   
+
+    
 }
 .btns_pedido .btn_vaciar{
+        background: #ad3131;
+    transition: 0.2s all ease;
+    border: 1px solid #c94848;
+    box-shadow: 3px 0px #dd5d5d, 0px 3px #dd5d5d, -3px 0px #dd5d5d, 0px -3px #dd5d5d;
+}
+.btns_pedido .btn_vaciar:hover{
+    cursor: pointer;
+    background: #b71414;
+    letter-spacing: 2px;
     
-    background: red;
+    
 }
 
-
-
-/* CSS */
-.btns_pedido .btn_vaciar {
-  text-decoration: none;
-  background: #FF4742;
-  border: 1px solid #FF4742;
-  border-radius: 6px;
-  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 16px;
-  min-height: 40px;
-  outline: 0;
-  padding: 12px 14px;
-  text-align: center;
-  text-rendering: geometricprecision;
-  text-transform: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
+.btns_pedido .btn_realizar{
+        background: #67c566;
+    transition: 0.2s all ease;
+    border: 1px solid #3e9720;
+    box-shadow: 3px 0px #2b8d30, 0px 3px #2b8d30, -3px 0px #2b8d30, 0px -3px #2b8d30;
 }
-
-.btns_pedido .btn_vaciar:hover,
-.btns_pedido .btn_vaciar:active {
-  background-color: initial;
-  background-position: 0 0;
-  color: #FF4742;
+.btns_pedido .btn_realizar:hover{
+    cursor: pointer;
+    background: #138527;
+    letter-spacing: 2px;
+    outline: 4px solid #1e661e;
+    
 }
-
-.btns_pedido .btn_vaciar:active {
-  opacity: .5;
-}
-
-
-
-
-/* CSS */
-.btns_pedido .btn_realizar {
-  text-decoration: none;
-  background-color: initial;
-  background-image: linear-gradient(-180deg, #00D775, #00BD68);
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
-  height: 44px;
-  line-height: 44px;
-  outline: 0;
-  overflow: hidden;
-  padding: 0 20px;
-  pointer-events: auto;
-  position: relative;
-  text-align: center;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
-  vertical-align: top;
-  white-space: nowrap;
-  width: 100%;
-  z-index: 9;
-  border: 0;
-}
-
-.btns_pedido .btn_realizar:hover {
-  background: #00bd68;
-}
-
+/*++++++++++++++++++++++++++++++++++cesta fin ++++++++++++++++++++++++++++++++++*/
 .formularioBusqueda{
     display: flex;
     align-items: center;
@@ -794,10 +977,18 @@ main{
     color:black
 }
 @keyframes agitar {
-  0% {transform: rotate(0deg)}
-  33% {transform: rotate(25deg)}
-  66% {transform: rotate(-25deg)}
-  100% {transform: rotate(0deg)}
+  0% {
+transform: rotate(0deg)
+}
+  33% {
+transform: rotate(25deg)
+}
+  66% {
+transform: rotate(-25deg)
+}
+  100% {
+transform: rotate(0deg)
+}
 }
 
 
@@ -901,10 +1092,18 @@ main{
     
 }
 @keyframes desaparecer {
-  0% {transform: scale(1)}
-  33% {transform: scale(0.75)}
-  66% {transform: scale(0.5)}
-  100% {transform: scale(0)}
+  0% {
+transform: scale(1)
+}
+  33% {
+transform: scale(0.75)
+}
+  66% {
+transform: scale(0.5)
+}
+  100% {
+transform: scale(0)
+}
 }
 
 
@@ -924,11 +1123,16 @@ form >div{
         margin-bottom: 20px;
 
 }
-form label, form textarea{
+form label{
     font-size: 0.9em;
     margin-bottom: 5px;
     color: #555555;
     display: block;
+}
+form textarea{
+    font-family: 'Arial';
+    width: 100%;
+    
 }
 form input{
     
@@ -967,7 +1171,7 @@ form input[type='checkbox']{
 
 .registrarse{
     align-self: center;
-    width:250px;
+    width:fit-content;
     background: #b9911b;
     color: white;
     padding: 10px 20px;
@@ -1010,21 +1214,24 @@ form input[type='checkbox']{
     color:black;
   font-size: 16px;
   font-weight: bolder;
-  letter-spacing: 1px;
+  letter-spacing: 10px;
   padding: 13px 20px 13px;
   outline: 0;
   border: 1px solid black;
   cursor: pointer;
   position: relative;
+  left: 25%;
   background-color: rgba(0, 0, 0, 0);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  
+  z-index: 5;
 }
 
 .btn_mostrar_publicaciones:after {
   content: "";
-  background-color: #ffe54c;
+  background-color: #4ddbd9;
   width: 100%;
   z-index: -1;
   position: absolute;
@@ -1091,6 +1298,14 @@ form input[type='checkbox']{
     flex-direction: row;
     justify-content: space-between;
 }
+.contenedor-libro-detalle .libro-detalles .titulo{
+    position: relative;
+}
+.contenedor-libro-detalle .libro-detalles .titulo .popup{
+    position: absolute;
+    top:10%;
+    left: -5%;
+}
 .contenedor-libro-detalle .libro-detalles .libro-titulo span:nth-child(2){
     color:#f7f769;
     text-shadow:1px 1px 1px black;
@@ -1100,7 +1315,50 @@ form input[type='checkbox']{
     font-weight: bold;
     margin:20px 0 20px;
     color:#0b0060;
+    width: fit-content;
 }
+.contenedor-libro-detalle .libro-detalles .libro-autor a{
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #ffffff;
+    background: #222;
+    padding: 5px 20px;
+    transition:0.2s all ease-in-out;
+}
+
+.contenedor-libro-detalle .libro-detalles .libro-autor a:hover{
+    background: #eee;
+    color:#222;
+    cursor: pointer;
+    outline:1px solid black;
+}
+
+.contenedor-libro-detalle .libro-detalles .libro-categoria{
+    margin:20px auto;
+}
+.contenedor-libro-detalle .libro-detalles .libro-categoria a{
+  color: #222;
+  border: 2px solid #222;
+  background: #eee;
+  border-radius: 0px;
+  padding: 5px 15px;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 #484848;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+  text-decoration: none;
+}
+.contenedor-libro-detalle .libro-detalles .libro-categoria a:hover{
+    box-shadow: inset 0 100px 0 0 #484848;
+    color:#eee;
+}
+
+
 .contenedor-libro-detalle .libro-detalles .libro-descripcion{
     font-size: 1.12em;
     line-height: 1.5;
@@ -1178,6 +1436,10 @@ form input[type='checkbox']{
 }
 .contenedor-libro-detalle .libro-comentarios .comentario span{
         margin-left: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
 }
 .contenedor-libro-detalle .libro-comentarios .comentario span a{
     text-decoration: none;
@@ -1191,6 +1453,22 @@ form input[type='checkbox']{
 .contenedor-libro-detalle .libro-comentarios .comentario span a:hover{
     
     background: #700f0f;
+    box-shadow: none;
+    cursor: pointer;
+    
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a:last-child{
+    text-decoration: none;
+    color:#fff;
+    padding: 5px 10px;
+    background: #e3941a;
+    box-shadow: 2px 2px #836618;
+    transition: 0.2s all ease;
+    
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a:last-child:hover{
+    
+    background: #836618;
     box-shadow: none;
     cursor: pointer;
     
@@ -1221,7 +1499,9 @@ form input[type='checkbox']{
     margin:25px 0;
     display: flex;
     flex-direction: row;
-    justify-content: center
+    justify-content: center;
+
+
 }
 .accionesdetallelibro a{
     margin:0 15px;
@@ -1316,30 +1596,6 @@ form input[type='checkbox']{
 }
 
 
-.calificaciones  img{
-    width: 20px;
-    height: 20px;
-    border-radius: 40%;
-    padding:5px;
-    background: none;
-}
-.calificaciones{
-    border:1px solid black;
-    width:fit-content;
-    padding:5px 10px;
-    margin-top:20px;
-    background: white;
-    border-radius: 5px;
-}
-.calificaciones h4{
-    text-align: center;
-}
-.calificaciones img:hover{
-    background-color: #FFC107;
-    cursor:pointer;
-    
-}
-
 /*icono lista de deseos*/
 .marcado{
     background: #c54b60;
@@ -1397,6 +1653,13 @@ form input[type='checkbox']{
     width: 100%;
 }
 
+.busqueda_autor form{
+    padding: 5px 15px;
+    background: none;
+}
+.busqueda_autor form input{
+    width: 200px;
+}
 
 /*estilos para tablas*/
 table{
@@ -1685,8 +1948,16 @@ table tbody tr td .accionesadmin .verdetallespedidos:hover{
 }
 
 @keyframes motrarfila{
-    from{opacity:10%;transform:scale(10%);display:none;}
-    to{opacity:100%;transform:scale(100%);display:table-cell !important;}
+    from{
+opacity:10%;
+transform:scale(10%);
+display:none;
+}
+    to{
+opacity:100%;
+transform:scale(100%);
+display:table-cell !important;
+}
 }
 table tbody .detalles_compra_libros h6{
     color:white;
@@ -1705,91 +1976,502 @@ table tbody .detalles_compra_libros h6{
 /*busqueda libros admin FIN*/ 
 /*estilos de ADMINISTRADOR FIN*/
 
+/*form publicar libro archivos -----------------------------------------------------------------*/
 
-/*A PARTIR DE AQUI ESTO ES ALGO QUE HABIA ANTES Y HE BORRADO*/
-/*.enlaces .admin{
-    background: yellow;
+ form .otroautor, form .otracategoria{
+    background:  #222;
+    color:white;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 5px;
+
+    /* visibility: hidden; */
+    display: none;
+}
+form .otroautor h6, form .otracategoria h6{
+    margin:1px auto;
+
+}
+
+form input[type='submit']:hover{
+    background: #0e0ebb;
+    color:#ffffff;
+    cursor: pointer;
+    transform: translate(0px,-5px);
+
+}
+.mostrar{
+    display: flex !important;
+    flex-direction: column;
+    animation: show 1s ease;
+}
+@keyframes show {
+    from{
+transform: scale(1) translate(1500px,0px);
+}
+    to{
+transform: scale(100%) translate(0px,0px);
+}
+
+}
+
+.archivos_portada>label{
+    padding: 5px 10px;
+    background: black;
+    box-shadow: 3px 3px #7d9de3;
+    color:#7d9de3;
+    width: fit-content;
+    transition: 0.8s all ease;
+    margin:0px 10px;
+}
+.archivos_portada>label:hover{
+    cursor: pointer;
+    background: #7d9de3;
     color:black;
+    box-shadow: none;
+    outline:1px solid black;
+
 }
-.enlaces{
-    padding: 2%;
+.archivos_archivo>label{
+    padding: 5px 10px;
+    background: black;
+    box-shadow: 3px 3px #e95e1d;
+    color:#e95e1d;
+    width: fit-content;
+    transition: 0.5s all ease;
+        margin:0px 10px;
+
+}
+.archivos_archivo>label:hover{
+    cursor: pointer;
+    background: #e95e1d;
+    color:black;
+    box-shadow: none;
+    outline:1px solid black;
+}
+.archivos_portada>div,.archivos_archivo>div{
+    border-radius: 10px;
+    background: #fdfdfd;
+    margin: 5px;
+    border: 3px dotted rgb(70 69 69 / 50%);
+    padding: 50px 100px;
+    display: none;
+    height: 100px;
+}
+.archivo_drag{
+    background-color: #606060 !important;
+    color:#fff!important;
+}
+.archivos_portada>div>button,.archivos_archivo>div>button{
+    padding: 5px 20px;
+    background-color: #ffff8a;
+    color:#222;
+    border: none;
+    width: fit-content;
+    box-shadow: 3px 3px #095c5c;
+}
+.archivos_portada>div>button:hover,.archivos_archivo>div>button:hover{
+    background-color: #095c5c;
+    color:#222;
+    cursor: pointer;
+    color:white;
+    box-shadow:none;
+}
+.mostrar_archivos{
+    display: flex !important;
+    flex-direction: column;
+    animation: files 0.5s ease;
+}
+.archivo_subido{
+    background: #a4f79f !important;
+    border: 3px dotted rgb(22 96 0 / 50%) !important;
+}
+.archivos_portada>div ul li,.archivos_archivo>div ul li{
+    list-style: none;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid;
+}
+.eliminarArchivo{
+    padding: 5px;
+    background: #db5656;
+    font-weight: bolder;
+    transition: 0.5s all ease;
+    
+}
+.eliminarArchivo:hover{
+    cursor:pointer;
+    background: #760000;
+    color: #ff0202;
+    
+}
+@keyframes files {
+    from{
+        transform: scale(1);
+        opacity: 0.5 ;
+    }
+    to{
+        transform: scale(100%) ;
+        opacity: 1;
+    }
+
+
+}
+/*form publicar libro archivos FIN-----------------------------------------------------------------*/
+/*estilos relacionados con autor*/
+
+.crear_autor{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.crear_autor div{
+    background: #222;
+    color:#eee;
+    padding:5px 10px;
     text-align: center;
+    margin:10px auto;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap:10px;
+    
 }
-.enlaces ul{
+.crear_autor div a{
+    background: white;
+    box-shadow: none;
+    color:#222;
+    margin: 5px auto;
+}
+.crear_autor a{
+    background: #4a90e2;
+    color: #eee;
+    box-shadow: 3px 3px #eee;
+    text-decoration: none;
+    padding: 1% 5%;
+    transition:1s all ease;
+}
+.crear_autor a:hover{
+    cursor: pointer;
+    background: #eee;
+    box-shadow:none;
+    color: #007b89;
+    outline: 1px solid #4a90e2;
+
+}
+/*----------------------------------------- detalles del autor -----------------------------------------*/
+.contenedor-autor-detalles{
+    display: grid;
+    grid-template-areas: 
+        "nombre  nombre"
+        "foto descripcion"
+        "fecha descripcion"
+        "libros libros";
+
+    gap:20px;
+    max-width: 800px;
+    margin:40px auto;
+    padding: 20px;
+    background: rgba(205, 205, 200, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 70%;
+    margin:0 auto;
+}
+.contenedor-autor-detalles .nombre-autor{
+    grid-area: nombre;
+    text-align: center;
+}
+
+.contenedor-autor-detalles .fecha-autor{
+    border-top:1px solid #222;
+    border-bottom: 1px solid #222;
+    grid-area: fecha;
+    margin: 5px auto;
+
+}
+.contenedor-autor-detalles .descripcion-autor{
+    grid-area:descripcion;
+}
+.contenedor-autor-detalles .imagen-autor{
+    grid-area:foto;
+        transition: 1s all ease;
+
+}
+.contenedor-autor-detalles .imagen-autor:hover{
+    transform: scale(2);
+    
+}
+.contenedor-autor-detalles .libros-autor{
+    grid-area: libros;
     display: flex;
-    list-style:none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:5px;
 }
-.enlaces a:nth-child(2) {
-    margin-left: auto;
+.contenedor-autor-detalles .libros-autor h5 a{
+    text-decoration: none;
+    color:#222;
+}
+
+.contenedor-autor-detalles .nombre-autor a{
+    text-decoration: none;
+    color:#eee;
+    background: #222;
+    padding:5px 20px;
+    font-size: 1.5em;
+    font-weight: bolder;
+    transition: 1s all ease;
+    
+}
+    
+.contenedor-autor-detalles .nombre-autor a:hover{
+    outline: 1px solid black;
+    cursor:pointer;
+    background: none;
+    color:#222;
+    box-shadow: 3px 3px #222;
+}
+
+/* ----------------------------------------- detalles del autor FIN -----------------------------------------*/
+/************************************************************* autores *************************************************************/
+
+/*estilos libro*/
+.autores{
+     display: grid;
+    column-gap: 10px;
+    row-gap: 50px;
+    grid-template-columns: 1fr  1fr 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+    flex-wrap: wrap;
+}
+.autor{
+    background-color: #e6f1f3;
+    float: left;
+    /*width: 205px;*/
+    /*height: 290px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+    align-items: anchor-center;
+    text-decoration: none;
+    
+    
+    
+}
+.autor a{
+    width: 250px;
+}
+.autor:hover{
+    background-color: #9dc4cb;
+    border:1px solid blue;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.autor>*{
+    margin:10px 0;
+    text-decoration: none;
+    color: black;
+}
+.autor img{
+    width: 100px;
+    height: fit-content;
+}
+
+.autor{
+    view-timeline-name:--animacionautores;
+    view-timeline-axis: block;
+    
+    animation-timeline:--animacionautores;
+    animation-name: mostrarautores;
+    animation-range:entry 50% cover 40%;
+    animation-fill-mode: both;
+}
+@keyframes mostrarautores{
+    from{
+opacity:0;
+       transform: translateX(1500px);
+    }
+    to{
+opacity:1;
+       transform: translateX(0px);
+    }
+}
+/************************************************************* autores FIN *************************************************************/
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++EStadisticas administracio +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+.enlaces  .administrador li:hover > ul {
+    display: inline-flex !important;
+    position: absolute;
+    width: fit-content;
+    left: -100%;    
+    
+}
+.estadisticas_admnistracion{
+    display: flex;
+    flex-direction: column;
+    
+}
+.estadisticas_admnistracion_botones{
+    padding: 0; /* Elimina el relleno predeterminado */
+  margin: 0; /* Elimina el margen predeterminado */
+  display: flex; /* Permite que los botones se dispongan horizontalmente */
+  gap: 10px; /* Espacio entre botones */
+}
+.estadisticas_admnistracion_botones a{
+    display: inline-block; /* Convierte el enlace en un elemento de bloque */
+  padding: 10px 15px; /* Ajusta el relleno según tus preferencias */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  color: #fff; /* Color de texto oscuro */
+  background-color: #f26419;
+; /* Color de fondo gris claro */
+  border: none; /* Elimina el borde */
+  border-radius: 5px; /* Bordes redondeados */
+  font-family: sans-serif; /* Fuente de letra simple */
+  font-size: 14px; /* Tamaño de letra */
+  transition: background-color 0.3s ease;
+}
+.estadisticas_admnistracion_botones a:hover{
+    background-color: #e65100; 
+}
+.estadisticas_contenido
+{
    
 }
-.enlaces ul li a{
-    text-decoration: none;
-    color: #e5c444;
-    background: black;
-    margin: 5px 5px;
-    width: 120px;
-    padding: 5px 10px 0px 10px ;
-    box-shadow: 3px -3px 0px red;
-    transition: 0.4s ease-in-out
-
-}
-.enlaces a:hover:nth-child(1){
-    background: white;
-    color:blue;
-
-}
-.enlaces a:hover{
-    box-shadow: 0px -0px 0px red;
-    color: red;
-    background: white;
-    outline:2px solid black;
-
-}
-.enlaces .submenu{
-    display:flex;
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++EStadisticas administracio FIN +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+.administracion_contenido{
+    display: flex;
     flex-direction: column;
+    justify-content: center;
 }
-.enlaces .submenu  li {
- position:relative;
- float:right;
- margin:0;
- padding:0;
-}
-.enlaces ul a{
-    height: 100%;
-    display:block;
- color:#fff;
- text-decoration:none;
- font-weight:400;
- font-size:12px;
- padding:10px 20px;
- font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
- text-transform:uppercase;
- letter-spacing:1px;
-}
-.enlaces ul ul{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    background:#eee;
-    padding:0;
-}
-.enlaces .submenu li{
-    float:none;
-    width:150px
-
+main h2{
+    text-align: center;
 }
 
-.enlaces .submenu li a {
-    line-height:120%;
-    padding:10px 15px;
-}
-.enlaces ul li:hover ul  {
-    display: block; 
+
+.tabla_estadisticas tbody tr td{
+    text-align: center;
     
-}*/
+}
+
+
+
+/*+++++++++++++++++++++++ ver pedidos usuario +++++++++++++++++++++++*/
+.pedidosenlace
+{
+    margin:20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.pedidosenlace ul{
+    list-style: none;
+
+}
+.pedidosenlace ul li a{
+    text-decoration: none;
+    
+    display: inline-block; /* Convierte el enlace en un elemento de bloque */
+  padding: 10px 20px; /* Ajusta el relleno según tus preferencias */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  color: #fff; /* Color de texto blanco para mejor contraste */
+/*  background-color: #f26419;  Color de fondo naranja cálido */
+  background-image: linear-gradient(to right, #f26419, #ffb300, #4caf50);  
+border: none; /* Elimina el borde */
+  border-radius: 5px; /* Bordes redondeados */
+  font-family: sans-serif; /* Fuente de letra simple */
+  font-size: 16px; /* Tamaño de letra */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+  position: relative; /* Necesario para la animación de brillo */
+  overflow: hidden; /* Oculta el brillo que se desborda */
+    transition: 0.5s all ease;
+    
+}
+
+.pedidosenlace ul li a:hover{
+     background-color: #e65100; /* Color de fondo naranja más oscuro al pasar el cursor */
+  transform: scale(0.95);
+      transition: 0.5s all ease;
+
+}
+.pedidosenlace ul li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent); /* Brillo blanco */
+  opacity: 0;
+  transform: translateX(-100%); /* Inicialmente fuera de la vista */
+  transition: opacity 0.3s ease, transform 0.4s ease; /* Transiciones para el brillo */
+}
+
+.pedidosenlace ul li a:hover::before {
+  opacity: 1;
+  transform: translateX(0%); 
+}
+.pedidosenlace ul li img{
+    visibility: hidden;
+    width: 100px;
+    height: fit-content;
+    border:1px solid black;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 25px;
+        transition: 0.5s all ease;
+
+
+}
+.pedidosenlace ul li a:hover ~img{
+    visibility: visible;
+    
+}
+/*+++++++++++++++++++++++ ver pedidos usuario FIN +++++++++++++++++++++++*/ 
+/*++++++++++++++++++++++++++++++++++++++++++++++ COOKIES ++++++++++++++++++++++++++++++++++++++++++++++*/
+.cookies {
+    position: fixed;
+    bottom:  0%;
+    left: 25%;
+    width: fit-content;
+    /*height: 10%;*/
+    width: 50%;
+    background-color: #222;
+    color: #fff;
+    padding: 50px 0px;
+    text-align: center;
+    z-index: 9999;
+    margin-bottom: 50px;
+}
+.cookies form{
+    background: none;
+    color:none;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    box-shadow: none;
+
+    /*margin:auto 10px;*/
+}
+.cookies p{
+    padding:0 100px;
+    
+}
+.cookies a{
+  color:yellow;
+
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++ COOKIES Fin ++++++++++++++++++++++++++++++++++++++++++++++*/

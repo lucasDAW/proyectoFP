@@ -1,5 +1,6 @@
 
                 @extends('administracion.index')
+@section('titulo','Panel de administración - Usuarios')
 
                 @section('accion')
     <div class="form_busqueda_usuario_admin">
@@ -26,7 +27,7 @@
               @foreach($usuarios as $user)
               <tr>
                   <td>{{$user->id}}</td>
-                  <td>{{$user->name}}</td>
+                  <td>{{$user->nombre}}</td>
                   <td>{{$user->email}}</td>
                   <td>
                       <div class='accionesadmin '>

@@ -9,17 +9,21 @@
     @if ($libros)
 
            
-        @foreach ($libros as $p)
         <div class='pedidosenlace'>
-            
-            <p> <a href="/libro/detalle/{{$p->id}}">Libro: {{$p->titulo}} | {{$p->autor}} |{{$p->precio}}€</a></p>
-        </div>
+            <ul>
+                
+        @foreach ($libros as $p)
+           
+            <li> <a href="/libro/detalle/{{$p->id}}">Libro: {{$p->titulo}} | Autor: {{$p->autor_nombre}}|{{$p->precio}}€</a>
+                <img src='{{$p->imagen_url}}'/>
+            </li>
         @endforeach
+            </ul>
+        </div>
     @else
-        <p>No existend pedidos</p>
+        <p>No existen pedidos</p>
     @endif
 </div>
 
-<a href="{{route('verpedidos',['id' => Auth::user()->id])}}">Volver</a>
                         
 @endsection

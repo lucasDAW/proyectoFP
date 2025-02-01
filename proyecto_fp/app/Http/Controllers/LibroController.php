@@ -19,14 +19,15 @@ class LibroController extends Controller
     
     public function index(Request $request)
     {       
-//      $libros=Libro::all();
+      
         //paginación
 //      $libros=Libro::paginate(9);
         $libros=Libro::simplePaginate(12);
            
-            
+//        var_dump($libros);
+//        exit();
         foreach($libros as $libro){
-            $documentos= DB::table('archivos_test')->where('id_libro',$libro->id)->first();
+            $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
 //                var_dump($documentos);
             if($documentos){//si existe el archivo del libro en la bbdd
                 if($documentos->archivo){
@@ -41,10 +42,11 @@ class LibroController extends Controller
                 $libro->imagen_url = $urlportada;
                 $libro->archivo_url = $urlarchivo;
             }
+            
+            $valoracion = DB::table('calificaciones')->where('libro_id',$libro->id)->avg('calificacion');
+            $libro->valoracion= $valoracion;
         }
-       
              return view('libro.todoslibros',['libros'=>$libros]);
-         
     
     }
     
@@ -52,20 +54,30 @@ class LibroController extends Controller
     
     public function detalle(Libro $libro){
 //    
-        
-        $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario,u.name as name,u.id as user_id FROM comentarios c , users u, libros l where l.id=c.libro_id and u.id=c.user_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
+//  
+        $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario,u.nombre as name,u.id as usuario_id FROM comentario c , usuario u, libro l where l.id=c.libro_id and u.id=c.usuario_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
 //        $valoracion = DB::select('SELECT c.* FROM calificaciones c, users u ,libros l where c.libro_id=l.id and u.id=c.user_id and c.libro_id=:libro_id;', ['libro_id'=>$libro->id]);
-        $valoracionmedia = DB::select("SELECT round(avg(calificacion),0) as media,round(avg(calificacion),2)as mediafloat FROM calificaciones WHERE libro_id=:libro_id", ['libro_id'=>$libro->id]);
-//       
+        $valoracionmedia = DB::select("SELECT round(avg(calificacion),0) as media,round(avg(calificacion),2)as mediafloat FROM calificaciones WHERE libro_id=:libro_id", ['libro_id'=>$libro->id])[0];
+        $valoraciousuario = DB::select("SELECT calificacion  FROM calificaciones WHERE libro_id=:libro_id and usuario_id=:user_id", ['libro_id'=>$libro->id,'user_id'=>Auth::user()->id]);
+        $autorlibro = DB::table('autor')
+                ->join('libro','autor.id','=','libro.autor_id')
+                ->select('autor.id','autor.nombre')
+                ->first();
+         $categoria = DB::table('categoria')
+                ->join('libro','categoria.id','=','libro.categoria_id')
+                ->select('categoria.id','categoria.nombre')
+                ->first();
+        
+        
         if(Auth::check()){
             $listadeseos = DB::table('listadeseos')
             ->select(DB::raw('count(*) as existe'))
-                    ->where('user_id','=',Auth::user()->id)->where('libro_id','=',$libro->id)
+                    ->where('usuario_id','=',Auth::user()->id)->where('libro_id','=',$libro->id)
             ->get()[0];
             
-            $autor = DB::table('archivos_test')
+            $autor = DB::table('archivos')
                     ->select(DB::raw('count(*) as existe'))
-                    ->where('usuario_id','=',Auth::user()->id)->where('id_libro','=',$libro->id)
+                    ->where('usuario_id','=',Auth::user()->id)->where('libro_id','=',$libro->id)
             ->first();
             
            
@@ -76,6 +88,8 @@ class LibroController extends Controller
         }
         if(empty($valoracion)){
             $valoracion=null;
+        } if(empty($valoraciousuario)){
+            $valoraciousuario=null;
         } 
         if(empty($listadeseos)){
             $listadeseos=null;
@@ -84,7 +98,7 @@ class LibroController extends Controller
             $autor=null;
         }
         
-        $documentos= DB::table('archivos_test')->where('id_libro',$libro->id)->first();
+        $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
         if($documentos){
             $urlarchivo = Storage::disk('archivos')->url($documentos->archivo);
 
@@ -104,28 +118,25 @@ class LibroController extends Controller
 //        var_dump($archivo,$libro);
         
        
-        return view('libro.detalle',['libro'=>$libro,'archivo'=>$archivo,'comentarios'=>$comentarios,'valoracion'=>$valoracionmedia[0],'listadeseos'=>$listadeseos,'autor'=>$autor]);
+        return view('libro.detalle',['libro'=>$libro,'archivo'=>$archivo,'comentarios'=>$comentarios,'valoracion'=>$valoracionmedia,'valoracionUsuario'=>$valoraciousuario,'listadeseos'=>$listadeseos,'autor'=>$autor,'categoria'=>$categoria,'autorlibro'=>$autorlibro]);
 
         
     }
      public function crearVistaLibro()
     {
         $categorias = DB::table('categoria')->get();
-        return view('libro.publicar',['categorias'=>$categorias]);
+        $autores = DB::table('autor')->get();
+        return view('libro.publicar',['categorias'=>$categorias,'autores'=>$autores]);
 
     }
     public function publicarlibro(Request $request){
         
-        
-       
+
 
         $reglas=[
             'titulo'=>'required|max:100',
             'descripcion'=>'required',
-            'autor'=>'required|max:100',
-//            'isbn'=>'required|max:100',
-//            'paginas'=>'int',
-            'fecha_lanzamiento'=>'regex:/^[0-9]{3,4}$/' ,
+            'fecha_lanzamiento'=>'regex:/^[0-9]{2,4}[a-z]([\.][c][.])?$/' ,
             'precio'=>'required|min:0|numeric',
             'archivo'=>'required|mimes:pdf'
         ];
@@ -133,61 +144,83 @@ class LibroController extends Controller
             'required' => 'Cuidado!! el campo :attribute esta vacío',
             'integer'=>'Cuidado!! el campo :attribute debe ser un número entero',
             'numeric'=>'Cuidado!! el campo :attribute debe ser numérico(ej:10.50)',
-            'mimes'=>'Cuidado!! el campo :attribute debe PDF',
-            'regex'=>'Cuidado!! el campo fecha debe tener 4 cifras(año)',
+            'regex'=>'Cuidado!! el campo :attribute debe tener 4 cifras(año)',
+            'mimes'=>'Cuidado!! el campo :attribute debe ser PDF',
         ];
         
         //si no se rellenan los campos
         $datosvalidados=$request->validate($reglas,$mensajeError);
         
-//        exit();
+//        acciones si se encuentra el autor en la base de datos
+        if($request->otroautorcheck){
+            $nombre_autor=$request->input('autorlibro');
+            
+            $existe = DB::table('autor')->where('nombre',$nombre_autor)->exists();
+//          
+            if(!$existe){
+                $id_autor=DB::table('autor')->insertGetId([
+                    'nombre'=>$nombre_autor,
+                    'descripcion'=>'null',
+                    'fecha_nacimiento'=>'null',
+                    'referencias'=>'null',
+                    ]);
+                    
+            }else{
+                $autorbase = DB::table('autor')->select('*')->where('nombre','LIKE','%'.$nombre_autor.'%')->first();
+               $id_autor=$autorbase->id;
+            }
+            
+        }else{
+            $id_autor=$request->autorselect;
+        }
+//     
+        $id_categoria=$request->categoriatext;
+        
+        
         
         $titulo = $request->input('titulo');
         $descripcion= $request->input('descripcion');
-        $autor= $request->input('autor');
         $precio= $request->input('precio');
-//        $isbn = $request->input('isbn');
-//        $num_paginas = $request->input('paginas');
         $fecha = $request->input('fecha_lanzamiento');
+        $autor=$id_autor;
+        $categoria = $id_categoria;
+        //si se modifica el libro
         if($request->id){
             
             $id = $request->id;
         }
-        
         //almacenar archivo y portada del libro 
         //archivo PDF
         $documento = $request->file('archivo');
         
-        if($request->file('portada')){
-            
-            $imagen_portada = $request->file('portada');
-            
-        }else{
-            $imagen_portada = null;
-        }
-//        var_dump($documento,$imagen_portada);
-//        
         if(!empty($documento)){
             $nombreArchivo = $documento->store('/archivo','archivos');
-            if($imagen_portada){
+            
+            if($request->file('portada')){
+            
+                $imagen_portada = $request->file('portada');
+                if($imagen_portada){
+
+                    $portadaArchivo = $imagen_portada->store('/portada','archivos');
+                }else{
+                    $portadaArchivo=null;
+                }
                 
-                $portadaArchivo = $imagen_portada->store('/portada','archivos');
             }else{
-                $portadaArchivo=null;
+                $imagen_portada = null;
             }
         }
        
-        
         //almacenar archivo y portada del libro 
+        //modificar el libro si existe en la base de datos
         if ($request->id){
             //modificar
             $libroEditar = Libro::find($id);
-            
-
             $libroEditar->titulo = $titulo;
             $libroEditar->descripcion = $descripcion;
 //            $libroEditar->isbn = $isbn;
-            $libroEditar->autor = $autor;
+            $libroEditar->autor_id = $autor;
+            $libroEditar->categoria_id = $categoria;
 //            $libroEditar->numero_paginas = $num_paginas;
             $libroEditar->fecha_lanzamiento = $fecha;
             $libroEditar->precio = $precio;
@@ -204,20 +237,20 @@ class LibroController extends Controller
             $libro->descripcion = $descripcion;
 //            $libro->isbn = $isbn;
             $libro->autor = $autor;
+            $libro->categoria = $categoria;
 //            $libro->numero_paginas = $num_paginas;
             $libro->fecha_lanzamiento = $fecha;
             $libro->precio = $precio;
-            
-//            $insertado=$libro->save();
-//            $id_libro=$libro->id();
-            
-            $id_libro = DB::table('libros')->insertGetId(
+          
+           
+            $id_libro = DB::table('libro')->insertGetId(
                 [
                     'titulo' => $libro->titulo,
                     'descripcion' => $libro->descripcion,
-                    'autor' => $libro->autor,
-                    'numero_paginas' => $libro->numero_paginas,
-                    'ISBN' => $libro->isbn,
+                    'autor_id' => $libro->autor,
+                    'categoria_id' => $libro->categoria,
+//                    'numero_paginas' => $libro->numero_paginas,
+//                    'ISBN' => $libro->isbn,
                     'precio' => $libro->precio,
                     'fecha_lanzamiento' => $libro->fecha_lanzamiento,
                     
@@ -230,9 +263,9 @@ class LibroController extends Controller
         }
         $archivoLibro=$nombreArchivo;
         $portadaLibro=$portadaArchivo;
-        DB::table('archivos_test')->updateOrInsert([
+        DB::table('archivos')->updateOrInsert([
                 'usuario_id'=>Auth::user()->id,
-                'id_libro' => $id_libro,
+                'libro_id' => $id_libro,
                 'archivo'=>$nombreArchivo,
                 'portada' =>$portadaArchivo,
         ]);
@@ -245,10 +278,10 @@ class LibroController extends Controller
         if(Auth::check()){
                     
             $categorias = DB::table('categoria')->get();
-            $documentos= DB::table('archivos_test')->where('id_libro',$libro->id)->first();
-//           
+            $autores= DB::table('autor')->get();
+            $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
 
-            return view('libro.publicar',['libro'=>$libro,'categorias'=>$categorias,'archivo'=>$documentos]);
+            return view('libro.publicar',['libro'=>$libro,'categorias'=>$categorias,'archivo'=>$documentos,'autores'=>$autores]);
         }else{
             return redirect()->route('login')->with('mensaje', 'Debe iniciar sesión');
 
@@ -257,20 +290,15 @@ class LibroController extends Controller
     }
     
     public function borrar(Libro $libro,Request $request){
-//        var_dump($libro);
-//        var_dump($request->id);
-//        exit();
-//        $libroelimnar = Libro::find();
        return view('libro.eliminar',['id_libro'=>$request->id]);
 
     }
     public function borrarBBDD(Libro $libro, Request $request){
         
-        $autorLibro= DB::table('archivos_test')->select('usuario_id')->where('id_libro',$request->id)->first();
-//        $autor = 
+        $autorLibro= DB::table('archivos')->select('usuario_id')->where('libro_id',$request->id)->first();
         
         
-        if(Auth::check() && (Auth::user()->role==2 || Auth::user()->id==$autorLibro->usuario_id) ){
+        if(Auth::check() && (Auth::user()->rol==2 || Auth::user()->id==$autorLibro->usuario_id) ){
           $id = $request->input('id');
         
          
@@ -278,7 +306,7 @@ class LibroController extends Controller
                 $libro = Libro::find($id);
        
                 $libro->delete();
-                DB::table('archivos_test')->where('id_libro', $id)->delete();
+                DB::table('archivos')->where('libro_id', $id)->delete();
                 $mensaje =  'Se ha eliminado el libro de forma correcta';
             }else{
               $mensaje =  'Error al eliminar el libro.';
@@ -296,11 +324,18 @@ class LibroController extends Controller
     public function busqueda(Request $request){
         
      
-        $libros = DB::table('libros')->select('*')->where('titulo','LIKE','%'.$request->busqueda.'%')->orWhere('autor','LIKE','%'.$request->busqueda.'%')->get();
+//        $libros = DB::table('libro')->select('*')->where('titulo','LIKE','%'.$request->busqueda.'%')->orWhere('autor','LIKE','%'.$request->busqueda.'%')->get();
+        $libros = DB::table('libro')
+                ->join('autor','libro.autor_id','=','autor.id')
+                ->select('libro.id','libro.titulo','libro.precio','autor.nombre as autor')
+                ->where('libro.titulo','LIKE','%'.$request->busqueda.'%')
+                ->orWhere('autor.nombre','LIKE','%'.$request->busqueda.'%')
+                ->get();
+        
         
         
         foreach($libros as $libro){
-                $documentos= DB::table('archivos_test')->where('id_libro',$libro->id)->first();
+                $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
 //                var_dump($documentos);
                 if($documentos){
                     
@@ -332,16 +367,18 @@ class LibroController extends Controller
 
     }
     
+//    Esto de puede borrar
     public function busquedavista(){
         
         return view('libro.busqueda');
     }
+//    Esto de puede borrar
     public function busquedaBBDD(Request $request){
         
 //        
         
         $campo_busqueda= $request->input('busqueda');
-        $libros = DB::table('libros')->where('titulo','like','%'.$campo_busqueda.'%')->orWhere('autor','like','%'.$campo_busqueda.'%')->orWhere('ISBN','like','%'.$campo_busqueda.'%')->get();
+        $libros = DB::table('libro')->where('titulo','like','%'.$campo_busqueda.'%')->orWhere('autor','like','%'.$campo_busqueda.'%')->orWhere('ISBN','like','%'.$campo_busqueda.'%')->get();
             
         $arrayLibros=[];
             
@@ -361,166 +398,24 @@ class LibroController extends Controller
             
             
         return view('libro.busqueda',['libros'=>$arrayLibros]);
-                
-                    
-                    
-         
-                    //        ESTO es para FECTJ con js
-                    //        
-                    //        
-                                        //        $response = [
-                    //            "success"=>false,
-                    //            "mensaje"=>'Ha ocurrido un error.'
-                    //        ];
-//        
-                    //            $response = [
-                    //            "success"=>true,
-                    //            "mensaje"=>'Consulta correcta.',
-                    //            "data"=>$libros
-                    //             ];
-                    //        return response()->json($response);
-            
-
         
     }
     
-//    TEST, probando para subida de archivos y adjuntado a email
-    public function publicar(){
-        
-        $libros = DB::table('archivos_test')->get();
-        
-        
-        foreach($libros as $libro){
-//            var_dump($libro);
-            $urlarchivo = Storage::disk('archivos')->url($libro->archivo);
-            if($libro->portada){
-                
-                $urlportada = Storage::disk('archivos')->url($libro->portada);
-                $libro->imagen_url = $urlportada;
-            }
-            
-            $libro->archivo_url = $urlarchivo;
-        }
-        
-//            var_dump($libros);
-//            $libros->imagen_url=$url;
-//        exit();
-        
-        return view('libro.archivo',['libros'=>$libros])->with('mensaje','Pagina de publicar libro');
-    }
-    
-    public function subir(Request $request){
-        
-        $reglas=[
-            'titulo'=>'required|max:100',
-            
-            'archivo'=>'required|mimes:pdf',
-        ];
-        $mensajeError = [
-            'required' => 'Cuidado!! el campo :attribute no se puede dejar vacío',
-            'mimes' => 'El archivo deber un PDF.'
-        ];  
-//      si no se rellenan los campos
-        $datosvalidados=$request->validate($reglas,$mensajeError);
-    
-        $titulo = $request->titulo;
-        $precio = $request->precio;
-      
-        
-        //archivo PDF
-        $documento = $request->file('archivo');
-        
-        
-        if($request->file('portada')){
-            
-            $imagen_portada = $request->file('portada');
-            
-        }else{
-            $imagen_portada = null;
-        }
-//        var_dump($documento,$imagen_portada);
-//        
-        if(!empty($documento)){
-            $nombreArchivo = $documento->store('/archivo','archivos');
-            if($imagen_portada){
-                
-                $portadaArchivo = $imagen_portada->store('/portada','archivos');
-            }else{
-                $portadaArchivo=null;
-            }
-        }
-
-//        exit();
-        //        BBDD
-        
-        $tituloLibro=$titulo;
-        $precioLibro=$precio;
-        $archivoLibro=$nombreArchivo;
-        $portadaLibro=$portadaArchivo;
-        DB::table('archivos_test')->insert([
-            'titulo' => $tituloLibro,
-            'precio' => $precioLibro,
-            'archivo'=>$nombreArchivo,
-            'portada' =>$portadaArchivo,
-        ]);
-        return redirect()->route('subirarchivo')->with('mensaje', 'SE HA SUBIDO EL LIBRO');//        
-        
-    }
-    
-    public function bajar(Request $request){
-        
-        var_dump($request->tituloLibro);
-        $libro = DB::table('archivos_test')->where('id',$request->tituloLibro)->get()[0];
-        var_dump($libro);
-        
-        $nombre=$libro->archivo;
-        $nombre = explode('/',$nombre);
-//        var_dump($nombre[count($nombre)-1]);
-        $nombrealamacen = $nombre[count($nombre)-1];
-//        $url = Storage::url($nombre);
-//        
-//        
-//      
-//        var_dump($url);
-        $contents = Storage::disk('public')->get($nombrealamacen);
-        var_dump($contents);
-//        return Storage::download($nombrealamacen);
-    }
-//    probando a leer documentos del escritorio
-    public function leerdocumento(){
-        
-        echo "<h2>Leer documentos</h2>";
-        $desktopPath = env('DESKTOP_PATH', 'C:\Users\Usuario\Desktop\libros'); // Cambia a la ruta de tu carpeta
-        $csvFile = $desktopPath . '\portada.jpg';
-        var_dump($csvFile);
-        echo '<img src="'.$csvFile.'"/>';
-    // Leer el archivo CSV
-           if (!file_exists($csvFile)) {
-               echo "El archivo data.csv no existe en la ruta especificada.\n";
-               return;
-           }
-              if (file_exists($csvFile)) {
-                $imagePath = Storage::disk('public')->putFileAs('libros', new File($csvFile), 'miportada.jpg');
-            } else {
-                $imagePath = null; // Si no existe la portada
-            }
-            
-            var_dump($imagePath);
-            $url = Storage::disk('public')->url('/libros/miportada.jpg');
-            var_dump($url);
-            echo '<img src="'.$url.'" alt="Portada">';
-        
-    }
-    
+//   Funciones del usuario con rol ADMIN
     
     public function busquedaAdmin(Request $request){
         
         
-        if(Auth::user()->role==2){
+        if(Auth::user()->rol==2){
             
-             $libros = DB::table('libros')->select('*')->where('titulo','LIKE','%'.$request->busqueda.'%')->orWhere('autor','LIKE','%'.$request->busqueda.'%')->get();
+             $libros = DB::table('libro')
+                     ->join('autor','libro.autor_id','=','autor.id')
+                     ->select('libro.id','libro.*','autor.nombre as autor_nombre')
+                     ->where('libro.titulo','LIKE','%'.$request->busqueda.'%')
+                     ->orWhere('autor.nombre','LIKE','%'.$request->busqueda.'%')
+                     ->get();
             foreach($libros as $libro){
-                $documentos= DB::table('archivos_test')->where('id_libro',$libro->id)->first();
+                $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
     //                var_dump($documentos);
                 if($documentos){//si existe el archivo del libro en la bbdd
                     if($documentos->archivo){
@@ -539,7 +434,7 @@ class LibroController extends Controller
         
          $response = [
                     "success"=>true,
-                    "mensaje"=>'Consulta correcta.',
+                    "mensaje"=>'Consulta correcta.Busqueda de libros',
                     "libros"=>$libros,
                      ];
 //        $response(['data' => 'Error al realizar la búsqueda','respuesta'=>'respuesta a get','libros'=>$libros]);
@@ -553,7 +448,7 @@ class LibroController extends Controller
            
             
         foreach($libros as $libro){
-            $documentos= DB::table('archivos_test')->where('id_libro',$libro->id)->first();
+            $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
 //                var_dump($documentos);
             if($documentos){//si existe el archivo del libro en la bbdd
                 if($documentos->archivo){
@@ -572,4 +467,58 @@ class LibroController extends Controller
        
              return view('administracion.libros',['libros'=>$libros]);
     }
+    
+    
+    //estadisticas libros
+    public function estadisticas(Request $request){
+        
+        $opcionespermitidas=['pedidos','comentarios','valoraciones'];
+        if(Auth::user()->rol==2){
+            if (in_array($request->opcion,$opcionespermitidas) !== false) {
+                
+                if($request->opcion=='pedidos'){
+                    $libros =DB::table('libro')
+                    ->join('pedidos','pedidos.libro_id','=','libro.id')
+                    ->join('autor','autor.id','=','libro.autor_id')
+                    ->selectRaw('count(pedidos.libro_id) as "Total", libro.id, libro.titulo,autor.nombre  as "autor"')
+                    ->groupBy('libro.id', 'libro.titulo','autor.nombre')->orderBy("Total",'desc')
+                    ->get();
+//                    ->get();
+//                    var_dump($libros);
+//                    exit();
+                    
+                    
+                }elseif($request->opcion=='comentarios'){
+                     $libros =DB::table('libro')
+                    ->join('comentario','comentario.libro_id','=','libro.id')
+                    ->join('autor','autor.id','=','libro.autor_id')
+                    ->selectRaw('count(comentario.libro_id) as "Total", libro.id, libro.titulo,autor.nombre  as "autor"')
+                    ->groupBy('libro.id', 'libro.titulo','autor.nombre')->orderBy("Total",'desc')
+                    ->get();
+                    
+                }elseif($request->opcion=='valoraciones'){
+                     $libros =DB::table('libro')
+                    ->join('calificaciones','calificaciones.libro_id','=','libro.id')
+                    ->join('autor','autor.id','=','libro.autor_id')
+                    ->selectRaw('count(calificaciones.libro_id) as "Total", libro.id, libro.titulo,autor.nombre  as "autor"')
+                    ->groupBy('libro.id', 'libro.titulo','autor.nombre')->orderBy("Total",'desc')
+                    ->orderByDesc('Total')
+                    ->get();
+                }else{
+                    return back()->with('mensaje', 'opcion no contemplada');
+                }
+                
+                return view('administracion.estadisticas',['libros'=>$libros,'opcion'=>$request->opcion]);
+                
+                
+            }else{
+                return back()->with('mensaje', 'opcion no contemplada');
+            }
+        return view('administracion.estadisticas');
+        }else{
+            return back()->with('mensaje', 'NO tiene permisos!');
+        }
+       ;
+    }
+    
 }

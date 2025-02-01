@@ -4,6 +4,7 @@
 @section('contenido')
 
     @if (isset($libro))
+    
     @auth
         @if (isset($autor) and ($autor->existe==1 or Auth::user()->role = 'admin'))
             <div class="accionesdetallelibro">
@@ -29,17 +30,20 @@
                 @include('calificacion.index')
             </div>
         </div>
-        <div class="libro-detalles">            
-            <h2 class="libro-titulo"><span>{{$libro->titulo}}</span><span>{{$libro->precio}}€</span>
-            </h2>
-                            <!--añadir a lista de deseos-->
-            <div class="popup">
-                    @if (isset($listadeseos->existe) and $listadeseos->existe==1)
-                        <span class="listadeseos marcado material-symbols-outlined">favorite</span>
-                    @else
-                        <span class="listadeseos  material-symbols-outlined">favorite</span>
-                    @endif
-                        <span class="popuptext" id="myPopup">Se ha añadido el libro a la lista de deseos!</span>
+        <div class="libro-detalles"> 
+            <div class='titulo'>
+                <div class="popup">
+                        @if (isset($listadeseos->existe) and $listadeseos->existe==1)
+                            <span class="listadeseos marcado material-symbols-outlined">favorite</span>
+                        @else
+                            <span class="listadeseos  material-symbols-outlined">favorite</span>
+                        @endif
+                            <span class="popuptext" id="myPopup">Se ha añadido el libro a la lista de deseos!</span>
+                </div>
+                <h2 class="libro-titulo"><span>{{$libro->titulo}}</span><span>{{$libro->precio}}€</span>
+                </h2>
+                                <!--añadir a lista de deseos-->
+                
             </div>
             <!--agregar al carro de compra-->
             <div class="carrocompra">
@@ -50,7 +54,8 @@
                         </div>
                      </a>
             </div>              
-            <h4 class="libro-autor">{{$libro->autor}}</h4>
+            <h4 class="libro-categoria"><a href='{{route('detalleCategoriaAdmin',['categoria'=>$categoria->id])}}'>{{$categoria->nombre}}</a></h4>
+            <h3 class="libro-autor"><a href='{{route("verAutor",["autor"=>$autorlibro->id])}}'>{{$autorlibro->nombre}}</a></h3>
             <p class="libro-descripcion">{{$libro->descripcion}}</p>
             <div class="btn_leermas">
                 <span>Ver más &#8595;</span>

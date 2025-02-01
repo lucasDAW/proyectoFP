@@ -176,27 +176,7 @@ main{
     width: 250px;
     height: auto    ;
 }
-.calificaciones  img{
-    width: 20px;
-    height: 20px;
-    border-radius: 40%;
-    padding:5px;
-    background: none;
-}
-.calificaciones{
-    border:1px solid black;
-    width:fit-content;
-    padding:5px 10px;
-    margin-top:20px;
-}
-.calificaciones h4{
-    text-align: center;
-}
-.calificaciones img:hover{
-    background-color: #FFC107;
-    cursor:pointer;
-    
-}
+
 
 /*icono lista de deseos*/
 .marcado{
@@ -227,17 +207,6 @@ main{
 /*  -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;*/
 }
-
-/* Add animation (fade in the popup) */
-/*@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}*/
 
 /*tabla lista deseos*/
 .lista_deseos{
@@ -295,6 +264,8 @@ main{
 }
 
 /*icono lista de deseos FIN*/
+
+/*calificaciones libros*/
 .listadeseos:hover{
     background: #c54b60;
     border-radius: 20%;
@@ -318,6 +289,41 @@ main{
     background-color: aquamarine !important;
     
 }
+
+.calificaciones  img{
+    width: 20px;
+    height: 20px;
+    border-radius: 40%;
+    padding:5px;
+    background: none;
+}
+.calificaciones{
+    border:1px solid black;
+    width:fit-content;
+    padding:5px 10px;
+    margin-top:20px;
+}
+.calificaciones h4{
+    text-align: center;
+}
+.calificaciones img:hover{
+    background-color: #FFC107;
+    cursor:pointer;
+    
+}
+.calificacion-hover{
+    background: red !important;
+}
+.mensajecalificacion{
+    display:inline;
+    color: gold;
+    background: #000000;
+    margin: 15px auto;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px gold;
+}
+/*FIN calificacion libros*/
 /*libros*/
 .libros{
     display: grid;
@@ -678,6 +684,19 @@ main{
   66% {transform: rotate(-25deg)}
   100% {transform: rotate(0deg)}
 }
+
+
+/*----------------------------------------DETALLES AUTOR--------------------------*/
+.contenedor-autor-detalles{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.contenedor-autor-detalles .libros-autor{
+    flex-direction: row;
+}
+/*----------------------------------------DETALLES AUTOR FIN--------------------------*/
 /*A PARTIR DE AQUI ESTO ES ALGO QUE HABIA ANTES Y HE BORRADO*/
 /*.enlaces .admin{
     background: yellow;

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('calificaciones', function (Blueprint $table) {
             $table->id();
             $table->integer('calificacion');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('null');
-            $table->foreignId('libro_id')->references('id')->on('libros')->onDelete('null');
+            $table->foreignId('usuario_id')->references('id')->on('usuario')->onDelete('cascade');
+            $table->foreignId('libro_id')->references('id')->on('libro')->onDelete('cascade');
             
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

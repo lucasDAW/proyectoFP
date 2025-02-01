@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comentarios', function (Blueprint $table) {
+        Schema::create('comentario', function (Blueprint $table) {
             $table->id();
             $table->text('comentario');
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('libro_id')->references('id')->on('libros');
-            $table->timestamps();
+            $table->foreignId('usuario_id')->references('id')->on('usuario');
+            $table->foreignId('libro_id')->references('id')->on('libro');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 

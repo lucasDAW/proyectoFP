@@ -3,7 +3,7 @@
                 @section('accion')
                 
     <div class="form_busqueda_libro_admin">
-        <form method="post" accion='#'>
+        <form method="post" accion='#' class='formularioBusquedaLibros'>
             @csrf
             <input type="text" placeholder="🔍 Busqueda de libro por titulo o autor..." id="busqueda_admin" name="busqueda_admin">
         </form>
@@ -27,10 +27,10 @@
               <tr>
                   <td>{{$item->id}}</td>
                   <td>{{$item->titulo}}</td>
-                  <td>{{$item->autor}}</td>
+                  <td>{{$item->escritor->nombre}}</td>
                   <td>{{$item->created_at}}</td>
-                  <td><a href='{{$item->archivo_url}}'>Portada</a></td>
-                  <td><a href='{{$item->created_at}}'>Archivo</a></td>
+                  <td><a href='{{$item->imagen_url}}'>Portada</a></td>
+                  <td><a href='{{$item->archivo_url}}'>Archivo</a></td>
                   <td>
                       <div class='accionesadmin '>
                           

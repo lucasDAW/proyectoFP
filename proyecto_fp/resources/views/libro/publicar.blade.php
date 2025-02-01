@@ -4,14 +4,16 @@
 @section('contenido')
 
                         
-<a href="{{route('mipublicaciones')}}" class="btn_mostrar_publicaciones">Mis publicaciones</a>    
-
-
-
-
-                   
+<a href="{{route('mipublicaciones')}}" class="btn_mostrar_publicaciones">Mis publicaciones</a>        
                         
-                 @if ($errors->any())
+      
+ <form action='{{route("publicar")}}' method="post" enctype="multipart/form-data" class="publicarLibro">
+        @if (isset($libro))
+             <legend>Modificar libro</legend>
+        @else
+             <legend>Publicar libro</legend>
+        @endif
+@if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -19,14 +21,7 @@
             @endforeach
         </ul>
     </div>
-@endif       
- <form action='{{route("publicar")}}' method="post" enctype="multipart/form-data" class="publicarLibro">
-        @if (isset($libro))
-             <legend>Modificar libro</legend>
-        @else
-             <legend>Publicar libro</legend>
-        @endif
-
+@endif 
      @csrf
      <!--titulo-->
     <div>
@@ -51,33 +46,30 @@
 
 
     </div> 
-    <div> 
-        <!--autor-->
-        <label for="autor">Autor/es: </label>
-            @if(isset($libro))
-                <input type="text" id='autor' name="autor" placeholder="Introduzca autor..." value='{{$libro->autor}}'>
-            @else 
-                <input type="text" id='autor' name="autor" placeholder="Introduzca autor...">
-            @endif
+    <div class="autores-libro">
+
+        <label for="autor">Autor:</label>
+        <input type="text" id="autorbusqueda" name="autorbusqueda" placeholder="Busqueda por nombre..."/>
+        <select id="autorselect" name="autorselect">
+            @foreach($autores as $a)
+            @isset($libro->categoria)
+                @if ($libro->categoria ==$a->id)
+                    <option value="{{$a->id}}" selected> {{$a->nombre}}</option>
+                @endif    
+            @endisset
+            <option value="{{$a->id}}"> {{$a->nombre}}</option>
+            @endforeach
+        </select>
+        <label for="otroautor">
+        <input type="checkbox" id="otroautorcheck" name="otroautorcheck"/>Otro Autor</label>
+        <div class="otroautor" >
+            <h6>Gracias por ayudarnos a conocer nuevos autores</h6>
+            <h6>La administración se encargara de añadirlo a la base de datos</h6>
+            <label for="autor">Nombre del autor</label>
+            <input type="text" id="autorlibro" name="autorlibro" placeholder="Introduzca autor..."/>
+        </div>
     </div>
-<!--    <div>
-        ISBN
-        <label for="isbn">ISBN: </label>
-        @if(isset($libro))
-            <input type="text" id='isbn' name="isbn" placeholder="Introduzca ISBN..." value='{{$libro->ISBN}}'>
-        @else 
-            <input type="text" id='isbn' name="isbn" placeholder="Introduzca ISBN...">
-        @endif
-    </div>-->
-<!--    <div>
-     numero páginas
-        <label for="paginas">Número de páginas: </label>
-        @if (isset($libro))
-            <input type="text" id='paginas' name="paginas" placeholder="Introduzca número de páginas..." value='{{$libro->numero_paginas}}'>
-        @else
-            <input type="text" id='paginas' name="paginas" placeholder="Introduzca número de páginas...">
-        @endif
-    </div>-->
+   
     <div> 
         <!--fecha lanzamiento-->
         <label for="fecha_lanzamiento">Fecha de lanzamiento: </label>
@@ -97,26 +89,44 @@
             <input type="text" id='precio' name="precio" placeholder="Introduzca precio...">
         @endif
     </div>
-     <div>     
+     <div class="categorias">     
         <!--categoría-->
         <label for="categoria">Categoría: </label>
-        <select name="categoria">
+        <select name="categoriatext" id="categoria" name="categoriatext">
             @foreach($categorias as $c)
                 <option value="{{$c->id}}">{{$c->nombre}}</option>          
             @endforeach
-  
         </select>
-       
     </div>
-    <div><!-- portada -->
-            <label for="portada">Portada: </label>
-            <input type="file" id="portada" name="portada" accept=".jpg, .jpeg, .png"/>
-    </div>
+    
+     <div class="documentos">
+         
+        <!-- portada -->
+            <div class="archivos_portada">
+        <label for="portada">Añadir Portada <span>&#8595;</span> </label>
+                <div>
+                    <span >Arrastra archivos </span> o <button>seleccione un archivo</button>
+                    <p>archivo de imagen.</p>
+<!--                    <input type="file" id="portada" name="portada" accept=".jpg, .jpeg, .png"/>-->
+                    <input type="file" id="portada" name="portada" accept=".jpg, .jpeg, .png" hidden/>
+                    <ul id="documentos-imagenes"></ul>
+                </div>
+            </div>
+    
     <div><!-- archivo -->
-        <label for="archivo">Archivo: </label>
-        <input type="file" id="archivo" name="archivo" accept='.pdf'/>
+        <div class="archivos_archivo">
+        <label for="archivo">Añadir Archivo<span>&#8595;</span> </label>
+                <div>
+                    <span >Arrastra archivos </span> o <button>seleccione un archivo</button>
+                    <p>Archivo PDF</p>
+                    <input type="file" id="archivo" name="archivo" accept='.pdf' hidden/>
+                    <ul id="documentos-imagenes"></ul>
+                </div>
+            </div>
     </div>
-     
+        
+     </div>
+        <span class='mensajePublicacion'>El libro se esta publicando ...</span>
         @if (isset($libro))
             <input type='hidden' name='id' id='id' value='{{$libro->id}}'/>
             <input type="submit" value="Modificar" class="boton"/>

@@ -18,31 +18,44 @@ class ComentarioController extends Controller
         
         $reglas=[
             'comentario'=>'required',
-            'user_id'=>'required',
-            'libro_id'=>'required',
             
         ];
         $mensajeError = [
             'required' => 'Cuidado!! el campo :attribute no se puede dejar vacío',
         ];
         
+        
         $datosvalidados=$request->validate($reglas,$mensajeError);
         $libro_id= $request->input('libro_id');
         $libro = Libro::find($libro_id);
+           
         if(Auth::check()){
-            $comentario = $request->input('comentario');
-            $user_id= $request->input('user_id');
-//            var_dump($comentario,$libro_id,$user_id);
-            
-            $comentarioBBDD = new Comentario;
-            $comentarioBBDD->comentario = $comentario;
-            $comentarioBBDD->libro_id = $libro_id;
-            $comentarioBBDD->user_id= $user_id;
-//            var_dump($comentarioBBDD);
-//            exit();
-            $comentarioBBDD->save();
-            
-            $mensaje = 'Comentario realizado.';
+            if($request->comentario_id){
+                echo 'entra atui';
+                $comentarioBBDD = Comentario::find($request->comentario_id);
+                $comentarioBBDD->comentario = $request->comentario;
+                $comentarioBBDD->libro_id = $request->libro_id;;
+                $comentarioBBDD->usuario_id= $request->usuario_id;
+    //            var_dump($comentarioBBDD);
+    //            exit();
+//                var_dump($comentarioBBDD);
+//                exit();
+                $comentarioBBDD->save();
+                $mensaje = 'Comentario modificado.';
+            }else{
+                $comentario = $request->input('comentario');
+                $user_id= Auth::user()->id;
+                $comentarioBBDD = new Comentario;
+                $comentarioBBDD->comentario = $comentario;
+                $comentarioBBDD->libro_id = $libro_id;
+                $comentarioBBDD->usuario_id= $user_id;
+    //            var_dump($comentarioBBDD);
+    //            exit();
+                $comentarioBBDD->save();
+
+                $mensaje = 'Comentario realizado.';
+            }
+        
         }else{
             $mensaje = 'Debe iniciar sesión para comentar.';
         }
@@ -53,8 +66,9 @@ class ComentarioController extends Controller
         return 'comentar';
     }
     
-    public function mostrarComentario(Comentario $comentario){
+    public function editarComentario(Comentario $comentario){
         
+        return view('comentarios.editar',['comentario'=>$comentario]);
         
     }
     
@@ -67,25 +81,13 @@ class ComentarioController extends Controller
     
     public function confirmarBorrado(Comentario $comentario, Request $request){
         
-//        var_dump($comentario);
-//        var_dump($request);
-
-        
+//     
         
         if(Auth::check()){
-            $libro_id = $request->input('libro_id');
-            $user_id = $request->input('user_id');
-            $comentario_id = $request->input('id');
-//            var_dump($libro_id,$user_id,$comentario_id);
-//            var_dump($comentario);
-            if (isset($comentario_id)){
-                $comentario = Comentario::find($comentario_id);
+                $libro_id =$comentario->libro_id;
                 $comentario->delete();
-//                $libro = Libro::find($libro_id);
-    //            var_dump($libro);
-    //            exit();
                 $mensaje =  'Se ha eliminado el comentario de forma correcta';
-            }
+            
         }else{
                 $mensaje =  'Debe iniciar sesión para borrar el comentario.';
         }
@@ -93,20 +95,4 @@ class ComentarioController extends Controller
         return redirect()->route('detallelibro',['libro'=>$libro_id])->with('mensaje', $mensaje);        
     }
     
-    public function valorar(Request $request){
-        
-        $valor=$request->input('valoracion');
-        $user_id=$request->input('user_id');
-        $libro_id=$request->input('libro_id');
-        
-        DB::table('calificaciones')
-        ->updateOrInsert(
-         ['user_id' => $user_id,'libro_id' => $libro_id],
-        ['calificacion' => $valor]
-        );
-        
-        
-        return redirect()->route('detallelibro',['libro'=>$libro])->with('mensaje', 'calificación envidada');
-
-    }
 }

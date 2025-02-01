@@ -28,23 +28,25 @@
                
                 <ul>
                     <li class="volver"><a href='{{ url()->previous() }}'><span>&#129044;</span> Volver  </a></li>
-                    <li><a href='{{route('todoslibros')}}'> Mostrar todos los libros</a></li>                                    
-                    <li><a href='{{route('busquedalibros')}}'> Categorías</a></li>
+                    <li><a href='{{route('todoslibros')}}'> Libros</a></li>                                    
+                    <li><a href='{{route('mostrarAutores')}}'> Autores</a></li>
+                    <li><a href='{{route('mostrarCategorias')}}'> Categorías</a></li>
                     <li class="cesta"> <a href="{{ route('mostrarTabla')}}">Ver Cesta</a></li>               
 
                     @auth
-                        <li class='nombre'><a href="{{route('verUsuario',['user'=>Auth::user()->id])}}" id='perfil'>Hola {{Auth::user()->name}}</a>
+                        <li class='nombre'><a href="{{route('verUsuario',['usuario_id'=>Auth::user()->id])}}" id='perfil'>Hola {{Auth::user()->nombre}}</a>
                     @else
                         <li> <a href="{{ route('login')}}">Iniciar Sesión</a></li>
                     @endauth
                             <ul class='submenu'>
 
                                 @auth
-                                    <li><a href="{{route('verUsuario')}}">Configuración de mi perfil<span>&#128187;</span></a></li>
+                                    <li><a href="{{route('verUsuario',['usuario_id'=>Auth::user()->id])}}">Configuración de mi perfil<span>&#128187;</span></a></li>
                                     <li><a href="{{route('verpedidos',['id' => Auth::user()->id])}}">Mis Pedidos<span>&#x1f6d2;</span></a></li>
                                     <li class="lista_deseos_enlace"><a href="{{route('verdeseos')}}">Mis Lista de deseos <span class="material-symbols-outlined">favorite</span></a></li>
                                     <li class="publicar"><a href="{{route('publicarvista')}}">Publicar <span>&#x270d;</span></a></li>
-                                    @if (Auth::user()->role==2)
+                                    <li class="publicar"><a href="{{route('mipublicaciones')}}">Mis publicaciones <span>&#x270d;</span></a></li>
+                                    @if (Auth::user()->rol==2)
                                     <li><a href="{{route('inicioadmin')}}" class='admin'>Panel de administrador<span>&#x1f5b3;</span></a></li>
                                     @endif
                                     <li class="btn_cerrar_sesion"><a href="{{ route('logout')}}">Cerrar Sesión<span>&#10060;</span></a></li>
@@ -74,10 +76,30 @@
             
             
             
+        @if (!Cookie::has('primera_visita'))
+        
+                    <div id="cookieBanner" class="cookies">
+                <h3>Esta página web usa cookies</h3>
+                <p>Utilizamos cookies para mejorar tu experiencia. Al continuar navegando, aceptas nuestra <a href="{{route('vercookies')}}">Política de Cookies</a>.</p>
+                <form method='GET' action='{{route('cookies')}}'>
+                    @csrf
+                    <input type="submit" value="Aceptar las cookies" id='botoncookies' name='botoncookies'/>
+                </form>
+            </div>
+        @endif
         </main>
         <footer>
-            
-        </footer>
+<div class="container">
+    <p>&copy; 2025 Mi Sitio Web. Todos los derechos reservados.</p>
+    <nav>
+      <ul>
+        <li><a href="{{route('contactoadmin')}}">Contacto</a></li>
+        <li><a href="#">Política de Privacidad</a></li>
+        <li><a href="#">Términos de Servicio</a></li>
+      </ul>
+    </nav>
+    
+  </div>        </footer>
             <script src="{{ asset("js/main.js") }}">
            </script>
     </body>

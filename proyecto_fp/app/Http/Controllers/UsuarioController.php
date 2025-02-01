@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class UsuarioController extends Controller
@@ -29,13 +30,9 @@ class UsuarioController extends Controller
     
     public function editarperfil(Request $request){
         
-//        var_dump($request->id);
-//        var_dump($usuario);
-//        exit();
-//        utilizamos tambien para modificar el usuario por parte de un usuario con rol admin
-            //rol de admin ==2
+//     
         
-        if(Auth::user()->role==2 && $request->id){
+        if(Auth::user()->rol==2 && $request->id){
             $usuario = User::find($request->id);
             return view('usuario.editar',['usuario'=>$usuario]);
         }
@@ -47,10 +44,10 @@ class UsuarioController extends Controller
     public function modificarperfil(Request $request){
         
 //        modificando un usuario desde el panel de admin
-        if($request->id_usuario && Auth::user()->role==2){
+        if($request->id_usuario && Auth::user()->rol==2){
   
             $reglas=[
-                  'name' => ['required', 'string', 'max:255'],
+                  'nombre' => ['required', 'string', 'max:255'],
                 'password' => ['required'],
                 'email' => 'required|unique:Users,email',
             ];
@@ -63,7 +60,7 @@ class UsuarioController extends Controller
         $datosvalidados=$request->validate($reglas,$mensajeError);
 
             $usuario = User::find($request->id_usuario);
-            $usuario->name=$request->name;
+            $usuario->nombre=$request->name;
             $usuario->email=$request->email;
             $usuario->password=Hash::make($request->password);
             $usuario->save();
@@ -74,12 +71,12 @@ class UsuarioController extends Controller
         if(Auth::check()){
             
             $request->validate([
-                  'name' => 'required', 'string', 'max:255',
+                  'nombre' => 'required', 'string', 'max:255',
                 'password' => 'required',
                 'email' => 'required|unique:Users,email',
             ]);
             $usuario = User::find(Auth::user()->id);
-            $usuario->name=$request->name;
+            $usuario->nombre=$request->name;
             $usuario->email=$request->email;
             $usuario->password=Hash::make($request->password);
             $usuario->save();
@@ -90,63 +87,28 @@ class UsuarioController extends Controller
         }
     }
     
-    public function show(User $user){
+    public function show(User $user,Request $request){
         
-        $user = User::find(Auth::user()->id);
+        $user = User::find($request->usuario_id);
         
-        return view('usuario.perfil',['user'=>$user]);
-        
-        
-    }
+       $valoraciones = DB::table('calificaciones')
+               ->join('usuario','usuario.id','=','calificaciones.usuario_id')
+               ->join('libro','libro.id','=','calificaciones.libro_id')
+               ->select('libro.id','libro.titulo','calificaciones.*')
+               ->where('usuario.id','LIKE',$request->usuario_id)->get();
     
-    public function addlistadeseos(Request $request){
-        
-        if(Auth::check()){
-            
-            $user_id=Auth::user()->id;
-            $libro_id=$request->libro_id;
-            $libro_ya_en_lista=$request->lista_deseos;
-            if($libro_ya_en_lista){
-                $deleted = DB::table('listadeseos')
-                        ->where('user_id', '=', $user_id)
-                        ->where('libro_id','=',$libro_id)
-                        ->delete();
-            }else{
+        $user->valoraciones=$valoraciones;
 
-    //         
-                DB::table('listadeseos')
-                ->updateOrInsert(
-                 ['user_id' => $user_id,'libro_id' => $libro_id]
-                );
-            }
-        } else {
-             
-            return json_encode(array('mensaje'=>'Debe iniciar sesion.'));
-
-        }
+        return view('usuario.perfil',['usuario'=>$user]);
         
-//        return json_encode(array('success' => 1,'libro'=>$libro_ya_en_lista));
-        return json_encode(array('libro'=>$libro_ya_en_lista));
-
-    }
-    
-    public function showlistadeseos(){
-        
-//        echo Auth::user()->id;
-        
-        $libros =DB::table('listadeseos')
-                ->join('libros','listadeseos.libro_id','=','libros.id')
-                ->select('libros.id','libros.titulo','libros.autor','libros.precio')->where('listadeseos.user_id',Auth::user()->id)
-                ->get();
-//        var_dump($libros);
-        return view('usuario.listadeseos',['libros'=>$libros]);    
         
     }
     
     public function showMispublicaciones(Request $request){
-        $libros =DB::table('archivos_test')
-                ->join('libros','archivos_test.id_libro','=','libros.id')
-                ->select('libros.id','libros.titulo','libros.autor','libros.precio')->where('archivos_test.usuario_id',Auth::user()->id)
+        $libros =DB::table('archivos')
+                ->join('libro','archivos.libro_id','=','libro.id')
+                ->join('autor','autor.id','=','libro.autor_id')
+                ->select('libro.id','libro.titulo','autor.nombre as autor','libro.precio')->where('archivos.usuario_id',Auth::user()->id)
                 ->get();
         
         return view('usuario.mipublicaciones',['libros'=>$libros]);
@@ -156,7 +118,7 @@ class UsuarioController extends Controller
     public function eliminar(Request $request){
        
 //        eliminando desde admin
-         if(Auth::user()->role==2 && $request->id_usuario){
+         if(Auth::user()->rol==2 && $request->id_usuario){
 //            $usuario = User::find($request->id);
 //            return view('usuario.editar',['usuario'=>$usuario]);
             return view('usuario.eliminar',['id'=>$request->id_usuario]);    
@@ -182,13 +144,85 @@ class UsuarioController extends Controller
     }
     
     
+    public function addlistadeseos(Request $request){
+        
+        if(Auth::check()){
+            
+            $user_id=Auth::user()->id;
+            $libro_id=$request->libro_id;
+            $libro_ya_en_lista=$request->lista_deseos;
+            if($libro_ya_en_lista){
+                $deleted = DB::table('listadeseos')
+                        ->where('usuario_id', '=', $user_id)
+                        ->where('libro_id','=',$libro_id)
+                        ->delete();
+            }else{
+
+    //         
+                DB::table('listadeseos')
+                ->updateOrInsert(
+                 ['usuario_id' => $user_id,'libro_id' => $libro_id]
+                );
+            }
+        } else {
+             
+            return json_encode(array('mensaje'=>'Debe iniciar sesion.'));
+
+        }
+        
+//        return json_encode(array('success' => 1,'libro'=>$libro_ya_en_lista));
+        return json_encode(array('libro'=>$libro_ya_en_lista));
+
+    }
     
+    public function showlistadeseos(){
+        
+
+        $libros =DB::table('listadeseos')
+                ->join('libro','listadeseos.libro_id','=','libro.id')
+                ->join('autor','libro.autor_id','=','autor.id')
+                ->select('libro.id','libro.titulo','autor.nombre as autor','libro.precio')->where('listadeseos.usuario_id',Auth::user()->id)
+                ->get();
+        return view('usuario.listadeseos',['libros'=>$libros]);    
+        
+    }
+    
+    
+    public function calificarLibro(Request $request){
+
+        if($request->isMethod('POST')){
+            
+            if(Auth::check()){
+    //            //           
+
+                    DB::table('calificaciones')
+                        ->updateOrInsert(
+                         ['usuario_id' => Auth::user()->id,'libro_id' => $request->libro],
+                         ['calificacion'=>$request->valoracion,]
+                        );
+    //            
+                return json_encode(array('mensaje'=>'calificacion OK.'));
+            }
+        }
+        
+        if($request->isMethod('GET')){
+            
+            DB::table('calificaciones')->where('id', '=', $request->comentario_id)->delete();
+            return redirect()->back()->with('mensaje','Se ha borrado la califacación');
+
+        }
+        
+    }
 //    acciones que solo puede hacer el usuario de clase admin
     public function accionesAdmin(){
         
-        if(Auth::check() && Auth::user()->role==2){
+        if(Auth::check() && Auth::user()->rol==2){
             
-            return view('administracion.index');
+            
+            $autoresaviso = DB::table('autor')->where('descripcion','=','NULL')->orWhere('fecha_nacimiento','=','NULL')->count();
+                   
+//            return view('administracion.index',['avisoautor'=>$autoresaviso>0]);
+            return view('administracion.usuario',['avisoautor'=>$autoresaviso>0]);
         }else{
             return redirect()->back()->with('mensaje','No tiene permiso para entrar aqui.');
         }
@@ -196,15 +230,15 @@ class UsuarioController extends Controller
     
     public function showall(Request $request){
         
-        if ($request->isMethod('post') && Auth::user()->role==2)
+        if ($request->isMethod('post') && Auth::user()->rol==2)
         {
-            $usuarios = DB::table('users')->select('*')->where('name','LIKE','%'.$request->busqueda_admin.'%')->orWhere('email','LIKE','%'.$request->busqueda_admin.'%')->simplePaginate(3);
+            $usuarios = DB::table('usuario')->select('*')->where('nombre','LIKE','%'.$request->busqueda_admin.'%')->orWhere('email','LIKE','%'.$request->busqueda_admin.'%')->simplePaginate(3);
         }
        
-        if(Auth::check() && Auth::user()->role==2 && $request->isMethod('get')){
-               $usuarios=   DB::table('users')->simplePaginate(3);
+        if(Auth::check() && Auth::user()->rol==2 && $request->isMethod('get')){
+               $usuarios=   DB::table('usuario')->simplePaginate(3);
         }
-        if(Auth::check() && Auth::user()->role==2){ 
+        if(Auth::check() && Auth::user()->rol==2){ 
             return view('administracion.usuario',['usuarios'=>$usuarios]);
         }else{
             return redirect()->back()->with('mensaje','No tiene permiso para entrar aqui.');
@@ -212,7 +246,7 @@ class UsuarioController extends Controller
     }
     
     public function hacerAdmin(User $user){
-        $user->role=2;
+        $user->rol=2;
         $user->save();
         return redirect()->route('vertodosUsuarios')->with('mensaje', 'Se ha concedido el rol de administrador al usuario');
 
@@ -226,40 +260,53 @@ class UsuarioController extends Controller
         return view('administracion.correo',['usuario'=>$user]);
         
     }
+   
     
     public function enviarCorreo(Request $request,User $user){
 
-
-        $usuario=json_decode($request->usuario);
-
         
-         $body=$request->cuerpo;
-         $titulo=$request->asunto;
-         $emaildestinatario=$usuario->email;
-        $email = new EmailController('Mensaje de SENECA Administracion',$body);
-        $email->sendEmail($emaildestinatario,$titulo,$body);
-        
-       return redirect()->route('vertodosUsuarios')->with('mensaje', 'Se ha enviado el mensaje al usuario');
+        if(Auth::user()->rol==2){
+            
+
+            $usuario=json_decode($request->usuario);
+            $body=$request->cuerpo;
+            $titulo=$request->asunto;
+            $emaildestinatario=$usuario->email;
+            $email = new EmailController('Mensaje de SENECA Administracion',$body);
+            $email->sendEmail($emaildestinatario,$titulo,$body);
+
+            return redirect()->route('vertodosUsuarios')->with('mensaje', 'Se ha enviado el mensaje al usuario');
+      }
+            return redirect()->back();
 
         
     }
 
+     public function contactoCorreo(Request $request){
+      
+            $body=$request->cuerpo;
+            $titulo=$request->asunto;
+            $emaildestinatario='dawlucas1993@gmail.com';
+            $email = new EmailController('Mensaje para SENECA Administracion',$body);
+            $email->sendEmail($emaildestinatario,$titulo,$body);
+            return redirect()->route('inicio')->with('mensaje','Correo enviado!');
+    }
     public function mostrarInteracciones(Request $request){
         
         $usuario_id=intval($request->id_usuario);
-        $comentarios= DB::table('comentarios')->join('users','comentarios.user_id','=','users.id')->join('libros','comentarios.libro_id','=','libros.id')->select('comentarios.id','comentarios.comentario','comentarios.libro_id','libros.titulo')->where('users.id','=',$request->id_usuario)->get();
-        $valoraciones= DB::table('calificaciones')->join('users','calificaciones.user_id','=','users.id')->join('libros','calificaciones.libro_id','=','libros.id')->select('calificaciones.id','calificaciones.calificacion','calificaciones.libro_id','libros.titulo')->where('users.id','=',$request->id_usuario)->get();
-        $compras=DB::table('compras')->join('users','compras.user_id','=','users.id')->select('compras.id','compras.*')->where('users.id','=',$request->id_usuario)->get();
+        $comentarios= DB::table('comentario')->join('usuario','comentario.usuario_id','=','usuario.id')->join('libro','comentario.libro_id','=','libro.id')->select('comentario.id','comentario.comentario','comentario.libro_id','libro.titulo')->where('usuario.id','=',$request->id_usuario)->get();
+        $valoraciones= DB::table('calificaciones')->join('usuario','calificaciones.usuario_id','=','usuario.id')->join('libro','calificaciones.libro_id','=','libro.id')->select('calificaciones.id','calificaciones.calificacion','calificaciones.libro_id','libro.titulo')->where('usuario.id','=',$request->id_usuario)->get();
+        $compras=DB::table('compras')->join('usuario','compras.usuario_id','=','users.id')->select('compras.id','compras.*')->where('usuario.id','=',$request->id_usuario)->get();
         $usuario = User::find($usuario_id);
         return view('administracion.interacciones',['comentarios'=>$comentarios,'calificaciones'=>$valoraciones,'pedidos'=>$compras,'usuario'=>$usuario]);
     }
     public function verTodospedidos(){
-        if(Auth::user()->role==2){
+        if(Auth::user()->rol==2){
             
         
-        $compras= DB::table('compras')->join('users','compras.user_id','=','users.id')->select('compras.*','users.name','users.email')->simplePaginate(5);        
+        $compras= DB::table('compras')->join('usuario','compras.usuario_id','=','usuario.id')->select('compras.*','usuario.nombre','usuario.email')->simplePaginate(5);        
             foreach($compras as $compra){
-                $librospedidos =DB::table('pedidos')->join('libros','pedidos.libro_id','=','libros.id')->select('libros.id','libros.titulo','libros.precio')->where('pedidos.compra_id','=',$compra->id)->get();
+                $librospedidos =DB::table('pedidos')->join('libro','pedidos.libro_id','=','libro.id')->select('libro.id','libro.titulo','libro.precio')->where('pedidos.compra_id','=',$compra->id)->get();
                 $compra->libros=$librospedidos;
                 
             }
@@ -274,7 +321,7 @@ class UsuarioController extends Controller
      public function busquedaAdmin(Request $request){
         
         
-        if(Auth::user()->role==2){
+        if(Auth::user()->rol==2){
             
           $usuarios = DB::table('users')->select('*')->where('name','LIKE','%'.$request->busqueda.'%')->orWhere('email','LIKE','%'.$request->busqueda.'%')->get();
             
@@ -287,9 +334,9 @@ class UsuarioController extends Controller
     public function busquedapedidoAdmin(Request $request){
         
         
-            $compras= DB::table('compras')->join('users','compras.user_id','=','users.id')->select('compras.*','users.name','users.email')->where('compras.id','LIKE','%'.$request->busqueda.'%')->get();        
+            $compras= DB::table('compras')->join('users','compras.usuario_id','=','users.id')->select('compras.*','users.name','users.email')->where('compras.id','LIKE','%'.$request->busqueda.'%')->get();        
             foreach($compras as $compra){
-                $librospedidos =DB::table('pedidos')->join('libros','pedidos.libro_id','=','libros.id')->select('libros.id','libros.titulo','libros.precio')->where('pedidos.compra_id','=',$compra->id)->get();
+                $librospedidos =DB::table('pedidos')->join('libro','pedidos.libro_id','=','libro.id')->select('libro.id','libro.titulo','libro.precio')->where('pedidos.compra_id','=',$compra->id)->get();
                 $compra->libros=$librospedidos;
                 
             }
@@ -302,4 +349,11 @@ class UsuarioController extends Controller
                      ];
             return response()->json($response);
     }
+    
+    //estadisticas libros
+    public function estadisticas(){
+        
+        return view('administracion.estadisticas');
+    }
+
 }
