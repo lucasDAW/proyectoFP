@@ -8,7 +8,7 @@
         <link rel="icon" href='{{ asset("image/icono.ico") }}' type="image/x-icon">
     <link rel='stylesheet' href='{{ asset("css/estilos.css") }}'>
     <link rel='stylesheet' href='../../css/estilos.css'>
-    <link rel='stylesheet' href='../../js/main.js'>
+
     <title>SENECALIB - @yield('titulo')</title>
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,8 +101,8 @@
       </ul>
     </nav>
     
-  </div>        </footer>
-            <script src="{{ asset("js/main.js") }}">
-           </script>
+  </div>
+        </footer>   
+        <script src="../../js/main.js"></script>
     </body>
 </html>

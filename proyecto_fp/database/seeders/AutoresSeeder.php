@@ -75,13 +75,14 @@ class AutoresSeeder extends Seeder
         "referencia" => "https://es.wikipedia.org/wiki/Federico_Garc%C3%ADa_Lorca"
     ]
 ];
-        foreach($autores as $a){        
-            DB::table('autor')->insert([
-                'nombre' => $a['nombre'],
-                'descripcion' => $a['biografia'],
-                'fecha_nacimiento' => $a['fecha_nacimiento'],
-                'referencias' => $a['referencia'],
-            ]);
-        }
+//          descomentar si queremos iniciar un seeder que suba 10 autores de prueba
+//        foreach($autores as $a){        
+//            DB::table('autor')->insert([
+//                'nombre' => $a['nombre'],
+//                'descripcion' => $a['biografia'],
+//                'fecha_nacimiento' => $a['fecha_nacimiento'],
+//                'referencias' => $a['referencia'],
+//            ]);
+//        }
     }
 }
