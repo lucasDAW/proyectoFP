@@ -34,6 +34,11 @@ Route::get('/contacto',function(){
             return view('usuario.contacto');
 
 })->name('contactoadmin');
+//Terminos de servicio
+Route::get('/terminos-servicio',function(){
+            return view('administracion.terminos');
+
+})->name('contactoadmin');
 Route::post('/contacto',[UsuarioController::class,'contactoCorreo'])->name('contactoadminpost');
 
 Route::get('/politica-cookies',function(){
