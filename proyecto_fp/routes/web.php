@@ -29,11 +29,11 @@ Route::get('/cookies',function(){
     return redirect()->route('todoslibros');
 
 })->name('cookies');
-Route::get('/politica-cookies',function(){
+Route::get('/politica-privacidad',function(){
     
-            return view('administracion.cookies');
+            return view('administracion.privacidad');
 
-})->name('cookies-politicas');
+})->name('privacidad');
 //CONTACTO
 Route::get('/contacto',function(){
             return view('usuario.contacto');
