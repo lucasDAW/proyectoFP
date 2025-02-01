@@ -221,8 +221,8 @@ class UsuarioController extends Controller
             
             $autoresaviso = DB::table('autor')->where('descripcion','=','NULL')->orWhere('fecha_nacimiento','=','NULL')->count();
                    
-//            return view('administracion.index',['avisoautor'=>$autoresaviso>0]);
-            return view('administracion.usuario',['avisoautor'=>$autoresaviso>0]);
+            return view('administracion.index',['avisoautor'=>$autoresaviso>0]);
+//            return view('administracion.usuario',['avisoautor'=>$autoresaviso>0]);
         }else{
             return redirect()->back()->with('mensaje','No tiene permiso para entrar aqui.');
         }
