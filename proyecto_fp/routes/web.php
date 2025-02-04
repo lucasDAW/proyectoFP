@@ -36,11 +36,11 @@ Route::prefix('/libro')->group(function () {
         Route::get('/publicar',[LibroController::class,'crearVistaLibro'])->name('publicarvista');
         Route::post('/publicando',[LibroController::class,'publicarlibro'])->name('publicar');
             //UPDATE
-        Route::get('/libro/editar/{libro}', [LibroController::class, 'editar'])->name('editarlibro');
+        Route::get('/editar/{libro}', [LibroController::class, 'editar'])->name('editarlibro');
 
         //DELETE
-        Route::get('/libro/borrar/{libro}', [LibroController::class, 'borrar'])->name('borrar');
-        Route::post('/libro/borrar/confirmar', [LibroController::class, 'borrarBBDD'])->name('confirmareliminar');
+        Route::get('/borrar/{libro}', [LibroController::class, 'borrar'])->name('borrar');
+        Route::post('/borrar/confirmar', [LibroController::class, 'borrarBBDD'])->name('confirmareliminar');
     });
 });
 
@@ -84,12 +84,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/perfil/eliminando', [UsuarioController::class, 'eliminarbbdd'])->name('confirmareliminarusuario');
 
     
-//    LIBROS
-//  editar
-    Route::get('/libro/editar/{libro}',[LibroController::class,'editar'])->name('editarlibro');
-//  eliminar
-    Route::get('/libro/borrar/{id}',[LibroController::class,'borrar'])->name('borrarlibroBBDD');
-    Route::post('/libro/borrar/confirmar',[LibroController::class,'borrarBBDD'])->name('confirmareliminar');
+////    LIBROS
+////  editar
+//    Route::get('/libro/editar/{libro}',[LibroController::class,'editar'])->name('editarlibro');
+////  eliminar
+//    Route::get('/libro/borrar/{id}',[LibroController::class,'borrar'])->name('borrarlibroBBDD');
+//    Route::post('/libro/borrar/confirmar',[LibroController::class,'borrarBBDD'])->name('confirmareliminar');
     
     
     //  routes que solo pueden acceder los usuario con el rol admin    
