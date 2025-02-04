@@ -1,8 +1,8 @@
 @extends('administracion.index')
 
                 @section('accion')
-                <h3>Enviar correo</h3>
                 <form method='post' action='{{route('enviarcorreoadminpost')}}'>
+                    <legend>Enviar correo</legend>
                     @csrf
                     <label from='destinatario'>Destinatario:</label>
                     <input type='text' id='destinatario' name='destinatario' value="{{$usuario->email}} - {{$usuario->nombre}}" disabled="true"/>

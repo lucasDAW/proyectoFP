@@ -38,7 +38,7 @@ class AutorController extends Controller
 
         }else{
 
-            $autores= Autor::simplePaginate(8);
+            $autores= Autor::simplePaginate(9);
             foreach($autores as $autor){
                 if($autor->foto){
                     $perfil_imagen= Storage::disk('archivos')->url($autor->foto);

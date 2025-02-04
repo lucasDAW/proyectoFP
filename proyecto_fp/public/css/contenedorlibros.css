@@ -1,0 +1,261 @@
+/*estilos que muetran los libros en contenedores en la ruta /libros/inicio*/
+/*libros*/
+.libros{
+    display: grid;
+    column-gap: 10px;
+    row-gap: 50px;
+    grid-template-columns: 1fr  1fr 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+    margin: 0 5%;
+}
+
+/*estilos libro*/
+.libro{
+    background-color: #e6f1f3;
+    float: left;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/*    width: 300px;*/
+    text-align: center;
+    overflow: hidden;
+    align-items: center;
+    text-decoration: none;
+    
+    
+    
+}
+.libro a, .autor a{
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:5px 0px;
+    padding:0px 30px;
+    
+}
+
+.libro:hover{
+    background-color: #9dc4cb;
+    border:1px solid blue;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.libro>*{
+    margin:10px 0;
+    text-decoration: none;
+    color: black;
+}
+.libro .precio{
+    padding:5px;
+    margin: 0 auto;
+    /*display: flex;*/
+    border-radius: 5px;
+    background: white;
+    /*height: 30px;*/
+    width: fit-content;
+    border: 1px solid black;
+}
+.libro .precio span{
+    font-size: 0.75em;
+    margin:auto;
+    text-align: center;
+    vertical-align: middel;
+}
+/*animacion al mostrar libros basado en el video de https://www.youtube.com/watch?v=AbCYziNyjvk&t=175s&ab_channel=midudev*/
+.libro{
+    view-timeline-name:--animacionlibros;
+    view-timeline-axis: block;
+    
+    animation-timeline:--animacionlibros;
+    animation-name: mostrarlibros;
+    animation-range:entry 10% cover 40%;
+    animation-fill-mode: both;
+}
+@keyframes mostrarlibros{
+    from{
+opacity:0;
+    scale:25%;
+    }
+    to{
+opacity:1;
+    scale:100%;
+    }
+}
+
+
+.libro img{
+    width: 150px;
+    height: 150px;
+    transition: 0.3s all;
+}
+.libro img:hover {
+    transform: scale(200%) translate(0px,20px);
+    border-radius: 15px;
+    outline:1px solid black;
+    z-index: 99;
+}
+
+
+/*//publicar libro ruta /publicar view(usuario.publicar)*/
+ form .otroautor, form .otracategoria{
+    background:  #222;
+    color:white;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 5px;
+
+    /* visibility: hidden; */
+    display: none;
+}
+form .otroautor h6, form .otracategoria h6{
+    margin:1px auto;
+
+}
+.otroautor label{
+    color:white;
+}
+.otroautor input[type='text']{
+    width: 50%; 
+    color:#222
+}
+
+form input[type='submit']:hover{
+    background: #0e0ebb;
+    color:#ffffff;
+    cursor: pointer;
+    transform: translate(0px,-5px);
+
+}
+.mostrar{
+    display: flex !important;
+    flex-direction: column;
+    animation: show 1s ease;
+}
+@keyframes show {
+    from{
+transform: scale(1) translate(1500px,0px);
+}
+    to{
+transform: scale(100%) translate(0px,0px);
+}
+
+}
+.documentos{
+    display: flex;
+    justify-content: center;
+}
+.botones_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.archivos_portada>label{
+    padding: 5px 10px;
+    background: black;
+    box-shadow: 3px 3px #7d9de3;
+    color:#7d9de3;
+    width: fit-content;
+    transition: 0.8s all ease;
+    margin:0px 10px;
+}
+.archivos_portada>label:hover{
+    cursor: pointer;
+    background: #7d9de3;
+    color:black;
+    box-shadow: none;
+    outline:1px solid black;
+
+}
+.archivos_archivo>label{
+    padding: 5px 10px;
+    background: black;
+    box-shadow: 3px 3px #e95e1d;
+    color:#e95e1d;
+    width: fit-content;
+    transition: 0.5s all ease;
+        margin:0px 10px;
+
+}
+.archivos_archivo>label:hover{
+    cursor: pointer;
+    background: #e95e1d;
+    color:black;
+    box-shadow: none;
+    outline:1px solid black;
+}
+.archivos_portada>div,.archivos_archivo>div{
+    border-radius: 10px;
+    background: #fdfdfd;
+    margin: 5px;
+    border: 3px dotted rgb(70 69 69 / 50%);
+    padding: 50px 100px;
+    display: none;
+    height: 100px;
+}
+.archivo_drag{
+    background-color: #606060 !important;
+    color:#fff!important;
+}
+.archivos_portada>div>button,.archivos_archivo>div>button{
+    padding: 5px 20px;
+    background-color: #ffff8a;
+    color:#222;
+    border: none;
+    width: fit-content;
+    box-shadow: 3px 3px #095c5c;
+}
+.archivos_portada>div>button:hover,.archivos_archivo>div>button:hover{
+    background-color: #095c5c;
+    color:#222;
+    cursor: pointer;
+    color:white;
+    box-shadow:none;
+}
+.mostrar_archivos{
+    display: flex !important;
+    flex-direction: column;
+    animation: files 0.5s ease;
+}
+.archivo_subido{
+    background: #a4f79f !important;
+    border: 3px dotted rgb(22 96 0 / 50%) !important;
+}
+.archivos_portada>div ul li,.archivos_archivo>div ul li{
+    list-style: none;
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid;
+}
+.eliminarArchivo{
+    padding: 5px;
+    background: #db5656;
+    font-weight: bolder;
+    transition: 0.5s all ease;
+    
+}
+.eliminarArchivo:hover{
+    cursor:pointer;
+    background: #760000;
+    color: #ff0202;
+    
+}
+@keyframes files {
+    from{
+        transform: scale(1);
+        opacity: 0.5 ;
+    }
+    to{
+        transform: scale(100%) ;
+        opacity: 1;
+    }
+
+
+}

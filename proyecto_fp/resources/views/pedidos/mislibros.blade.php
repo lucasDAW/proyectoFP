@@ -1,11 +1,9 @@
 @extends('layouts.base')
 @section('titulo','Pedidos')
 @section('contenido')
-<div class="container mt-5">
-  <h2>Mis Libros en Pedido {{$id_pedido}}</h2>
-</div>
 
 <div class='pedidos'>
+  <h2>Mis Libros en Pedido {{$id_pedido}}</h2>
     @if ($libros)
 
            

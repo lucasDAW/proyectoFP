@@ -1,0 +1,93 @@
+.pedidos{
+    justify-items: center;
+        display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    margin: 5px auto;
+    padding: 10px 100px;
+    background: #d5d4d4;
+    width: 50vw;
+    
+}
+    
+.pedidos h2{
+    text-align: center;
+    padding: 10px 30px;
+    background: #222;
+    color:#eee;
+    width:fit-content;
+        justify-content: right;
+    align-self: anchor-center;
+}
+.pedidosenlace
+{
+    margin:20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.pedidosenlace ul{
+    list-style: none;
+
+}
+.pedidosenlace ul li a{
+    text-decoration: none;
+    
+    display: inline-block; /* Convierte el enlace en un elemento de bloque */
+  padding: 10px 20px; /* Ajusta el relleno según tus preferencias */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  color: #fff; /* Color de texto blanco para mejor contraste */
+/*  background-color: #f26419;  Color de fondo naranja cálido */
+  background-image: linear-gradient(to right, #f26419, #ffb300, #4caf50);  
+border: none; /* Elimina el borde */
+  border-radius: 5px; /* Bordes redondeados */
+  font-family: sans-serif; /* Fuente de letra simple */
+  font-size: 16px; /* Tamaño de letra */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+  position: relative; /* Necesario para la animación de brillo */
+  overflow: hidden; /* Oculta el brillo que se desborda */
+    transition: 0.5s all ease;
+    
+}
+
+.pedidosenlace ul li a:hover{
+     background-color: #e65100; /* Color de fondo naranja más oscuro al pasar el cursor */
+  transform: scale(0.95);
+      transition: 0.5s all ease;
+
+}
+.pedidosenlace ul li a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), transparent); /* Brillo blanco */
+  opacity: 0;
+  transform: translateX(-100%); /* Inicialmente fuera de la vista */
+  transition: opacity 0.3s ease, transform 0.4s ease; /* Transiciones para el brillo */
+}
+
+.pedidosenlace ul li a:hover::before {
+  opacity: 1;
+  transform: translateX(0%); 
+}
+.pedidosenlace ul li img{
+    visibility: hidden;
+    width: 100px;
+    height: fit-content;
+    border:1px solid black;
+    border-radius: 10px;
+    vertical-align: middle;
+    margin-left: 25px;
+        transition: 0.5s all ease;
+
+
+}
+.pedidosenlace ul li a:hover ~img{
+    visibility: visible;
+    
+}

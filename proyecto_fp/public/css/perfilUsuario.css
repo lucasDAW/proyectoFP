@@ -1,0 +1,132 @@
+
+
+/*formulario de edicion de usuario*/
+.misdatos{
+    
+}
+.miperfil{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid black;
+    margin: 5px auto;
+    padding: 10px 100px;
+    background: #d5d4d4;
+    width: 50vw;
+    
+}
+.miperfil ul{
+    margin: 0 auto;
+    list-style: none;
+    padding:10px 5px;
+}
+.miperfil ul li{
+    font-size: 1.25em;
+    background: #222;
+    padding: 15px 50px;
+    margin: 20px auto;
+    color: #ebebeb;
+}
+
+.miperfil .switch{
+    
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 20px;
+  margin:10px auto;
+
+}
+
+.miperfil .switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.miperfil .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #e96666;
+  -webkit-transition: .4s;
+  transition: .4s;
+  z-index: 1;
+}
+
+.miperfil .slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 5px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.miperfil input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.miperfil input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.miperfil input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(35px);
+}
+
+/* Rounded sliders */
+.miperfil .slider.round {
+  border-radius: 34px;
+}
+
+.miperfil .slider.round:before {
+  border-radius: 50%;
+}
+.miperfil h3{
+    background: #f7f335;
+    text-transform: uppercase;
+    padding: 10px;
+}
+.miperfil .switch span:first-child{
+    z-index: 99;
+}
+.miperfil h3:hover{
+    animation-name: desaparecer;
+    animation-iteration-count: 1;
+}
+.hidden{
+    display: none;
+    animation-name: desaparecer;
+    animation-iteration-count: 1;
+    
+}
+@keyframes desaparecer {
+    0% {
+    transform: scale(1)
+    }
+    33% {
+    transform: scale(0.75)
+    }
+    66% {
+    transform: scale(0.5)
+    }
+    100% {
+    transform: scale(0)
+    }
+}
+
+/*formulario*/
+.miperfil form{
+    background: #f6ff80;
+    width: 60%;
+    text-align: left;
+}

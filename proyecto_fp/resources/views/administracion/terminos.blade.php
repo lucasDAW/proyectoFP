@@ -3,7 +3,8 @@
 
 @section('contenido')
 
-
+<div class="terminos">
+    
         <section>
             <h2>1. Aceptación de los Términos</h2>
             <p>Al utilizar nuestro sitio web, usted acepta estos Términos de Servicio.</p>
@@ -34,6 +35,7 @@
             <p>Cualquier disputa se resolverá de acuerdo con las leyes de [Tu País].</p>
         </section>
 
+</div>
 
 @endsection
     

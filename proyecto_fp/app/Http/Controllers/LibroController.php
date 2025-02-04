@@ -21,11 +21,9 @@ class LibroController extends Controller
     {       
       
         //paginación
-//      $libros=Libro::paginate(9);
-        $libros=Libro::simplePaginate(12);
+        $libros=Libro::cursorPaginate(12);
+        
            
-//        var_dump($libros);
-//        exit();
         foreach($libros as $libro){
             $documentos= DB::table('archivos')->where('libro_id',$libro->id)->first();
 //                var_dump($documentos);
@@ -358,48 +356,15 @@ class LibroController extends Controller
             }
         $response = [
                     "success"=>true,
-                    "mensaje"=>'Consulta correcta.',
+                    "mensaje"=>'Consulta correcta. Busqueda libro',
                     "busqueda"=>$request->busqueda,
-                    "data"=>$libros
+                    "libros"=>$libros
                      ];
 //        $response(['data' => 'Error al realizar la búsqueda','respuesta'=>'respuesta a get','libros'=>$libros]);
         return response()->json($response);
 
     }
-    
-//    Esto de puede borrar
-    public function busquedavista(){
-        
-        return view('libro.busqueda');
-    }
-//    Esto de puede borrar
-    public function busquedaBBDD(Request $request){
-        
-//        
-        
-        $campo_busqueda= $request->input('busqueda');
-        $libros = DB::table('libro')->where('titulo','like','%'.$campo_busqueda.'%')->orWhere('autor','like','%'.$campo_busqueda.'%')->orWhere('ISBN','like','%'.$campo_busqueda.'%')->get();
-            
-        $arrayLibros=[];
-            
-        foreach($libros as $l){
-            $libroObject = new Libro;
-            $libroObject->id= $l->id;
-            $libroObject->titulo = $l->titulo;
-            $libroObject->descripcion = $l->descripcion;
-            $libroObject->isbn = $l->ISBN;
-            $libroObject->autor = $l->autor;
-            $libroObject->numero_paginas = $l->numero_paginas;
-            $libroObject->fecha_lanzamiento = $l->fecha_lanzamiento;
-            $libroObject->precio = $l->precio;
-
-            $arrayLibros[$l->id]=$libroObject;
-        }
-            
-            
-        return view('libro.busqueda',['libros'=>$arrayLibros]);
-        
-    }
+  
     
 //   Funciones del usuario con rol ADMIN
     

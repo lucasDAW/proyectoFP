@@ -8,7 +8,6 @@
             @csrf
             <input type="text" placeholder="🔍 Busqueda de usuario por email o nombre..." id="busqueda_admin" name="busqueda_admin">
             
-            <input type="submit" value='Buscar'/>
         </form>
     </div>
                 
@@ -16,10 +15,10 @@
       <table class="tabla_usuarios">
           <thead>
               <tr>
-                  <th>id</th>
-                  <th>nombre</th>
-                  <th>email</th>
-                  <th>acciones</th>
+                  <th>Id</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th></th>
                   
               </tr>
           </thead>

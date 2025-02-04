@@ -1,0 +1,407 @@
+
+/*Estilos para tablas table*/
+
+/*estilos para tablas*/
+table{
+    margin: 40px auto;
+    max-width: 700px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Para manejar tablas en pantallas pequeñas */
+    
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: left;
+}
+table thead tr{
+    background: #222;
+    color:#eee;
+}
+table thead td{
+    
+    background-color: #007bff;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+}
+table th,table td{
+     padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+table tbody tr:nth-child(even) {
+    background-color: #f3f3f3; /* Color alterno para las filas */
+
+}
+table  tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 2px solid #007bff;
+}
+
+table tbody td {
+    transition: all 0.3s ease;
+}
+table .accionesadmin{
+    display: flex;
+    flex-direction: column;
+}
+table .accionesadmin a{
+    max-width: 100px;
+    width:100px;
+    text-align: center;
+    color:white;
+    text-decoration: none;
+    padding:5px 10px;
+    background: #06f;
+    box-shadow: 2px 2px #3385ff;
+    margin:3px auto;
+    transition: 0.2s all;
+}
+table .accionesadmin a:hover{
+    box-shadow: none;
+    background: #3385ff;
+    cursor: pointer;
+    outline:1px solid #222;
+    transform: translate(1px,-2px);
+}
+
+table .accionesadmin a:nth-child(2){
+    box-shadow: 2px 2px #48cb7f;
+    background: #27ae60;
+}
+table .accionesadmin a:nth-child(3){
+    box-shadow: 2px 2px #f58a4e;
+    background: #ff7426 ;
+}
+table .accionesadmin a:nth-child(4){
+    box-shadow: 2px 2px #c71820;
+    background: #e1585e ;
+}
+table .accionesadmin a:nth-child(2):hover{
+    box-shadow: none;
+    background: #48cb7f;
+    cursor: pointer;
+}
+table .accionesadmin a:nth-child(3):hover{
+    box-shadow: none;
+    background: #f58a4e;
+    cursor: pointer;
+}
+table .accionesadmin a:nth-child(4):hover{
+    box-shadow: none;
+    background: #c71820 ;
+    cursor: pointer;
+}
+
+
+
+/*Estilos para ver los pedidos por parte del administrador*/  
+
+
+table tbody .fila_detalles {
+    background: #222;
+}
+table tbody .fila_detalles td {
+    background: #222; 
+    display:none;
+    transition: 5s display ease;
+
+}
+table .fila_detalles .detalles_compra_libros ul{
+    list-style: none;
+    
+}
+table .fila_detalles .detalles_compra_libros ul li a{
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    margin-left: 50px;
+    color:#eee;
+    margin-top: 5px;
+    border:1px solid white;
+    padding:5px 10px;
+    transition: all 0.2s ease;
+    /*background: #222;*/
+}
+table .fila_detalles .detalles_compra_libros ul li a:hover{
+    cursor: pointer;
+    color:#1e1e20;
+    background: #e7d2d2;
+    font-style: italic;
+}
+
+table tbody tr td .accionesadmin .verdetallespedidos{
+    background: #a35289;
+    color: white;
+    padding: 5px 10px;
+    width: fit-content;
+    text-align: center;
+    box-shadow: 2px 2px #bb88aa;
+    transition: all 0.2s ease;
+}
+table tbody tr td .accionesadmin .verdetallespedidos:hover{
+    background: #bb88aa;
+    color: white;
+    box-shadow: none;
+    outline:1px solid black;    
+    
+}
+
+.vermasdetalles{
+    display: table-cell !important;
+    /*transition: 2s display ease;*/
+    animation-name: motrarfila;
+    animation-duration: 2s;
+    animation-timing-function: ease;
+}
+
+@keyframes motrarfila{
+    from{
+opacity:10%;
+transform:scale(10%);
+display:none;
+}
+    to{
+opacity:100%;
+transform:scale(100%);
+display:table-cell !important;
+}
+}
+table tbody .detalles_compra_libros h6{
+    color:white;
+}
+/*Estilos para ver los pedidos por parte del administrador  FIN*/
+/*Tabla cesta de la compra  view usuario.carro--/carrito*/
+.cesta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cesta h2{
+    background: #222;
+    color:#fff;
+    width: 100%;
+    text-align: center;
+    padding:20px 0; 
+}
+
+.cesta h5{
+    background: #222;
+    color:#fff;
+    width: 100%;
+    text-align: center;
+    padding:20px 0; 
+}
+.cesta_compra{
+    width: 75%;
+    margin: 0 auto;
+    margin:25px auto;
+}
+
+.cesta_compra .accion a:hover{
+    background: red;
+    color:black;
+    cursor: pointer;    
+}
+.cesta_compra .accion a{
+    text-decoration: none;
+    color:white;
+    font-weight: bolder;    
+    text-shadow: 1px 1px black;
+   
+    background: #f54848;
+    padding: 5px;
+       
+
+}
+.cesta_compra .cantidad{
+    margin:0 auto;
+    text-align: center;
+}
+.cesta_compra .signo{
+    width: 5px;
+    height: 5px;
+    background: aquamarine;
+/*    border:1px solid black;*/
+    margin:0 10px;
+    padding:3px 5px;
+    font-weight: bolder;
+    font-family: sans-serif;
+    
+}
+.cesta_compra .cantidad  a{
+    text-decoration: none;
+    color:black;
+}
+.cesta_compra .accion{
+    padding: 10px;
+}
+.cesta_compra  .signo:hover{
+    color:white;
+    cursor:pointer;
+}
+.cesta_compra  .menos:hover{
+    background: red;
+    
+}
+.cesta_compra .mas:hover{
+    background: green;
+    
+}
+.cesta_compra thead tr{
+    padding:10px;
+}
+.cesta_compra thead tr th:first-child{
+    text-align: left;
+    margin-left: 15px;
+}
+.cesta_compra tbody tr td:first-child{
+    width:25%;
+}
+.cesta_compra tbody tr td:nth-child(2+n){
+    background: red;
+}
+.cesta_compra thead tr{
+    outline: 1px solid black;
+}
+.cesta_compra tbody tr td{
+       padding: 2%;
+}
+.cesta_compra tbody tr td:nth-child(n+2){
+    
+    text-align: center;
+}
+.cesta_compra tbody tr:nth-child(even){
+    background: #dbd8d8;
+    /*outline:1px solid black;*/ 
+      /*line-height: 1px;*/
+      border-bottom: 1px solid black;
+
+}
+.cesta_compra tbody tr:last-child{
+    background: none;
+    font-weight: bolder;
+}
+.cantidadtotal{
+    padding:15px;
+    background: greenyellow;
+    
+}
+
+
+
+/*tabla lista deseos ruta -> /usuario/listadeseos -- view(usuario.listadeseos)*/
+.lista_deseos{
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    font-family: OpensSans-Regular;
+    font-size:18px;
+    margin:10px 50px;
+}
+.lista_deseos thead tr{
+    
+    height: 60px;
+    background: #36304a;
+    color:white;
+    font-style: italic;
+} 
+.lista_deseos tbody tr{
+    font-family: OpenSans-Regular;
+    font-size: 15px;
+    color: #808080;
+    line-height: 1.2;
+    font-weight: unset;
+    text-align: center;
+    border-collapse: collapse;
+
+}
+.lista_deseos tbody tr{
+    
+    height: 80px;
+    transition: 0.3s ease;
+}
+.lista_deseos tbody tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+.lista_deseos tbody tr:nth-child(odd){
+    background-color: #c5efef;
+}
+
+.lista_deseos tbody tr:hover{
+    color: #3c0909;
+    background: #ebeb67;
+    /*transform: scale(1.15);*/
+    border: 1px solid black;
+    
+}
+.lista_deseos tbody tr:hover td:last-child{
+    text-align: left;
+
+}
+.listadeseoscontenedor,encabezado{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    margin: 5px auto;
+    padding: 10px 100px;
+    background: #d5d4d4; 
+}
+/*icono lista de deseos FIN*/
+.listadeseos:hover{
+    background: #c54b60;
+    border-radius: 20%;
+    cursor:pointer;
+    transform: scale(1.5);
+    animation: agitar  ease 0.5s;
+}
+.listadeseos:hover{
+    background: #c54b60;
+    border-radius: 20%;
+    cursor:pointer;
+    transform: scale(1.5);
+    animation: agitar  ease 0.5s;
+}
+.lista_deseos_tabla tbody tr td a:first-child{
+    text-decoration: none;
+    box-shadow: 2px 2px #b5d33d;
+    background: #7f9b10;
+    padding: 5px 10px;
+    color: #ffffff;
+    font-weight: bolder;
+        margin-right: 10px;
+    transition: 0.4s all ease;
+}
+.lista_deseos_tabla tbody tr td a:first-child:hover{
+    box-shadow: none;
+    background: #b5d33d;
+    cursor: pointer;
+    outline:1px solid black;
+}
+.lista_deseos_tabla tbody tr td a:last-child{
+    text-decoration: none;
+    box-shadow: 2px 2px #8b1b1b;
+    background: #b33e3e;
+    padding: 5px 10px;
+    color: #ffffff;
+    transition: 0.9s all ease;
+    font-weight: bolder;
+}
+.lista_deseos_tabla tbody tr td a:last-child:hover{
+    box-shadow: none;
+    background: #8b1b1b;
+    cursor: pointer;
+    outline:1px solid black;
+}

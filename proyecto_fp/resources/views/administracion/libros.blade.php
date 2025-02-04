@@ -3,7 +3,7 @@
                 @section('accion')
                 
     <div class="form_busqueda_libro_admin">
-        <form method="post" accion='#' class='formularioBusquedaLibros'>
+        <form method="post" accion='#' class='formularioBusquedaLibrosAdmin'>
             @csrf
             <input type="text" placeholder="🔍 Busqueda de libro por titulo o autor..." id="busqueda_admin" name="busqueda_admin">
         </form>

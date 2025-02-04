@@ -126,6 +126,8 @@
     </div>
         
      </div>
+     <div class="botones_form">
+         
         <span class='mensajePublicacion'>El libro se esta publicando ...</span>
         @if (isset($libro))
             <input type='hidden' name='id' id='id' value='{{$libro->id}}'/>
@@ -133,6 +135,7 @@
         @else
         <input type="submit" value="Publicar" class="boton"/>
             @endif
+     </div>
  </form>
                         
 

@@ -1,0 +1,214 @@
+header{
+    padding:80px auto;
+    margin-bottom: 100px;
+    position: fixed;
+    width: 100%;
+    top:0px;
+    z-index: 100;
+}
+.cabecera-banner{
+    background-image: url("../image/banner.webp"), url("../image/portadaheader.webp");
+    background-size: contain,cover;
+    background-repeat: no-repeat;
+    background-position: center,right;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+header img{
+    height: 100px;
+    transition: opacity 0.3s ease;
+}
+header img:hover{
+    height: 100px;
+    cursor: pointer;
+}
+
+#perfil{
+    transition: 0.5s;
+}
+#perfil:hover{
+
+    background: #F44336;
+    color: #FFC107;
+    transform: perspective(150px) skewX(5deg) rotateX(360deg);
+}
+
+
+nav{
+    background: #333;
+}
+
+/*enlaces de nav*/
+.enlaces{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.enlaces ul{
+    list-style: none;
+    margin:0;
+    padding: 0;
+    display:flex;
+}
+.enlaces ul li a, .enlaces ul ul a{
+ display:block;
+ color:#fff;
+ text-decoration:none;
+ font-weight:400;
+ font-size:15px;
+ padding:10px;
+ font-family:"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+ text-transform:uppercase;
+ letter-spacing:1px;
+ background: #5b5866;
+ margin:0 5px;
+ box-shadow: 3px 3px #6fa6d5;
+ transition: 0.2s all ease-in;
+    
+}
+.enlaces ul .cesta{
+    order:4;
+}
+.enlaces ul li{
+    position:relative;
+    float:left;
+    margin:0;
+    padding:10px 0;
+}
+.enlaces >ul .volver{
+    position: absolute;
+    left: 0px;
+}
+.enlaces ul li:first-child a span{
+    visibility: hidden;
+    
+}
+.enlaces ul li:first-child a{
+    background: #d9b639;
+    box-shadow: 3px 3px #b1780c;
+    /*color: black;*/
+    
+}
+.enlaces ul li:first-child a:hover{
+    background: #b1780c;
+    box-shadow: none;
+    
+}
+.enlaces ul li:first-child a:hover span{
+    visibility: visible;
+}
+.enlaces ul li:hover a{
+     /*background:red;*/
+     background: #6fa6d5;
+      box-shadow: none;
+      outline:1px solid black;
+
+}
+.enlaces ul ul{
+    display:none;
+ position:absolute;
+ top:100%;
+ right: 0;
+ background:#eee;
+ padding:0;
+}
+.enlaces ul ul li{
+    float:none;
+    width: 150px;
+}
+.enlaces ul ul a{
+    line-height: 120%;
+    padding:10px 15px;
+}
+.enlaces ul li:hover > ul{
+    display: block;
+    background: none;
+}
+.enlaces ul li:hover > ul li a{
+    background: #5b5866;
+    font-size: 10px;
+    margin:0 5px;
+    box-shadow: 3px 3px #2e72ad;
+    transition: 0.2s all ease-in;
+}
+
+.enlaces ul li:hover > ul li a:hover{
+     background: #2e72ad;
+      box-shadow: none;
+      outline:1px solid black;
+ }
+ .enlaces .submenu .admin{
+     background: yellow;
+     color:black;
+     transition: all 0.2s ease-in-out;
+ }
+ .enlaces .submenu .admin:hover{
+     background: #5bede7;
+     
+ }
+     
+ .enlaces .nombre a{
+    /*width: 200px;  Ancho fijo*/ 
+    overflow: hidden;  
+ }
+ .enlaces .lista_deseos_enlace span, .enlaces .submenu li a span{
+     visibility: hidden;
+     float:right;
+     
+ }
+ .enlaces .lista_deseos_enlace a:hover span, .enlaces .submenu li a:hover span{
+     visibility: visible;
+     
+ }
+.enlaces .submenu .lista_deseos_enlace a:hover{
+    /*border:1px solid black;*/
+    background: #d72343;
+    /*color:black;*/
+ }
+
+ .enlaces .submenu .publicar a:hover{
+     background: #6e1b5c;
+ }
+ 
+ 
+.enlaces ul li:hover > ul .btn_cerrar_sesion a{    
+    background: #d79635;
+    box-shadow: 3px 3px #9f0808;
+    transition: 0.3s all ease-in-out;
+}
+.enlaces ul li:hover > ul .btn_cerrar_sesion:hover a{    
+    background: #9f0808;
+    box-shadow: 0px 0px #9f0808;
+}
+
+.accionesadmin  {
+    justify-content: flex-start;
+}
+.enlaces .administrador li a:nth-child(1){
+    background: #edeaea;
+    color:#222121;
+    box-shadow: 3px 3px #222121;
+    
+}
+.enlaces .administrador li a:nth-child(1):hover{
+
+    background: #222121;
+    color:#edeaea;
+    box-shadow: none;
+}
+.btn_administrador_pulsado{
+    background: #222121 !important;
+    color:#edeaea !important;
+    box-shadow: none !important;
+}
+
+.autores_aviso:hover .aviso{
+    background: yellow;
+    color:black;
+    transition: 0.5s all ease-in;
+}
+    
+
+

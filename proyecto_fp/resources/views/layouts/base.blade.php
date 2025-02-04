@@ -7,8 +7,9 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href='{{ asset("image/icono.ico") }}' type="image/x-icon">
-    <link rel='stylesheet' href='{{ asset("css/estilos.css") }}'>
-    <link rel='stylesheet' href='../../css/estilos.css'>
+    <!--<link rel='stylesheet' href='{{ asset("css/estilos.css") }}'>-->
+    <link rel='stylesheet' href='{{ asset("css/index.css") }}'>
+    <!--<link rel='stylesheet' href='../../css/estilos.css'>-->
 
     <title>SENECALIB - @yield('titulo')</title>
     <!--font-->
@@ -22,7 +23,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_shopping_cart" />
     </head>
-    <body class="font-sans antialiased">
+    <body >
         <header>
             <div class="cabecera-banner">
                 <a href='{{route('todoslibros')}}'><img id="header-image" src="{{asset("image/cabecera.webp")}}" alt="Cabecera" /></a>
@@ -50,18 +51,13 @@
                                     <li class="publicar"><a href="{{route('publicarvista')}}">Publicar <span>&#x270d;</span></a></li>
                                     <li class="publicar"><a href="{{route('mipublicaciones')}}">Mis publicaciones <span>&#x270d;</span></a></li>
                                     @if (Auth::user()->rol==2)
-                                    <li><a href="{{route('inicioadmin')}}" class='admin'>Panel de administrador<span>&#x1f5b3;</span></a></li>
+                                    <li><a href="{{route('vertodosUsuarios')}}" class='admin'>Panel de administrador<span>&#x1f5b3;</span></a></li>
                                     @endif
                                     <li class="btn_cerrar_sesion"><a href="{{ route('logout')}}">Cerrar Sesión<span>&#10060;</span></a></li>
                             </ul>
                         </li>
                                 @endauth
-
-                    <!--<li> <a href="{{ route('login')}}">Iniciar Sesión</a></li>-->
-                            <!--Esto se puede eliminar-->
-                            @if (Route::has('registro'))
-                                <li><a href="{{ route('registro')}}">Registrarse</a></li>
-                            @endif    
+  
                 </ul>
             </nav>
             
@@ -93,7 +89,7 @@
         </main>
         <footer>
 <div class="container">
-    <p>&copy; 2025 Mi Sitio Web. Todos los derechos reservados.</p>
+    <p>&copy; 2025 Lucas DAW. Todos los derechos reservados.</p>
     <nav>
       <ul>
         <li><a href="{{route('contactoadmin')}}">Contacto</a></li>
@@ -104,6 +100,7 @@
     
   </div>
         </footer>   
-        <script src="{{ asset("js/main.js") }}"></script>
+        <!--<script src="{{ asset("js/main.js") }}"></script>-->
+        <script type="module" src="{{ asset("js/index.js") }}"></script>
     </body>
 </html>

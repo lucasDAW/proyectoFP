@@ -1,0 +1,123 @@
+
+
+.enlaces  .administrador li:hover > ul {
+    display: inline-flex !important;
+    position: absolute;
+    width: fit-content;
+    left: -100%;    
+    
+}
+/*estadisticas_admnistracion /administracion/estadisticas/{}*/
+.estadisticas_admnistracion{
+    display: flex;
+    flex-direction: column;
+    
+}
+.estadisticas_admnistracion_botones{
+    padding: 0; /* Elimina el relleno predeterminado */
+  margin: 0; /* Elimina el margen predeterminado */
+  display: flex; /* Permite que los botones se dispongan horizontalmente */
+  gap: 10px; /* Espacio entre botones */
+}
+.estadisticas_admnistracion_botones a{
+  display: inline-block; /* Convierte el enlace en un elemento de bloque */
+  padding: 10px 15px; /* Ajusta el relleno según tus preferencias */
+  text-decoration: none; /* Elimina el subrayado del enlace */
+  color: #fff; /* Color de texto oscuro */
+  background-color: #f26419;
+; /* Color de fondo gris claro */
+  border: none; /* Elimina el borde */
+  border-radius: 5px; /* Bordes redondeados */
+  font-family: sans-serif; /* Fuente de letra simple */
+  font-size: 14px; /* Tamaño de letra */
+  transition: background-color 0.3s ease;
+}
+.estadisticas_admnistracion_botones a:hover{
+    background-color: #e65100; 
+}
+
+.administracion_contenido{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+main h2{
+    text-align: center;
+}
+
+
+.tabla_estadisticas tbody tr td{
+    text-align: center;
+    
+}
+
+form .botones_formulario{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin:10px 0;
+    gap:40px;
+    
+}
+form .botones_formulario a{
+    text-decoration: none;
+    padding: 5px 15px;
+    width: 100px;
+    background: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    transition: 0.1s all;   
+    
+    
+    
+}
+form .botones_formulario a:first-child{
+   background:#e52f36;
+}
+form .botones_formulario a:first-child span:nth-child(2){
+    display: none;
+}
+form .botones_formulario a:first-child:hover{
+   background:#cd2127;
+   transform: translate(0px,-5px);
+   display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    
+}
+form .botones_formulario a:first-child:hover span:nth-child(2){
+    display: block;
+}
+form .botones_formulario a:first-child:hover span:nth-child(1){
+    display: none;
+}
+form .botones_formulario a:first-child:active{
+    background: red;
+}
+form .botones_formulario a:last-child{
+    background:#106834;
+}
+form .botones_formulario a:last-child:hover{
+    
+   transform: translate(0px,-5px);
+    background:#05381a;
+}
+
+/*formulario busqueda pedidos*/
+.form_busqueda_pedidos_admin form{
+    background: none;
+    box-shadow: none;
+}
+form .btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

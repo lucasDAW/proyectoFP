@@ -1,0 +1,380 @@
+.contenedor-libro-detalle{
+    
+    display: grid;
+    grid-template-areas: 
+        "portada detalles"
+        "comentarios comentarios";
+    grid-template-columns: 1fr 2fr;
+    gap:20px;
+    max-width: 800px;
+    margin:40px auto;
+    padding: 20px;
+    background: rgba(205, 205, 200, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 70%;
+    margin:0 auto;
+   
+}
+.contenedor-libro-detalle .portada-libro{
+    grid-area: portada;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+.contenedor-libro-detalle .portada-libro .imagen{
+    width:100%;
+    max-width: 300px;
+    height: fit-content;
+    transition: 0.2s all ease-in-out;
+    z-index: 99;
+    text-align: center;
+}
+
+.contenedor-libro-detalle .portada-libro .imagen:hover{
+    transform: scale(1.5) translate(0%,10%);
+    
+}
+.contenedor-libro-detalle .libro-detalles{
+    grid-area:detalles;
+}
+
+.contenedor-libro-detalle .libro-detalles .libro-titulo{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin:0 0 10px;
+    color:#222;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.contenedor-libro-detalle .libro-detalles .titulo{
+    position: relative;
+}
+.contenedor-libro-detalle .libro-detalles .titulo .popup{
+    position: absolute;
+    top:10%;
+    left: -5%;
+}
+.contenedor-libro-detalle .libro-detalles .libro-titulo span:nth-child(2){
+    color:#f7f769;
+    text-shadow:1px 1px 1px black;
+}
+.contenedor-libro-detalle .libro-detalles .libro-autor{
+    font-size: 0.8em;
+    font-weight: bold;
+    margin:20px 0 20px;
+    color:#0b0060;
+    width: fit-content;
+}
+.contenedor-libro-detalle .libro-detalles .libro-autor a{
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #ffffff;
+    background: #222;
+    padding: 5px 20px;
+    transition:0.2s all ease-in-out;
+}
+
+.contenedor-libro-detalle .libro-detalles .libro-autor a:hover{
+    background: #eee;
+    color:#222;
+    cursor: pointer;
+    outline:1px solid black;
+}
+
+.contenedor-libro-detalle .libro-detalles .libro-categoria{
+    margin:20px auto;
+}
+.contenedor-libro-detalle .libro-detalles .libro-categoria a{
+  color: #222;
+  border: 2px solid #222;
+  background: #eee;
+  border-radius: 0px;
+  padding: 5px 15px;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 #484848;
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+  text-decoration: none;
+}
+.contenedor-libro-detalle .libro-detalles .libro-categoria a:hover{
+    box-shadow: inset 0 100px 0 0 #484848;
+    color:#eee;
+}
+
+
+.contenedor-libro-detalle .libro-detalles .libro-descripcion{
+    font-size: 1.12em;
+    line-height: 1.5;
+    color:#555;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+.contenedor-libro-detalle .libro-detalles  .btn_leermas{
+    color: #222;
+    margin-top: 3px;
+    border-top: 1px dashed lightgrey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contenedor-libro-detalle .libro-detalles  .btn_leermas span:hover{
+    cursor: pointer;
+}
+.contenedor-libro-detalle .libro-detalles  .btn_leermas span:last-child{
+    display:none;
+}
+.mostrar_todo{
+    height: 500px;
+}
+
+.contenedor-libro-detalle .libro-detalles .portada-libro .libro-calificacion{
+    margin:15px 0;
+    font-size: 1em;
+    color:#333;
+    display: flex;
+    flex-direction: row;
+}
+.contenedor-libro-detalle .libro-detalles .libro-acciones{
+    
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+.contenedor-libro-detalle .libro-comentarios{
+    grid-area: comentarios;
+    margin-top:5%;
+    margin-bottom: 10%;
+
+}
+.contenedor-libro-detalle .libro-comentarios h2{
+    font-size: 20px;
+    margin-bottom: 20px;
+    color:#333;
+    text-align: center;
+}
+.contenedor-libro-detalle .libro-comentarios .comentario{
+    padding:10px;
+    /*border-radius: 4px;*/
+    margin-bottom: 10px;
+    background: rgba(231,231,231,0.9);
+    box-shadow: 3px 3px #878787;
+}
+.contenedor-libro-detalle .libro-comentarios .comentarios{
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    padding: 5px;
+    border-radius: 5px;
+    background: rgba(215,230,237,0.9);
+}
+
+.contenedor-libro-detalle .libro-comentarios .comentario p{
+    margin: 0;
+    color: #555;
+    line-height: 1.5;
+    display: flex;
+    justify-content: flex-start;
+    
+}
+.contenedor-libro-detalle .libro-comentarios .comentario:hover{
+    background: rgba(235 204 145 / 90%);
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span{
+        margin-left: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        gap:10px;
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a{
+    text-decoration: none;
+    color:#fff;
+    padding: 5px 10px;
+    background: #eb4242;
+    box-shadow: 2px 2px #700f0f;
+    transition: 0.2s all;
+    
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a:hover{
+    
+    background: #700f0f;
+    box-shadow: none;
+    cursor: pointer;
+    
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a:last-child{
+    text-decoration: none;
+    color:#fff;
+    padding: 5px 10px;
+    background: #e3941a;
+    box-shadow: 2px 2px #836618;
+    transition: 0.2s all ease;
+    
+}
+.contenedor-libro-detalle .libro-comentarios .comentario span a:last-child:hover{
+    
+    background: #836618;
+    box-shadow: none;
+    cursor: pointer;
+    
+}
+.contenedor-libro-detalle .libro-comentarios form{
+    margin: 5% auto;
+}
+.contenedor-libro-detalle .libro-comentarios form textarea{
+    resize: none;
+    padding:10px;
+    font-size: 1.125;
+    border:1px solid #ccc;
+    border-radius: 4px;
+    height: 80px;
+    width: 100%;
+    font-family: 'Arial',sans-serif;
+    color: #333;
+    margin:15px 0;
+}
+
+.contenedor-libro-detalle .portada-libro img{
+    max-width: 150px;
+    height: fit-content;
+}
+
+
+/*botones eliminar y editar libro*/
+.accionesdetallelibro{
+    margin:25px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+}
+.accionesdetallelibro a{
+    margin:0 15px;
+}
+/* CSS */
+.btn_edit {
+    text-decoration: none;
+    color:black;
+  font-size: 16px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn_edit:hover,
+.btn_edit:active {
+  outline: 0;
+}
+
+.btn_edit:hover{
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn_edit:before{
+  background-color: #D5EDF6;
+  content: "";
+  height: calc(100% + 3px);
+  position: absolute;
+  right: -7px;
+  top: -9px;
+  transition: background-color 300ms ease-in;
+  width: 100%;
+  z-index: -1;
+}
+
+.btn_edit:hover:before {
+  background-color: #6DCFF6;
+  top: 0px;
+  left: 0px;
+}
+.btn_eliminar
+{
+    text-decoration: none;
+    color:black;
+    font-size: 16px;
+  font-weight: bolder;
+    letter-spacing: 1px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.btn_eliminar:hover{
+     background-color: #a90000;
+     color:white;   
+  cursor: pointer;
+}
+.btn_eliminar:hover:before {
+  background-color: #6DCFF6;
+  top: 0px;
+  left: 0px;
+}
+.btn_eliminar:hover:before {
+  background-color: #ebabab;
+  top: 0px;
+  left: 0px;
+}
+.btn_eliminar:before{
+    background-color: #ebabab;
+  content: "";
+  height: calc(100% + 3px);
+  position: absolute;
+  right: -7px;
+  top: -9px;
+  transition: background-color 300ms ease-in;
+  width: 100%;
+  z-index: -1;
+}
+
+
+/*icono lista de deseos*/
+.marcado{
+    background: #c54b60;
+    border-radius: 6px;
+}
+
+
+/* The actual popup */
+.popup .popuptext {
+    background: #555;
+    padding: 10px 5px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    bottom: 0px;
+    left: 10px;
+    visibility: hidden;
+}
+
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+}
+

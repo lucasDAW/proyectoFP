@@ -3,7 +3,7 @@
 @section('contenido')
             
    
-                <h3>{{$categoria}}</h3>
+                <h3 class="categoria_encabezado">{{$categoria}}</h3>
             <div class='libros'>
                 
             @if (isset($libros))

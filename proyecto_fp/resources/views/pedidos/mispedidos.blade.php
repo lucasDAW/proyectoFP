@@ -1,11 +1,11 @@
 @extends('layouts.base')
-@section('titulo','Pedidos')
+@section('titulo','Pedidos Detalles')
 @section('contenido')
-<div class="container mt-5">
-  <h2>Mis Pedidos</h2>
-</div>
+
 
 <div class='pedidos'>
+  <h2>Mis Pedidos</h2>
+
     @if ($pedidos)
 
         <table class='tabla_pedidos_usuario'>

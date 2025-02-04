@@ -58,8 +58,11 @@
 
        
 
-        <div>
+        <div class="btn">
+            <div>
+                
             <input type="submit" value='Editar Perfil'/>
+            </div>
             @if (isset($usuario))
                 <input type="hidden" name='id_usuario' id='id_usuario' value='{{$usuario->id}}'/>
                 <div class='botones_formulario'>

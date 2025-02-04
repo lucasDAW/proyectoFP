@@ -24,7 +24,8 @@
                             <td>{{$libro->autor}}</td>
                             <td>{{$libro->precio}} €</td>
                             <td>
-                                <a href='{{route('detallelibro',['libro'=>$libro->id])}}'>Ver</a>                                
+                                <a href='{{route('detallelibro',['libro'=>$libro->id])}}'>Ver</a>   
+                                <a href="{{route('borrarlibrolistadeseos',['id'=>$libro->id])}}">X</a>
                             </td>
 
                         </tr>

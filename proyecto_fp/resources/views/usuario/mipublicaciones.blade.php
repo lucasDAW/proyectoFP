@@ -3,7 +3,6 @@
 @section('contenido')
 <div class="listadeseoscontenedor">
   <h2>Mi Lista de libros publicados</h2>
-</div>
 @if ($libros)
         <table  class="lista_deseos_tabla">
             <thead>
@@ -41,4 +40,5 @@
    @endif
 
 
+</div>
 @endsection

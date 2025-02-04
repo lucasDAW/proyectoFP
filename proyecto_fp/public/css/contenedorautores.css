@@ -1,0 +1,67 @@
+
+.autores{
+     display: grid;
+    column-gap: 10px;
+    row-gap: 50px;
+    grid-template-columns: 1fr  1fr 1fr;
+    grid-template-rows: auto;
+    justify-items: center;
+    flex-wrap: wrap;
+}
+.autor{
+    background-color: #e6f1f3;
+    float: left;
+    /*width: 205px;*/
+    /*height: 290px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+    align-items: anchor-center;
+    text-decoration: none;
+    
+    
+    
+}
+.autor a{
+    width: 250px;
+}
+.autor:hover{
+    background-color: #9dc4cb;
+    border:1px solid blue;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.autor>*{
+    margin:10px 0;
+    text-decoration: none;
+    color: black;
+}
+.autor img{
+    width: 100px;
+    height: fit-content;
+}
+
+.autor{
+    view-timeline-name:--animacionautores;
+    view-timeline-axis: block;
+    
+    animation-timeline:--animacionautores;
+    animation-name: mostrarautores;
+    animation-range:entry 50% cover 40%;
+    animation-fill-mode: both;
+}
+@keyframes mostrarautores{
+    from{
+opacity:0;
+       transform: translateX(1500px);
+    }
+    to{
+opacity:1;
+       transform: translateX(0px);
+    }
+}

@@ -1,0 +1,355 @@
+/*archivo con varios estilos definidos de forma particular*/
+
+/*boton eliminar usuarario -> se encuentra en la vista usuario.eliminar -- perfil/eliminar*/
+.btn_eliminarusuario{
+    background: #eb4f4f;
+    text-align: center; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn_eliminarusuario:hover{
+    background: #951c1c;
+    transform: translateY(-2px);
+}
+
+/*boton de usuario.carro -- /carrito*/
+
+/*botones pedidos*/
+.btns_pedido{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin:0px 15px;
+    width: fit-content;
+    height: fit-content;
+    background: none;
+}
+.btns_pedido a{
+    text-decoration: none;
+    font-family: 'Arial';
+    font-weight: bolder;
+    margin:0 20px;
+    padding: 10px 20px;
+    border-radius: 10px; 
+    color:#eee;
+   
+
+    
+}
+.btns_pedido .btn_vaciar{
+    background: #ad3131;
+    transition: 0.2s all ease;
+    border: 1px solid #c94848;
+    box-shadow: 3px 0px #dd5d5d, 0px 3px #dd5d5d, -3px 0px #dd5d5d, 0px -3px #dd5d5d;
+}
+.btns_pedido .btn_vaciar:hover{
+    cursor: pointer;
+    background: #b71414;
+    letter-spacing: 2px;
+    
+    
+}
+
+.btns_pedido .btn_realizar{
+        background: #67c566;
+    transition: 0.2s all ease;
+    border: 1px solid #3e9720;
+    box-shadow: 3px 0px #2b8d30, 0px 3px #2b8d30, -3px 0px #2b8d30, 0px -3px #2b8d30;
+}
+.btns_pedido .btn_realizar:hover{
+    cursor: pointer;
+    background: #138527;
+    letter-spacing: 2px;
+    outline: 4px solid #1e661e;
+    
+}
+/*/estilo de aviso para autor en el panel de administracion administracion.index*/
+.aviso{
+    padding: 5px;
+    position: absolute;
+    background: #bf0000;
+    color: #eee;
+    width: 10px;
+    height: fit-content;
+    border-radius: 100%;
+    /* font-size: 1.25em; */
+    /* width: 10px; */
+    top: 0%;
+    right: 0%;
+    vertical-align: center;
+    text-align: center;
+    text-transform: uppercase;
+}
+/*estilos del mensaje que se muestra al publicar libro en la ruta /publicar -view(libro.publicar)*/
+
+.publicarLibro .mensajePublicacion{
+    display: none;
+    text-align: center;
+    border: 1px solid black;
+    padding: 50px;
+    background: #f5f5f5;
+    margin: 10px 0px;
+    box-shadow: 1px 1px 10px #555, -1px -1px 10px #555;
+    transition: 0.5s all ease-in;
+}
+
+/* Boton añadir al carrito*/
+.btn_carro{
+   
+    background: #ffad13;
+    color:#2c2c44;
+    font-family: 'Arial';
+    text-decoration: none;
+    padding:5px 0;
+    text-align: center;
+    box-shadow: 3px 3px yellow;
+    transition: 0.5s all;
+    font-weight: bolder;
+   
+}
+
+
+ .btn_carro:hover{
+    background: yellow;
+    cursor:pointer;
+    outline:1px solid black;
+    box-shadow:none;
+}
+
+/* Contenedor principal */
+.add-to-cart {
+    width: 200px; /* Ancho del div */
+    height: 50px; /* Alto del div */
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    display: flex; /* Usar flexbox para centrar contenido */
+    align-items: center; /* Centrado vertical */
+    justify-content: center; /* Centrado horizontal */
+    border-radius: 5px; /* Bordes redondeados */
+    position: relative; /* Necesario para posicionar elementos dentro */
+    overflow: hidden; /* Evitar desbordamiento */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el div */
+    transition: background-color 0.3s ease; /* Transición de color */
+    z-index: 1;
+}
+
+/* Estilo del texto inicial */
+.cart-text {
+    font-size: 16px;
+    font-weight: bold;
+    transition: opacity 0.3s ease; /* Transición de opacidad */
+}
+
+/* Estilo del icono del carrito */
+.cart-icon {
+    font-size: 24px; /* Tamaño del icono */
+    opacity: 0; /* Ocultar inicialmente */
+    transform: scale(0.5); /* Reducir tamaño inicial */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición del tamaño y opacidad */
+    position: absolute; /* Posicionarlo sobre el texto */
+}
+
+/* Efecto al pasar el ratón */
+.add-to-cart:hover {
+    background-color: #45a049; /* Cambiar el color de fondo */
+}
+
+.add-to-cart:hover .cart-text {
+    opacity: 0; /* Ocultar el texto */
+}
+
+.add-to-cart:hover .cart-icon {
+    opacity: 1; /* Mostrar el icono */
+    transform: scale(1); /* Agrandar el icono */
+}
+/*--------------------------------------------------------------------*/
+/*boton que muestra las publicaciones del usuario vista view(libro.publicar) -- /publicar*/
+.btn_mostrar_publicaciones {
+    margin: 0 auto;
+    text-decoration: none;
+    color:black;
+    font-size: 16px;
+    font-weight: bolder;
+    letter-spacing: 10px;
+    padding: 13px 20px 13px;
+    outline: 0;
+    border: 1px solid black;
+    cursor: pointer;
+    position: relative;
+    left: 0%;
+    background-color: rgba(0, 0, 0, 0);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+
+    z-index: 5;
+}
+
+.btn_mostrar_publicaciones:after {
+    content: "";
+    background-color: #4ddbd9;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+}
+
+.btn_mostrar_publicaciones:hover:after {
+    top: 0px;
+    left: 0px;
+}
+/*--------------------------------------------------------------------*/
+/*cabecera de administracion*/
+/*estilos de ADMINISTRADOR*/
+.cabecera_administracion{
+    background: #222;
+    padding-left: 15%;
+    padding: 25px;
+    text-shadow: 3px 1px 2px #000000;
+    color: white;
+}
+
+/*boton registrar en la vista /login view(auth.login)*/
+.registrarse{
+    align-self: flex-start;
+    width:fit-content;
+    background: #b9911b;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.registrarse:hover{
+    background: #8d6c0c;
+    transform: translateY(-2px);
+}
+
+/*boton crear autor en la ruta /administracion/autores -- view(administracion.autores)*/
+.crear_autor{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.crear_autor div{
+    background: #222;
+    color:#eee;
+    padding:5px 10px;
+    text-align: center;
+    margin:10px auto;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    
+}
+.crear_autor div a{
+    background: white;
+    box-shadow: none;
+    color:#222;
+    margin: 5px auto;
+}
+.crear_autor a{
+    background: #4a90e2;
+    color: #eee;
+    box-shadow: 3px 3px #1e374c;
+    text-decoration: none;
+    padding: 1% 5%;
+    transition:1s all ease;
+}
+.crear_autor a:hover{
+    cursor: pointer;
+    background: #1e374c;
+    box-shadow:none;
+    color: #007b89;
+    outline: 1px solid #4a90e2;
+
+}
+
+/*Cookies*/
+.cookies {
+    position: fixed;
+    bottom:  0%;
+    left: 25%;
+    width: fit-content;
+    /*height: 10%;*/
+    width: 50%;
+    background-color: #222;
+    color: #fff;
+    padding: 50px 0px;
+    text-align: center;
+    z-index: 9999;
+    margin-bottom: 50px;
+}
+.cookies form{
+    background: none;
+    color:none;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    box-shadow: none;
+
+    /*margin:auto 10px;*/
+}
+.cookies p{
+    padding:0 100px;
+    
+}
+.cookies a{
+  color:yellow;
+
+}
+
+/*politica privacidad*/
+.privacidad,.terminos,.cookies-politicas{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    margin: 5px 100px;
+    padding: 10px 100px;
+    background: #d5d4d4; 
+}
+.privacidad h2,.terminos h2,.cookies-politicas h2{
+    margin:10px auto;
+}
+.privacidad h3,.terminos h3,.cookies-politicas h3{
+    
+    align-self: flex-start;
+}
+.privacidad p,.terminos p,.cookies-politicas p{
+    margin:10px auto;
+}
+/*/-----------------------------------------------------*/
+.categoria_encabezado{
+    text-align: center;
+    background: #222;
+    color:#eee;
+    padding: 10px 30px;
+    margin:auto 150px;
+    /*width: fit-content;*/
+}
+
+.listadeseoscontenedor h2{
+        background: #222;
+    color: #eee;
+    padding: 5px 20px;
+}

@@ -1,0 +1,220 @@
+*{
+    padding:0px;
+    margin:0px;
+}
+body{
+   font-family: "Lato", serif;
+   background-image: url("../image/fondo.png");
+   background-position: center;
+   background-size: contain;
+   background-attachment: fixed;
+    height: 100%;
+    margin: 0;
+   /*height: 100vh;*/
+}
+/*main*/
+main{
+   margin-top: 170px;
+   position: relative;
+   min-height: 100%;
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   height: 100%;
+    min-height: 100vh; /* Al menos la altura de la viewport */
+    display: flex;
+    flex-direction: column;
+
+  
+}
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+   flex: 0 1 auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+footer nav{
+    background: none;
+}
+
+footer nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+footer nav li {
+  margin: 0 10px;
+}
+footer nav ul li a
+{
+   color:#eee;
+}
+footer nav ul li a:hover{
+    color:#ffff66;
+    cursor:pointer;
+}
+
+
+
+
+/*formularios*/
+form{
+    margin:10px auto;
+    padding: 30px 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #f6ff80;
+}
+form >div{
+        margin-bottom: 20px;
+
+}
+form label{
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    color: #555555;
+    display: block;
+}
+form textarea{
+    font-family: 'Arial';
+    width: 100%;
+    
+}
+form input{
+    
+    width:100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}  
+form input[type='submit'],.inputsubmit{
+    background: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    width: fit-content;
+    transition: background 0.3s, transform 0.2s;
+}
+form input[type='submit']:hover,.inputsubmit:hover{
+    background: #357abd;
+    transform: translateY(-2px);
+}
+
+form legend{
+        margin: 0 auto;
+    font-size: 1.5em;
+    font-family: cursive;
+}
+form input[type='checkbox']{
+    width: 15px;
+}
+/*//estilo de mensajes que la web da como resultado de las acciones que se realizan*/
+.mensaje{
+    padding: 10px auto;
+    font-family:'Arial';
+    border: 3px solid #7e9f4c;
+    padding: 25px 50px;
+    margin: 20px 100px;
+    background: #d6f9a1;
+    font-size: 1.0em;
+    font-weight: bolder;
+    font-family: sans-serif;
+    box-shadow: 5px 5px #1e4e1e;
+    color: #083008;
+}
+
+.formularioBusquedaLibros,formularioBusquedaLibrosAdmin
+{
+    background: none;
+   display: flex;
+   justify-content: center;
+   padding: none;
+   box-shadow: none;
+}
+.busqueda_autor form{
+    background: none;
+    padding: none;
+    box-shadow: none;
+}
+
+/*//paginacion de elementos*/
+
+.paginacion{
+    display: flex;
+    flex-direction: row;
+    /*margin: 0 auto;*/
+    background: none;
+    /*width: 100%;*/
+    /*height: 50px;*/
+    justify-content:  center;  
+    margin:20px 0;
+    
+}
+.paginacion nav{
+    background: none;
+    margin-bottom: 50px;
+}
+.paginacion nav a{
+    font-weight: bold;
+    text-decoration: none;
+    background: white;
+    color:black;
+    margin: 0 5px;
+    padding: 5px 10px;
+    transition: all 0.3s;
+    box-shadow: 3px 3px black;
+}
+.paginacion nav a:last-child{
+    text-decoration: none;
+    background: white;
+    color:black;
+    margin: 0 5px;
+    padding: 5px 10px;
+    transition: all 0.3s;
+    box-shadow: -3px 3px black;
+}
+.paginacion nav span{
+    background: #0f005a;
+    color:white;
+    margin: 0 5px;
+    padding: 5px 10px;
+    
+}
+
+.paginacion nav a:hover{
+    cursor:pointer;
+    background: black;
+    color: white;
+    box-shadow: none;
+
+    outline: 1px solid black;
+}
+
+.form_busqueda_usuario_admin form{
+    background: none;
+    box-shadow: none;
+    padding:none;
+}
+form .btn{
+    display: flex;
+    flex-direction: column;
+}

@@ -47,7 +47,7 @@ class UsuarioController extends Controller
         if($request->id_usuario && Auth::user()->rol==2){
   
             $reglas=[
-                  'nombre' => ['required', 'string', 'max:255'],
+                'nombre' => ['required', 'string', 'max:255'],
                 'password' => ['required'],
                 'email' => 'required|unique:Users,email',
             ];
@@ -69,21 +69,43 @@ class UsuarioController extends Controller
  
         }
         if(Auth::check()){
+            if($request->email == Auth::user()->email){
+                $reglas=[
+                    'nombre' => ['required'],
+                    'password' => ['required'],
+                ];
+        
+                $mensajeError = [
+                    'required' => 'Cuidado!! el campo :attribute esta vacío',
+                    'unique'=>'Ya existe el correo introducido en la base de datos',
+                ];
+            }else{
+                 $reglas=[
+                    'nombre' => ['required', 'string', 'max:255'],
+                    'password' => ['required'],
+                    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                ];
+                $mensajeError = [
+                    'required' => 'Cuidado!! el campo :attribute esta vacío',
+                    'unique'=>'Ya existe el correo introducido en la base de datos',
+                ];
+            }
             
-            $request->validate([
-                  'nombre' => 'required', 'string', 'max:255',
-                'password' => 'required',
-                'email' => 'required|unique:Users,email',
-            ]);
+            $datosvalidados=$request->validate($reglas,$mensajeError);
+            
             $usuario = User::find(Auth::user()->id);
-            $usuario->nombre=$request->name;
+            $usuario->nombre=$request->nombre;
             $usuario->email=$request->email;
             $usuario->password=Hash::make($request->password);
+           
             $usuario->save();
             
             
-             return view('usuario.perfil',['user'=>$usuario])->with('mensaje', 'Se han modificado los datos del usuario correctamente');
+             return view('usuario.perfil',['usuario'=>$usuario])->with('mensaje', 'Se han modificado los datos del usuario correctamente');
  
+        }else{
+             return view('usuario.perfil',['usuario'=>$usuario])->with('mensaje', 'Se ha producido un fallo en la modificación de los datos del usuario. Por favor, contacte con administración');
+            
         }
     }
     
@@ -184,6 +206,27 @@ class UsuarioController extends Controller
                 ->select('libro.id','libro.titulo','autor.nombre as autor','libro.precio')->where('listadeseos.usuario_id',Auth::user()->id)
                 ->get();
         return view('usuario.listadeseos',['libros'=>$libros]);    
+        
+    }
+    
+    public function borrarlibrolistadeseos(Request $request){
+        if(Auth::check()){
+            
+            $user_id=Auth::user()->id;
+            $libro_id=$request->id;
+        
+            $deleted = DB::table('listadeseos')
+                   ->where('usuario_id', '=', $user_id)
+                   ->where('libro_id','=',$libro_id)
+                   ->delete();
+            
+           $libros =DB::table('listadeseos')
+                ->join('libro','listadeseos.libro_id','=','libro.id')
+                ->join('autor','libro.autor_id','=','autor.id')
+                ->select('libro.id','libro.titulo','autor.nombre as autor','libro.precio')->where('listadeseos.usuario_id',Auth::user()->id)
+                ->get();
+            return view('usuario.listadeseos',['libros'=>$libros]);
+        }
         
     }
     
@@ -296,7 +339,7 @@ class UsuarioController extends Controller
         $usuario_id=intval($request->id_usuario);
         $comentarios= DB::table('comentario')->join('usuario','comentario.usuario_id','=','usuario.id')->join('libro','comentario.libro_id','=','libro.id')->select('comentario.id','comentario.comentario','comentario.libro_id','libro.titulo')->where('usuario.id','=',$request->id_usuario)->get();
         $valoraciones= DB::table('calificaciones')->join('usuario','calificaciones.usuario_id','=','usuario.id')->join('libro','calificaciones.libro_id','=','libro.id')->select('calificaciones.id','calificaciones.calificacion','calificaciones.libro_id','libro.titulo')->where('usuario.id','=',$request->id_usuario)->get();
-        $compras=DB::table('compras')->join('usuario','compras.usuario_id','=','users.id')->select('compras.id','compras.*')->where('usuario.id','=',$request->id_usuario)->get();
+        $compras=DB::table('compras')->join('usuario','compras.usuario_id','=','usuario.id')->select('compras.id','compras.*')->where('usuario.id','=',$request->id_usuario)->get();
         $usuario = User::find($usuario_id);
         return view('administracion.interacciones',['comentarios'=>$comentarios,'calificaciones'=>$valoraciones,'pedidos'=>$compras,'usuario'=>$usuario]);
     }
@@ -323,10 +366,17 @@ class UsuarioController extends Controller
         
         if(Auth::user()->rol==2){
             
-          $usuarios = DB::table('users')->select('*')->where('name','LIKE','%'.$request->busqueda.'%')->orWhere('email','LIKE','%'.$request->busqueda.'%')->get();
+          $usuarios = DB::table('usuario')->select('*')->where('nombre','LIKE','%'.$request->busqueda.'%')->orWhere('email','LIKE','%'.$request->busqueda.'%')->get();
             
        
-            return view('administracion.usuariobusqueda',['$usuarios'=>$usuarios]);
+             $response = [
+                    "success"=>true,
+                    "mensaje"=>'Consulta correcta. Busqueda usuario',
+                    "busqueda"=>$request->busqueda,
+                    "usuarios"=>$usuarios
+                     ];
+//        $response(['data' => 'Error al realizar la búsqueda','respuesta'=>'respuesta a get','libros'=>$libros]);
+        return response()->json($response);
         }   
         
     }

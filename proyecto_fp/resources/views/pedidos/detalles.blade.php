@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('titulo','Pedidos')
 @section('contenido')
-<div class="container mt-5">
+<div class="pedidos">
   <h2>Confirmar Pedido</h2>
   @if (isset($carro))
   @php 

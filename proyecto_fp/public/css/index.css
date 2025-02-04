@@ -1,0 +1,27 @@
+/*Archivos con estilos*/
+/*estilos sobre elementos generales*/
+@import "general.css";
+/*estilo acciones de barra principal de navegacion*/
+@import "navegacion.css";
+/*estilos para table*/
+@import "tablas.css";
+/*estilos de libro/inicio -> estilos sobre los que se muestran los elemetos en las paginas principales*/
+@import "contenedorlibros.css";
+/*estilos para edicion se usuario miperfil -> view(usuario.perfil)*/
+@import "perfilUsuario.css";
+/*estilos detalles libro libro/detalle view(libro.detalle)*/
+@import "detallesLibro.css";
+/*estilos que se muestran las interacciones del usuario por parte del admin usuario/administracion/usuarios/interacciones-- view(administracion.interacciones)*/
+@import "interaccionUsuario.css";
+/*estilos para calificacion de libros en vista libro/detalle*/
+@import "rating.css";
+/*estilo que muestra los todos los autores al usuario ruta /autor - view(autor.todos)*/
+@import "contenedorautores.css";
+/*estilos para detalles de autor - ruta autor/detalle - view(autor.verautor)*/
+@import "detallesAutor.css";
+/*estilos para detalles de autor - ruta autor/detalle - view(autor.verautor)*/
+@import "estilosAdministracion.css";
+/*estilos pedidos de usuario ruta -> /pedidos/libros - view()*/
+@import "pedidosUsuario.css";
+/*estilos de botones particulares*/
+@import "varios.css";

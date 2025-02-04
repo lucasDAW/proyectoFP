@@ -1,4 +1,4 @@
-@extends('layouts.base')
+<!--@extends('layouts.base')
 @section('titulo','Login')
 
 @section('contenido')
@@ -9,7 +9,7 @@
     <h3>Iniciar sesion</h3>
     <form action='#' method="post" class="publicarLibro">
      @csrf
-     <!--titulo-->
+     titulo
      <div>
         <label for="email">Email: </label>
         <input type="text" id='email' name="email" placeholder="Introduzca email...">       
@@ -29,4 +29,4 @@
                     
 
 @endsection
-  
+  -->

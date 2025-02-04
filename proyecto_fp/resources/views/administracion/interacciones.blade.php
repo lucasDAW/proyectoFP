@@ -1,17 +1,20 @@
 
 @extends('administracion.index')
 @section('accion')
-                
-@isset($usuario)
-    <h3>Mostrando las interacciones del usuario: {{$usuario->name}}   |   {{$usuario->email}}</h3>
-@endisset
+        
+
+    
+            @isset($usuario)
+                <h3 class="cabecera">Mostrando las interacciones del usuario: {{$usuario->name}}   |   {{$usuario->email}}</h3>
+            @endisset
+      
   <div class='interacciones'>
       <div class='btn_interacciones'>
           <span valor='0'>Comentarios</span>
           <span valor='1'>Valoraciones</span>
           <span valor='2'>Pedidos</span>
       </div>
-      @if (isset($comentarios) and count($comentarios)>0)
+        @if (isset($comentarios) and count($comentarios)>0)
       <div class='comentarios'>
           <table>
           <thead>
@@ -75,7 +78,7 @@
       
       <!--//pedidos-->
       @isset($pedidos)
-      <div class="pedidos">
+      <div class="compras">
           <table>
           <thead>
               <tr>

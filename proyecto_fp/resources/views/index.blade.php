@@ -4,5 +4,5 @@
 <a href="{{route('subirarchivo')}}">Subir archivo</a>
 <a href="{{route('verfactura')}}">Ver ejemplo factura</a>
 <a href="{{route('leerdocumentos')}}">Ver Documentos</a>
-<p class="mensaje">ejempo de mendajes</p>
+<p class="mensaje">ejempo de mensajes <span class="aviso">!</span></p>
 @endsection
