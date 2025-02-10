@@ -16,7 +16,7 @@ class Libro extends Model
     protected $table = 'libro';
     
     // Definición de los atributos asignables en masa.
-    protected $fillable = ['titulo','descripcion','autor','fecha_lanzamiento','precio'];
+    protected $fillable = ['titulo','descripcion','autor','fecha_lanzamiento','categoria_id','precio'];
     
   /**
      * Get the comentarios for the libros.

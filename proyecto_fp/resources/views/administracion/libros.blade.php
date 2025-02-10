@@ -36,7 +36,7 @@
                           
                           <a href='{{route('detallelibro',['libro'=>$item->id])}}'>Ver Libro</a>
                           <a href='{{route('editarlibro',['libro'=>$item])}}'>Modificar</a>
-                          <a href='{{route('borrarlibroBBDD',['id'=>$item->id])}}'>Eliminar</a>
+                          <a href='{{route('borrar',['libro'=>$item->id])}}'>Eliminar</a>
                       </div>
                   </td>
               </tr>

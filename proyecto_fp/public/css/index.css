@@ -25,3 +25,5 @@
 @import "pedidosUsuario.css";
 /*estilos de botones particulares*/
 @import "varios.css";
+/*estilos para vista responsiva*/
+@import "responsivo.css";

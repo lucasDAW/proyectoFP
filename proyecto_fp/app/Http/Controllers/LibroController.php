@@ -288,17 +288,16 @@ class LibroController extends Controller
     }
     
     public function borrar(Libro $libro,Request $request){
-       return view('libro.eliminar',['id_libro'=>$request->id]);
+       return view('libro.eliminar',['libro'=>$libro->id]);
 
     }
     public function borrarBBDD(Libro $libro, Request $request){
         
-        $autorLibro= DB::table('archivos')->select('usuario_id')->where('libro_id',$request->id)->first();
+//        $autorLibro= DB::table('archivos')->select('usuario_id')->where('libro_id',$request->id)->first();
         
         
         if(Auth::check() && (Auth::user()->rol==2 || Auth::user()->id==$autorLibro->usuario_id) ){
-          $id = $request->input('id');
-        
+            $id = $request->input('id');
          
             if (isset($id)){
                 $libro = Libro::find($id);
@@ -447,10 +446,8 @@ class LibroController extends Controller
                     ->join('autor','autor.id','=','libro.autor_id')
                     ->selectRaw('count(pedidos.libro_id) as "Total", libro.id, libro.titulo,autor.nombre  as "autor"')
                     ->groupBy('libro.id', 'libro.titulo','autor.nombre')->orderBy("Total",'desc')
-                    ->get();
-//                    ->get();
-//                    var_dump($libros);
-//                    exit();
+                    ->simplePaginate(5);
+                    
                     
                     
                 }elseif($request->opcion=='comentarios'){
@@ -459,7 +456,7 @@ class LibroController extends Controller
                     ->join('autor','autor.id','=','libro.autor_id')
                     ->selectRaw('count(comentario.libro_id) as "Total", libro.id, libro.titulo,autor.nombre  as "autor"')
                     ->groupBy('libro.id', 'libro.titulo','autor.nombre')->orderBy("Total",'desc')
-                    ->get();
+                    ->simplePaginate(5);
                     
                 }elseif($request->opcion=='valoraciones'){
                      $libros =DB::table('libro')
@@ -468,7 +465,7 @@ class LibroController extends Controller
                     ->selectRaw('count(calificaciones.libro_id) as "Total", libro.id, libro.titulo,autor.nombre  as "autor"')
                     ->groupBy('libro.id', 'libro.titulo','autor.nombre')->orderBy("Total",'desc')
                     ->orderByDesc('Total')
-                    ->get();
+                    ->simplePaginate(5);
                 }else{
                     return back()->with('mensaje', 'opcion no contemplada');
                 }

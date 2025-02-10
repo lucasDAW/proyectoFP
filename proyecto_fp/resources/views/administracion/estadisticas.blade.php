@@ -33,6 +33,9 @@
               @endforeach
           </tbody>
       </table>
+            <div class="paginacion">
+                        {{ $libros->links() }}
+                </div> 
         @endisset
     </div>
 @endsection

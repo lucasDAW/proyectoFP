@@ -10,7 +10,7 @@
             <div class="accionesdetallelibro">
 
                 <a href="{{route('editarlibro',['libro'=>$libro])}}" class="btn_edit">Modificar libro</a>
-                <a href="{{route('borrarlibroBBDD',['id'=>$libro->id])}}" class="btn_eliminar">Eliminar libro</a>
+                <a href="{{route('borrar',['libro'=>$libro->id])}}" class="btn_eliminar">Eliminar libro</a>
             </div>
         @endif
     @endauth

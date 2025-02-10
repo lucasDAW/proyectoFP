@@ -216,4 +216,28 @@ if(li){
 //          alert('boton enter pulsado');
         }
       }))
+      
+//   ------------------------- RESPONSIVO -------------------------
+    const widthviewport = window.innerWidth;
+    if(widthviewport < 700){
+        
+        let botonVerNavegacion = document.querySelector('.enlaces .menu-icon');
+        let navegacion = document.querySelector('nav ul');
+        let perfil = document.querySelector('nav ul #perfil');
+        botonVerNavegacion.addEventListener('click',(e)=>{
+            e.preventDefault();
+            navegacion.classList.toggle('active');
+            botonVerNavegacion.classList.toggle('active');
+        });
+
+        perfil.addEventListener('click',(e)=>{
+            e.preventDefault();
+            console.log(e.target.parentElement);
+            let submenu = perfil.nextElementSibling;
+            submenu.classList.toggle('submenu-active');
+            
+            
+        });
+    }
+//   ------------------------- RESPONSIVO FIN -------------------------
 });

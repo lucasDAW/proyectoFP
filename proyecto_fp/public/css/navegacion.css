@@ -19,6 +19,8 @@ header{
 header img{
     height: 100px;
     transition: opacity 0.3s ease;
+    border-radius: 15px;
+    vertical-align: bottom;
 }
 header img:hover{
     height: 100px;
@@ -211,4 +213,28 @@ nav{
 }
     
 
+.enlaces ul .nombre .submenu li:nth-child(1) a:hover{
+    background: #e54141;;
+}
+.enlaces ul .nombre .submenu li:nth-child(2) a:hover{
+    
+    background: #185a18;;
+}
 
+.enlaces ul .nombre .submenu li{
+    padding: 5px 0;  
+}
+.enlaces .cesta{
+    display: inline;
+    
+}
+
+.menu-icon{
+    display:none;
+}
+.menu-icon .bar {
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #fff;
+}

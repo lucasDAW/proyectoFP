@@ -121,3 +121,12 @@ form .btn{
     flex-direction: column;
     align-items: center;
 }
+
+.estadisticas_contenido h2{
+    border-radius: 5px;
+    color: #000000;
+    background: #e0ff3e;
+    width: fit-content;
+    margin: 1% auto;
+    padding: 1% 5%;
+}

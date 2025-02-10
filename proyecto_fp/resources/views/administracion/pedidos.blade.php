@@ -10,7 +10,7 @@
         </form>
     </div>
   <div>
-      <table class='tabla_libro'>
+      <table class='tabla_pedidos'>
           <thead>
               <tr>
                   <th>id</th>

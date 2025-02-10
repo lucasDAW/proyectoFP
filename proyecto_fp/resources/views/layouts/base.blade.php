@@ -29,7 +29,11 @@
                 <a href='{{route('todoslibros')}}'><img id="header-image" src="{{asset("image/cabecera.webp")}}" alt="Cabecera" /></a>
            </div>
             <nav class="enlaces">
-               
+                <div class="menu-icon">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
                 <ul>
                     <li class="volver"><a href='{{ url()->previous() }}'><span>&#129044;</span> Volver  </a></li>
                     <li><a href='{{route('todoslibros')}}'> Libros</a></li>                                    

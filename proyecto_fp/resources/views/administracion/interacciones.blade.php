@@ -4,10 +4,10 @@
         
 
     
-            @isset($usuario)
-                <h3 class="cabecera">Mostrando las interacciones del usuario: {{$usuario->name}}   |   {{$usuario->email}}</h3>
-            @endisset
       
+            @isset($usuario)
+                <h3 class="cabecera-interaccion">Mostrando las interacciones del usuario: {{$usuario->name}}   |   {{$usuario->email}}</h3>
+            @endisset
   <div class='interacciones'>
       <div class='btn_interacciones'>
           <span valor='0'>Comentarios</span>
