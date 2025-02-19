@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Cookie;
 
 //INICIO ver todos los libros
 
-Route::get('/',[LibroController::class,'index'])->name('todoslibros');
+Route::get('/',[LibroController::class,'index'])->name('inicio');
 
 //LIBROS
 Route::prefix('/libro')->group(function () {
@@ -78,7 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'],'/usuario/libro/valorar/{comentario_id?}',[UsuarioController::class,'calificarLibro'])->name('calificarLibro');
 //    editar perfil usuario
     Route::get('/perfil/editar/', [UsuarioController::class, 'editarperfil'])->name('editarperfil');
-    Route::post('/perfil/editar/editar', [UsuarioController::class, 'modificarperfil'])->name('actualizarperfil');
+    Route::post('/perfil/editar', [UsuarioController::class, 'modificarperfil'])->name('actualizarperfil');
     //eliminar usuario
     Route::get('/perfil/eliminar/{id?}', [UsuarioController::class, 'eliminar'])->name('eliminarperfil');
     Route::post('/perfil/eliminando', [UsuarioController::class, 'eliminarbbdd'])->name('confirmareliminarusuario');
@@ -187,7 +187,7 @@ Route::get('/cookies',function(){
     Cookie::queue('primera_visita', true, 1*60*24*31);//1 hora
 //    var_dump(Cookie::get('primera_visita'));
 //    exit();
-    return redirect()->route('todoslibros');
+    return redirect()->route('inicio');
 
 })->name('cookies');
 //politica de privacidad

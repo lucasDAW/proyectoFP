@@ -28,11 +28,11 @@
         @csrf
         <!--Name--> 
         <div>
-            <label for="name"> Nombre</label>
+            <label for="nombre"> Nombre</label>
             @if (isset($usuario))
-                <input type='text' id='name' name="name" placeholder="Nombre...." value="{{$usuario->nombre}}"/>
+                <input type='text' id='nombre' name="nombre" placeholder="Nombre...." value="{{$usuario->nombre}}"/>
             @else
-                <input type='text' id='name' name="name" placeholder="Nombre...." value="{{Auth::user()->nombre}}"/>
+                <input type='text' id='nombre' name="nombre" placeholder="Nombre...." value="{{Auth::user()->nombre}}"/>
             @endif
         </div>
         

@@ -12,15 +12,26 @@ use App\Mail\AdministradorMail;
 
 class EmailController extends Controller
 {
-    //
+    /**
+     * Envía un correo electrónico de bienvenida.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function sendWelcomeEmail(){
         $title = 'Welcome to the laracoding.com example mail';
         $body = 'Thank you for participing';
         
         Mail::to('dawlucas1993@gmail.com')->send(new WelcomeMail($title,$body));
-        return redirect()->route('todoslibros')->with('mensaje', 'Se ha enviado el correo !!'); 
+        return redirect()->route('inicio')->with('mensaje', 'Se ha enviado el correo !!'); 
     }
-    
+       /**
+     * Envía un correo electrónico genérico.
+     *
+     * @param  string  $email  Dirección de correo electrónico del destinatario
+     * @param  string  $titulo  Título del correo electrónico
+     * @param  string  $cuerpo  Cuerpo del correo electrónico
+     * @return void
+     */
     public function sendEmail($email,$titulo,$cuerpo){
         
 //        $email = 'dawlucas1993@gmail.com';
@@ -28,12 +39,30 @@ class EmailController extends Controller
 //        Mail::to($email)->send(new WelcomeMail($titulo,$cuerpo));
 //        return redirect()->route('todoslibros')->with('mensaje', 'Se ha enviado el correo !!'); 
     }
+    
+    /**
+     * Envía un correo electrónico al administrador.
+     *
+     * @param  string  $email  Dirección de correo electrónico del administrador (actualmente fija)
+     * @param  string  $titulo  Título del correo electrónico
+     * @param  string  $cuerpo  Cuerpo del correo electrónico
+     * @return void
+     */
     public function sendEmailAdmin($email,$titulo,$cuerpo){
         
         $email = 'dawlucas1993@gmail.com';
         Mail::to($email)->send(new AdministradorMail($titulo,$cuerpo));
     }
-    
+     /**
+     * Envía una factura por correo electrónico.
+     *
+     * @param  int  $id_compra  ID de la compra
+     * @param  string  $usuario  Nombre del usuario
+     * @param  string  $email  Dirección de correo electrónico del usuario
+     * @param  array  $direcion  Dirección del usuario
+     * @param  array  $carro  Carrito de compra del usuario
+     * @return \Illuminate\Http\Response
+     */
     public function sendFactura($id_compra,$usuario,$email,$direcion,$carro){
         
         

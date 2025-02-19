@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
         
 
-        return redirect()->intended(route('todoslibros', absolute: false));
+        return redirect()->intended(route('inicio', absolute: false));
     }
 
     /**
@@ -42,6 +42,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('todoslibros');
+        return redirect()->route('inicio');
     }
 }

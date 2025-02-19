@@ -11,8 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class AutorController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
+     * Muestra un listado de autores.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
@@ -55,7 +59,12 @@ class AutorController extends Controller
         }
 
     }
-    
+    /**
+     * Muestra un listado de autores para administración.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function showAutores(Request $request){
         if($request->isMethod('POST')){
                 
@@ -77,7 +86,11 @@ class AutorController extends Controller
                 return view('administracion.autores',['autores'=>$autores,'autoresnull'=>$informacion]);
             }
     }
-
+    /**
+     * Muestra un listado de autores con información incompleta.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function corregirAutores(){
 
         $autores= DB::table('autor')->where('descripcion','=','NULL')->orWhere('fecha_nacimiento','=','NULL')->simplePaginate(8);
@@ -87,6 +100,10 @@ class AutorController extends Controller
     }
     /**
      * Show the form for creating a new resource.
+     * Muestra el formulario para crear un nuevo autor.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
     {
@@ -101,6 +118,10 @@ class AutorController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * Guarda un nuevo autor en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -150,11 +171,15 @@ class AutorController extends Controller
 
            return redirect()->route('verAutoresAdmin')->with('mensaje',($mensaje. ' el autor en la base de datos'));
         }
-           return redirect()->route('todosloslibros')->with('mensaje',('No tiene permisos'));
+           return redirect()->route('inicio')->with('mensaje',('No tiene permisos'));
     }
 
     /**
      * Display the specified resource.
+     * Muestra la información de un autor específico.
+     *
+     * @param  \App\Models\Autor  $autor
+     * @return \Illuminate\Http\Response
      */
     public function show(Autor $autor)
     {
@@ -195,6 +220,7 @@ class AutorController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * funcion ya implementada en create
      */
     public function edit(string $id)
     {
@@ -203,6 +229,7 @@ class AutorController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * funcion ya implementada en create
      */
     public function update(Request $request, string $id)
     {
@@ -211,6 +238,7 @@ class AutorController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * Borra el autor de la base de datos
      */
     public function destroy(Autor $autor)
     {
@@ -221,6 +249,6 @@ class AutorController extends Controller
               $mensaje = 'Se ha borrado ';
               return redirect()->route('verAutoresAdmin')->with('mensaje',($mensaje. 'el autor en la base de datos'));
           }
-         return redirect()->route('todosloslibros')->with('mensaje',('No tiene permisos'));
+         return redirect()->route('inicio')->with('mensaje',('No tiene permisos'));
     }
 }

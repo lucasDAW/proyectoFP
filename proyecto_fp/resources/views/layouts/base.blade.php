@@ -26,7 +26,7 @@
     <body >
         <header>
             <div class="cabecera-banner">
-                <a href='{{route('todoslibros')}}'><img id="header-image" src="{{asset("image/cabecera.webp")}}" alt="Cabecera" /></a>
+                <a href='{{route('inicio')}}'><img id="header-image" src="{{asset("image/cabecera.webp")}}" alt="Cabecera" /></a>
            </div>
             <nav class="enlaces">
                 <div class="menu-icon">
@@ -36,7 +36,7 @@
                 </div>
                 <ul>
                     <li class="volver"><a href='{{ url()->previous() }}'><span>&#129044;</span> Volver  </a></li>
-                    <li><a href='{{route('todoslibros')}}'> Libros</a></li>                                    
+                    <li><a href='{{route('inicio')}}'> Libros</a></li>                                    
                     <li><a href='{{route('mostrarAutores')}}'> Autores</a></li>
                     <li><a href='{{route('mostrarCategorias')}}'> Categorías</a></li>
                     <li class="cesta"> <a href="{{ route('mostrarTabla')}}">Ver Cesta</a></li>               

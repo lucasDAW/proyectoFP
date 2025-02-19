@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\DB;
 class ComentarioController extends Controller
 {
     //
-    
+    /**
+     * Permite a un usuario comentar un libro o editar un comentario existente.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function comentar(Request $request){
         
         $reglas=[
@@ -65,20 +70,36 @@ class ComentarioController extends Controller
         
         return 'comentar';
     }
-    
+     /**
+     * Muestra el formulario para editar un comentario.
+     *
+     * @param  \App\Models\Comentario  $comentario
+     * @return \Illuminate\Http\Response
+     */
     public function editarComentario(Comentario $comentario){
         
         return view('comentarios.editar',['comentario'=>$comentario]);
         
     }
-    
+     /**
+     * Muestra la página de confirmación para borrar un comentario.
+     *
+     * @param  \App\Models\Comentario  $comentario
+     * @return \Illuminate\Http\Response
+     */
     public function delete(Comentario $comentario){
         
         
         return view('comentarios.borrarComentario',['comentario'=>$comentario]);
     }
     
-    
+     /**
+     * Confirma el borrado de un comentario.
+     *
+     * @param  \App\Models\Comentario  $comentario
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function confirmarBorrado(Comentario $comentario, Request $request){
         
 //     

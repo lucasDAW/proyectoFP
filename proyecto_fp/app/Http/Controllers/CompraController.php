@@ -14,7 +14,12 @@ class CompraController extends Controller
     
     
     
-    
+     /**
+     * Muestra los pedidos de un usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function verPedidos(Request $request){
         
 //        var_dump($request->id);
@@ -28,7 +33,12 @@ class CompraController extends Controller
         }
 
     }
-    
+    /**
+     * Muestra los libros de un pedido específico.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function verLibrosPedido(Request $request){
         
         $libros= DB::table('libro')
@@ -63,7 +73,12 @@ class CompraController extends Controller
 
         }
     }
-    
+    /**
+     * Muestra la página de confirmación del pedido.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function confirmarPedido(Request $request){
         
         $carro = session()->get('cart');
@@ -73,7 +88,12 @@ class CompraController extends Controller
         return view('pedidos.detalles',['carro'=>$carro]);     
     }  
     
-    
+     /**
+     * Procesa la compra y guarda los datos en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function realizarcompra(Request $request){
 //        
         $reglas=[

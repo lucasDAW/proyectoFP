@@ -7,7 +7,11 @@ use App\Models\Libro;
 
 class CarritoController extends Controller
 {
-    
+     /**
+     * Muestra la tabla del carrito.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showTabla(){
         $cart = session()->get('cart');
         $total=0;
@@ -22,6 +26,13 @@ class CarritoController extends Controller
         
         return view('usuario.carro',['carro'=>$cart,'total'=>$total]);
     }
+    /**
+     * Añade un libro al carrito.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Libro  $libro
+     * @return \Illuminate\Http\Response
+     */
     public function add(Request $request, Libro $libro){
         
         
@@ -66,7 +77,12 @@ class CarritoController extends Controller
 
        
     }
-    
+    /**
+     * Borra un producto del carrito (usado para la tabla de resumen).
+     *
+     * @param  \Illuminate\Http\Request  $request -> id del libro
+     * @return void
+     */
     public function borrarProducto(Request $request){
         if($request->id){
             $cart = session()->get('cart');
@@ -77,7 +93,12 @@ class CarritoController extends Controller
             session()->flash('sucess','Producto eliminado');
         }
     }
-    
+    /**
+     * Elimina un libro del carrito (redirecciona).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function eliminarlibro(Request $request){
                 
         $cart = session()->get('cart');
@@ -93,7 +114,12 @@ class CarritoController extends Controller
                  return back();
 
     }
-    
+    /**
+     * Vacía el carrito.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function vaciarcarrito(Request $request){
         
 //        
@@ -105,15 +131,24 @@ class CarritoController extends Controller
 
         
     }
-    
+    /**
+     * Muestra el carrito (debug).
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showProduct(){
         $cart = session()->get('cart');
 
-        var_dump($cart);
+//        var_dump($cart);
         return view('usuario.carro', compact('cart'));
         
     }
-    
+      /**
+     * Aumenta la cantidad de un producto en el carrito.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function aumentar(Request $request){
         
         
@@ -121,7 +156,7 @@ class CarritoController extends Controller
         if($cart[strval($request->id)] and $cart[strval($request->id) ]['cantidad']<=10 ){
             $cart[strval($request->id) ]['cantidad']++;
         }
-        var_dump($cart);
+//        var_dump($cart);
         session()->put('cart',$cart);
 
 //        return view('usuario.carro',['carro'=>$cart]);    
@@ -129,7 +164,12 @@ class CarritoController extends Controller
 
     }
     
-    
+    /**
+     * Decrementa la cantidad de un producto en el carrito.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function descrementar(Request $request){
         $cart =session()->get('cart');
         if($cart[strval($request->id)]){

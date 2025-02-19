@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
 {
+    /**
+     * 
+     * @return Muestra el formulario de registro.
+     */
       public function crear()
     {       
             
@@ -20,6 +24,10 @@ class UsuarioController extends Controller
         return view('usuario.register');
     
     }
+    /**
+     * 
+     * @return Muestra el formulario de inicio de sesión.
+     */
       public function login()
     {       
             
@@ -27,7 +35,12 @@ class UsuarioController extends Controller
         return view('usuario.login');
     
     }
-    
+    /**
+     * 
+     *  Muestra el formulario para editar el perfil del usuario actual o de otro usuario (si es administrador).
+     * @param Request $request
+     * @return type
+     */
     public function editarperfil(Request $request){
         
 //     
@@ -41,6 +54,12 @@ class UsuarioController extends Controller
      return view('usuario.editar');
         
     }
+    /**
+     * 
+     * Edita el perfil del usuario actual o de otro usuario (si es administrador).
+     * @param Request $request
+     * @return type
+     */
     public function modificarperfil(Request $request){
         
 //        modificando un usuario desde el panel de admin
@@ -60,7 +79,7 @@ class UsuarioController extends Controller
         $datosvalidados=$request->validate($reglas,$mensajeError);
 
             $usuario = User::find($request->id_usuario);
-            $usuario->nombre=$request->name;
+            $usuario->nombre=$request->nombre;
             $usuario->email=$request->email;
             $usuario->password=Hash::make($request->password);
             $usuario->save();
@@ -108,7 +127,12 @@ class UsuarioController extends Controller
             
         }
     }
-    
+    /**
+     * 
+     * Muestra el perfil de un usuario específico
+     * @param Request $request
+     * @return type
+     */
     public function show(User $user,Request $request){
         
         $user = User::find($request->usuario_id);
@@ -125,7 +149,12 @@ class UsuarioController extends Controller
         
         
     }
-    
+     /**
+     * 
+     * Muestra las publicaciones del usuario actual
+     * @param Request $request
+     * @return type
+     */
     public function showMispublicaciones(Request $request){
         $libros =DB::table('archivos')
                 ->join('libro','archivos.libro_id','=','libro.id')
@@ -136,7 +165,12 @@ class UsuarioController extends Controller
         return view('usuario.mipublicaciones',['libros'=>$libros]);
     }
     
-  
+    /**
+     * 
+     * Muestra la confirmación para eliminar un usuario.
+     * @param Request $request
+     * @return type
+     */
     public function eliminar(Request $request){
        
 //        eliminando desde admin
@@ -148,7 +182,12 @@ class UsuarioController extends Controller
         return view('usuario.eliminar');    
 
     }
-    
+    /**
+     * 
+     * Elimina un usuario de la base de datos.
+     * @param Request $request
+     * @return type
+     */
     public function eliminarbbdd(Request $request){
         
 //        var_dump($request->id);
@@ -161,11 +200,16 @@ class UsuarioController extends Controller
         $request->session()->invalidate();
         Auth::guard('web')->logout();
         $request->session()->regenerateToken();
-        return redirect()->route('todoslibros')->with('mensaje', 'Se ha borrado el usuario correctamente de la base de datos');
+        return redirect()->route('inicio')->with('mensaje', 'Se ha borrado el usuario correctamente de la base de datos');
         
     }
     
-    
+    /**
+     * 
+     * Agrega o elimina un libro de la lista de deseos del usuario.
+     * @param Request $request
+     * @return type
+     */
     public function addlistadeseos(Request $request){
         
         if(Auth::check()){
@@ -196,7 +240,12 @@ class UsuarioController extends Controller
         return json_encode(array('libro'=>$libro_ya_en_lista));
 
     }
-    
+    /**
+     * 
+     * Muestra la lista de deseos del usuario.
+     * @param Request $request
+     * @return type
+     */
     public function showlistadeseos(){
         
 
@@ -208,7 +257,12 @@ class UsuarioController extends Controller
         return view('usuario.listadeseos',['libros'=>$libros]);    
         
     }
-    
+    /**
+     * 
+     *  Elimina un libro de la lista de deseos.
+     * @param Request $request
+     * @return type
+     */
     public function borrarlibrolistadeseos(Request $request){
         if(Auth::check()){
             
@@ -230,7 +284,12 @@ class UsuarioController extends Controller
         
     }
     
-    
+    /**
+     * 
+     * Permite calificar un libro.
+     * @param Request $request
+     * @return type
+     */
     public function calificarLibro(Request $request){
 
         if($request->isMethod('POST')){
@@ -257,6 +316,12 @@ class UsuarioController extends Controller
         
     }
 //    acciones que solo puede hacer el usuario de clase admin
+    /**
+     * 
+     * Muestra la página de acciones del administrador.
+     * @param Request $request
+     * @return type
+     */
     public function accionesAdmin(){
         
         if(Auth::check() && Auth::user()->rol==2){
@@ -270,7 +335,12 @@ class UsuarioController extends Controller
             return redirect()->back()->with('mensaje','No tiene permiso para entrar aqui.');
         }
     }
-    
+    /**
+     * 
+     * Muestra una lista paginada de todos los usuarios (para el administrador).
+     * @param Request $request
+     * @return type
+     */
     public function showall(Request $request){
         
         if ($request->isMethod('post') && Auth::user()->rol==2)
@@ -287,7 +357,12 @@ class UsuarioController extends Controller
             return redirect()->back()->with('mensaje','No tiene permiso para entrar aqui.');
         }
     }
-    
+    /**
+     * 
+     * Asigna el rol de administrador a un usuario.
+     * @param Request $request
+     * @return type
+     */
     public function hacerAdmin(User $user){
         $user->rol=2;
         $user->save();
@@ -295,7 +370,12 @@ class UsuarioController extends Controller
 
     }
     
-    
+    /**
+     * 
+     * Muestra el formulario para enviar un correo a un usuario.
+     * @param Request $request
+     * @return type
+     */
     public function enviarCorreoform(Request $request,User $user){
         
         $user = User::find($request->user_id);
@@ -304,7 +384,12 @@ class UsuarioController extends Controller
         
     }
    
-    
+    /**
+     * 
+     * Envía un correo electrónico a un usuario.
+     * @param Request $request
+     * @return type
+     */
     public function enviarCorreo(Request $request,User $user){
 
         
@@ -324,16 +409,13 @@ class UsuarioController extends Controller
 
         
     }
-
-     public function contactoCorreo(Request $request){
-      
-            $body=$request->cuerpo;
-            $titulo=$request->asunto;
-            $emaildestinatario='dawlucas1993@gmail.com';
-            $email = new EmailController('Mensaje para SENECA Administracion',$body);
-            $email->sendEmail($emaildestinatario,$titulo,$body);
-            return redirect()->route('inicio')->with('mensaje','Correo enviado!');
-    }
+ 
+    /**
+     * 
+     *  Muestra las interacciones de un usuario (comentarios, valoraciones, compras).
+     * @param Request $request
+     * @return type
+     */
     public function mostrarInteracciones(Request $request){
         
         $usuario_id=intval($request->id_usuario);
@@ -343,6 +425,12 @@ class UsuarioController extends Controller
         $usuario = User::find($usuario_id);
         return view('administracion.interacciones',['comentarios'=>$comentarios,'calificaciones'=>$valoraciones,'pedidos'=>$compras,'usuario'=>$usuario]);
     }
+    /**
+     * 
+     * Muestra una lista paginada de todos los pedidos.
+     * @param Request $request
+     * @return type
+     */
     public function verTodospedidos(){
         if(Auth::user()->rol==2){
             
@@ -356,11 +444,16 @@ class UsuarioController extends Controller
             
             return view('administracion.pedidos',['compras'=>$compras]);
         }else{
-            return redirect()->route('todoslibros')->with('mensaje', 'NO tiene permisos para ver la direccion introducida');
+            return redirect()->route('inicio')->with('mensaje', 'NO tiene permisos para ver la direccion introducida');
         }
     }
     
-    
+    /**
+     * 
+     * Permite buscar pedidos por nombre al usuario con rol administrador
+     * @param Request $request
+     * @return type
+     */
      public function busquedaAdmin(Request $request){
         
         
@@ -380,7 +473,12 @@ class UsuarioController extends Controller
         }   
         
     }
-    
+    /**
+     * 
+     * Permite buscar pedidos por ID.
+     * @param Request $request
+     * @return type
+     */
     public function busquedapedidoAdmin(Request $request){
         
         
@@ -401,9 +499,31 @@ class UsuarioController extends Controller
     }
     
     //estadisticas libros
+    /**
+     * 
+     *  Muestra la página de estadísticas
+     * @param Request $request
+     * @return type
+     */
     public function estadisticas(){
         
         return view('administracion.estadisticas');
+    }
+    
+       /**
+     * 
+     *  Envía un correo electrónico a la administración.
+     * @param Request $request
+     * @return type
+     */
+     public function contactoCorreo(Request $request){
+      
+            $body=$request->cuerpo;
+            $titulo=$request->asunto;
+            $emaildestinatario='dawlucas1993@gmail.com';
+            $email = new EmailController('Mensaje para SENECA Administracion',$body);
+            $email->sendEmail($emaildestinatario,$titulo,$body);
+            return redirect()->route('inicio')->with('mensaje','Correo enviado!');
     }
 
 }

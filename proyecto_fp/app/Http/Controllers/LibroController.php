@@ -16,7 +16,12 @@ use Illuminate\Http\File;
 class LibroController extends Controller
 {
     //
-    
+    /**
+     * Muestra la página principal con todos los libros.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {       
       
@@ -49,7 +54,12 @@ class LibroController extends Controller
     }
     
    
-    
+     /**
+     * Muestra la página de detalles de un libro específico.
+     *
+     * @param  \App\Models\Libro  $libro
+     * @return \Illuminate\Http\Response
+     */
     public function detalle(Libro $libro){
 //    
 //  
@@ -120,6 +130,11 @@ class LibroController extends Controller
 
         
     }
+    /**
+     * Muestra el formulario para crear un nuevo libro.
+     *
+     * @return \Illuminate\Http\Response
+     */
      public function crearVistaLibro()
     {
         $categorias = DB::table('categoria')->get();
@@ -127,6 +142,12 @@ class LibroController extends Controller
         return view('libro.publicar',['categorias'=>$categorias,'autores'=>$autores]);
 
     }
+    /**
+     * Publica un nuevo libro o modifica uno existente.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function publicarlibro(Request $request){
         
 
@@ -134,7 +155,7 @@ class LibroController extends Controller
         $reglas=[
             'titulo'=>'required|max:100',
             'descripcion'=>'required',
-            'fecha_lanzamiento'=>'regex:/^[0-9]{2,4}[a-z]([\.][c][.])?$/' ,
+            'fecha_lanzamiento'=>'regex:/^[0-9]{1,4}[a-z]?([\.][c][.])?$/' ,
             'precio'=>'required|min:0|numeric',
             'archivo'=>'required|mimes:pdf'
         ];
@@ -142,7 +163,7 @@ class LibroController extends Controller
             'required' => 'Cuidado!! el campo :attribute esta vacío',
             'integer'=>'Cuidado!! el campo :attribute debe ser un número entero',
             'numeric'=>'Cuidado!! el campo :attribute debe ser numérico(ej:10.50)',
-            'regex'=>'Cuidado!! el campo :attribute debe tener 4 cifras(año)',
+            'regex'=>'Cuidado!! el campo :attribute ha provocado un error',
             'mimes'=>'Cuidado!! el campo :attribute debe ser PDF',
         ];
         
@@ -268,9 +289,14 @@ class LibroController extends Controller
                 'portada' =>$portadaArchivo,
         ]);
         
-        return redirect()->route('todoslibros')->with('mensaje', $mensaje);
+        return redirect()->route('inicio')->with('mensaje', $mensaje);
     }
-    
+      /**
+     * Edita un libro existente.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function editar(Libro $libro){
     
         if(Auth::check()){
@@ -286,11 +312,22 @@ class LibroController extends Controller
         }
 
     }
-    
+     /**
+     * Genera la vista para borrar un libro existente.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function borrar(Libro $libro,Request $request){
        return view('libro.eliminar',['libro'=>$libro->id]);
 
     }
+     /**
+     * Borrar un libro existente en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function borrarBBDD(Libro $libro, Request $request){
         
 //        $autorLibro= DB::table('archivos')->select('usuario_id')->where('libro_id',$request->id)->first();
@@ -314,10 +351,15 @@ class LibroController extends Controller
             $mensaje = 'Debe tener permiso de admin para borrar el elemento';
         }
 
-        return redirect()->route('todoslibros')->with('mensaje', $mensaje);
+        return redirect()->route('inicio')->with('mensaje', $mensaje);
 
     }
-    
+     /**
+     * Busca un libro existente en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function busqueda(Request $request){
         
      
@@ -366,7 +408,12 @@ class LibroController extends Controller
   
     
 //   Funciones del usuario con rol ADMIN
-    
+     /**
+     * Borrar un libro existente en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function busquedaAdmin(Request $request){
         
         
@@ -406,7 +453,12 @@ class LibroController extends Controller
         }   
         
     }
-    
+     /**
+     * Genera un libro existente en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function indexAdmin(){
         $libros=Libro::simplePaginate(5);
            
@@ -434,6 +486,12 @@ class LibroController extends Controller
     
     
     //estadisticas libros
+     /**
+     * Muestra las estadisticas de un libro existente en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function estadisticas(Request $request){
         
         $opcionespermitidas=['pedidos','comentarios','valoraciones'];
@@ -480,7 +538,7 @@ class LibroController extends Controller
         }else{
             return back()->with('mensaje', 'NO tiene permisos!');
         }
-       ;
+       
     }
     
 }
