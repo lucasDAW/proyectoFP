@@ -65,7 +65,7 @@ El panel de administración permite a los usuarios con rol de administrador gest
     *   Generación de estadísticas sobre libros (libros más populares, categorías más visitadas, etc.).
 ## Tecnologías Utilizadas
 
-*   **Frontend:** HTML, CSS, JavaScript.
+*   **Frontend:** HTML, CSS, JavaScript,Blade.
 *   **Backend:** Lavavel 11.
 *   **Base de datos:** MySQL
 
