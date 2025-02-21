@@ -362,7 +362,7 @@ if(formulariobqdpedido){
     }
 }
 
-//+++++++++++++++++++++++++autores
+//+++++++++++++++++++++++++autores+++++++++++++++++++++++++++++++++++++++++++++++
 let autorcontenedor= document.querySelector('.autores-libro');
 if(autorcontenedor){
     let autoresselect= autorcontenedor.querySelector('select')
@@ -370,7 +370,7 @@ if(autorcontenedor){
 
         let indiceoption = document.createElement('option');
         indiceoption.setAttribute('value','999');
-        indiceoption.setAttribute('selected','true');
+//        indiceoption.setAttribute('selected','true');
         indiceoption.innerText='-- Lista de Autores --';
         autoresselect.appendChild(indiceoption);
         let autoresAll= autoresselect.querySelectorAll('option');

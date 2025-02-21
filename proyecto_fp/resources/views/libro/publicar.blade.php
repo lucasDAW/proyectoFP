@@ -52,12 +52,11 @@
         <input type="text" id="autorbusqueda" name="autorbusqueda" placeholder="Busqueda por nombre..."/>
         <select id="autorselect" name="autorselect">
             @foreach($autores as $a)
-            @isset($libro->categoria)
-                @if ($libro->categoria ==$a->id)
+                @if ($libro->autor_id ==$a->id)
                     <option value="{{$a->id}}" selected> {{$a->nombre}}</option>
+                @else
+                    <option value="{{$a->id}}"> {{$a->nombre}}</option>
                 @endif    
-            @endisset
-            <option value="{{$a->id}}"> {{$a->nombre}}</option>
             @endforeach
         </select>
         <label for="otroautor">
@@ -94,7 +93,12 @@
         <label for="categoria">Categoría: </label>
         <select name="categoriatext" id="categoria" name="categoriatext">
             @foreach($categorias as $c)
-                <option value="{{$c->id}}">{{$c->nombre}}</option>          
+           
+                @if($c->id ==$libro->categoria_id)
+                    <option value="{{$c->id}}" selected>{{$c->nombre}}</option>
+                @else
+                    <option value="{{$c->id}}" >{{$c->nombre}}</option>          
+                @endif    
             @endforeach
         </select>
     </div>
@@ -127,8 +131,11 @@
         
      </div>
      <div class="botones_form">
-         
-        <span class='mensajePublicacion'>El libro se esta publicando ...</span>
+           @if (isset($libro))
+                <span class='mensajePublicacion'>El libro se esta modificando...</span>
+           @else
+                <span class='mensajePublicacion'>El libro se esta publicando ...</span>
+           @endif
         @if (isset($libro))
             <input type='hidden' name='id' id='id' value='{{$libro->id}}'/>
             <input type="submit" value="Modificar" class="boton"/>

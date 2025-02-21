@@ -280,14 +280,30 @@ class LibroController extends Controller
             
             $mensaje =  'Se ha publicado el libro de forma correcta';
         }
-        $archivoLibro=$nombreArchivo;
-        $portadaLibro=$portadaArchivo;
-        DB::table('archivos')->updateOrInsert([
-                'usuario_id'=>Auth::user()->id,
-                'libro_id' => $id_libro,
-                'archivo'=>$nombreArchivo,
-                'portada' =>$portadaArchivo,
-        ]);
+        
+        if ($request->id){
+        
+        
+            $archivoLibro=$nombreArchivo;
+            $portadaLibro=$portadaArchivo;
+            DB::table('archivos')->where('libro_id',$request->id)
+                    ->update([
+                    'usuario_id'=>Auth::user()->id,
+                    'archivo'=>$nombreArchivo,
+                    'portada' =>$portadaArchivo,
+            ]);
+            
+        }else{
+            $archivoLibro=$nombreArchivo;
+            $portadaLibro=$portadaArchivo;
+            DB::table('archivos')->insert([
+                    'usuario_id'=>Auth::user()->id,
+                    'libro_id' => $id_libro,
+                    'archivo'=>$nombreArchivo,
+                    'portada' =>$portadaArchivo,
+            ]);
+            
+        }
         
         return redirect()->route('inicio')->with('mensaje', $mensaje);
     }
@@ -298,6 +314,7 @@ class LibroController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function editar(Libro $libro){
+       
     
         if(Auth::check()){
                     
