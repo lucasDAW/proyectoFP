@@ -52,7 +52,7 @@
         <input type="text" id="autorbusqueda" name="autorbusqueda" placeholder="Busqueda por nombre..."/>
         <select id="autorselect" name="autorselect">
             @foreach($autores as $a)
-                @if ($libro->autor_id ==$a->id)
+                @if (isset($libro) && $libro->autor_id ==$a->id )
                     <option value="{{$a->id}}" selected> {{$a->nombre}}</option>
                 @else
                     <option value="{{$a->id}}"> {{$a->nombre}}</option>
@@ -94,7 +94,7 @@
         <select name="categoriatext" id="categoria" name="categoriatext">
             @foreach($categorias as $c)
            
-                @if($c->id ==$libro->categoria_id)
+                @if(isset($libro) && $c->id ==$libro->categoria_id)
                     <option value="{{$c->id}}" selected>{{$c->nombre}}</option>
                 @else
                     <option value="{{$c->id}}" >{{$c->nombre}}</option>          

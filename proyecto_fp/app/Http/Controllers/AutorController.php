@@ -110,7 +110,7 @@ class AutorController extends Controller
         if(Auth::user()->rol==2){
         if($request->autor){
             $autor=Autor::find($request->autor);
-         return view('autor.crearautor',['autor'=>$autor]);
+            return view('autor.crearautor',['autor'=>$autor]);
         }
          return view('autor.crearautor');
         }
@@ -149,6 +149,7 @@ class AutorController extends Controller
             }else{
                 $perfilpath=null;
             }
+            //modificación de autor
             if ($request->id_autor){
                 $autor = Autor::find($request->id_autor);
                 $autor->nombre = $request->nombre;
@@ -157,7 +158,8 @@ class AutorController extends Controller
                 $autor->referencias = $request->referencias;
                 $autor->foto =$perfilpath;
                 $autor->save();
-                    $mensaje = 'Se ha modificado';
+                
+                $mensaje = 'Se ha modificado';
             }else{
                 $autor = new Autor();
                 $autor->nombre = $request->nombre;
