@@ -1,4 +1,4 @@
-Proyecto de fin de ciclo Desarrollo de Aplicaciones Webs
+# Proyecto de fin de ciclo Desarrollo de Aplicaciones Webs
 
 [![portada.png](https://i.postimg.cc/CM9D3SnQ/portada.png)](https://postimg.cc/F1g7ctZy)
 # Biblioteca Digital Seneca
@@ -12,7 +12,22 @@ Este proyecto es una biblioteca digital interactiva que permite a los usuarios e
 *   **Sección de Libros:**
     *   Visualización de libros por portada, título, autor y categoría.
     *   Opción de ver la descripción completa de cada libro.
-    *   Posibilidad de descargar o leer el libro en línea (si disponible).
+    *   Posibilidad de descargar o leer el libro en línea.
+    *   *   **Valoración y Comentarios:**
+        *   Los usuarios registrados pueden valorar los libros.
+        *   Los usuarios registrados pueden dejar comentarios sobre los libros.
+        *   Visualización de valoraciones promedio y comentarios de otros usuarios.
+  [![valoracion.png](https://i.postimg.cc/N0JyCN96/valoracion.png)](https://postimg.cc/gwhknHKj)
+    *   **Publicación de Libros:**
+        *   Los usuarios registrados pueden publicar sus propios libros.
+        *   Proceso de publicación guiado con campos para título, descripción, precio, autor, categoría, portada y archivo.
+        *   Moderación de libros publicados por el administrador.
+[![publicar.png](https://i.postimg.cc/4y5bd62B/publicar.png)](https://postimg.cc/q6NCD3T3)
+    *    *   **Compra de Libros:**
+        *   Proceso de compra sencillo e intuitivo.
+        *   Confirmación de compra con detalles del pedido.
+        *   **Envío de Factura:**
+            *   La factura en formato PDF se envía automáticamente al correo electrónico del usuario registrado después de la compra.
 [![libros.png](https://i.postimg.cc/Kv0t7L36/libros.png)](https://postimg.cc/HV7Jdr2z)
    **Sección de Autores:**
     *   Listado de autores con su biografía y libros publicados.
@@ -50,20 +65,8 @@ El panel de administración permite a los usuarios con rol de administrador gest
     *   Generación de estadísticas sobre libros (libros más populares, categorías más visitadas, etc.).
 ## Tecnologías Utilizadas
 
-*   **Frontend:** HTML, CSS, JavaScript (puedes especificar frameworks o librerías como React, Angular, Vue.js si los utilizaste).
-*   **Backend:** (Especifica el lenguaje y framework utilizado, ej. Python con Django, Node.js con Express, etc.).
-*   **Base de datos:** (Especifica la base de datos utilizada, ej. MySQL, PostgreSQL, MongoDB, etc.).
+*   **Frontend:** HTML, CSS, JavaScript.
+*   **Backend:** Lavavel 11.
+*   **Base de datos:** MySQL
 
-## Instalación
 
-1.  Clona el repositorio: `git clone https://github.com/tu-usuario/nombre-del-repositorio.git`
-2.  Accede al directorio del proyecto: `cd nombre-del-repositorio`
-3.  Instala las dependencias: (especifica los comandos, ej. `npm install` para Node.js, `pip install -r requirements.txt` para Python, etc.).
-4.  Configura la base de datos: (detalla los pasos para configurar la conexión a la base de datos).
-5.  Inicia el servidor: (especifica los comandos, ej. `npm start` para Node.js, `python manage.py runserver` para Python, etc.).
-
-## Uso
-
-1.  Abre el navegador y accede a la URL de la aplicación (ej. `http://localhost:8000`).
-2.  Explora las diferentes secciones de la biblioteca digital.
-3.  Utiliza el buscador dinámico para encontrar libros de tu interés.
