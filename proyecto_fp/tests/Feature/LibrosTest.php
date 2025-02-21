@@ -83,5 +83,8 @@ class LibrosTest extends TestCase
             'titulo', 'descripcion', 'fecha_lanzamiento', 'precio', 'archivo'
         ]); // 
    }
+   public function test_editar_libro(){
+       $libro = Libro::factory()->create();
+   }
  
 }

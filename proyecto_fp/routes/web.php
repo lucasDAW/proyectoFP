@@ -171,8 +171,8 @@ Route::post('/compra/confirmar',[CompraController::class,'realizarcompra'])->nam
 
 //pedidos
 //Route::get('/pedido',[CompraController::class,'mostrarPedido'])->name('mostrarPedidos');
-Route::get('/pedidos/{id}',[CompraController::class,'verPedidos'])->name('verpedidos');
-Route::get('/pedidos/libros/{compra_id}',[CompraController::class,'verLibrosPedido'])->name('verlibrospedido');
+Route::get('/usuario/pedidos/{id}',[CompraController::class,'verPedidos'])->name('verpedidos');
+Route::get('/usuario/pedidos/libros/{compra_id}',[CompraController::class,'verLibrosPedido'])->name('verlibrospedido');
 
 
 //correos

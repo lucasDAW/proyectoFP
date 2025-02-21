@@ -24,10 +24,12 @@ class CompraController extends Controller
         
 //        var_dump($request->id);
         $compras= DB::table('compras')->where('usuario_id',$request->id)->get();
-        
-        if(Auth::check()){
+        if(Auth::check() && Auth::user()->id==$request->id){
             
             return view('pedidos.mispedidos',['pedidos'=>$compras]);
+        }else if(Auth::check()){
+                
+            return back()->with('mensaje','No puede ver la información requerida.');
         }else{
             return back()->with('mensaje','Debe iniciar sesión para realizar pedido.');
         }
