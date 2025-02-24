@@ -66,8 +66,12 @@ class LibroController extends Controller
         $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario,u.nombre as name,u.id as usuario_id FROM comentario c , usuario u, libro l where l.id=c.libro_id and u.id=c.usuario_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
 //        $valoracion = DB::select('SELECT c.* FROM calificaciones c, users u ,libros l where c.libro_id=l.id and u.id=c.user_id and c.libro_id=:libro_id;', ['libro_id'=>$libro->id]);
         $valoracionmedia = DB::select("SELECT round(avg(calificacion),0) as media,round(avg(calificacion),2)as mediafloat FROM calificaciones WHERE libro_id=:libro_id", ['libro_id'=>$libro->id])[0];
-        $valoraciousuario = DB::select("SELECT calificacion  FROM calificaciones WHERE libro_id=:libro_id and usuario_id=:user_id", ['libro_id'=>$libro->id,'user_id'=>Auth::user()->id]);
-        $autorlibro = DB::table('autor')
+       if(Auth::check()){   
+            $valoraciousuario = DB::select("SELECT calificacion  FROM calificaciones WHERE libro_id=:libro_id and usuario_id=:user_id", ['libro_id'=>$libro->id,'user_id'=>Auth::user()->id]);
+       }else{
+           $valoraciousuario=0;
+       }
+       $autorlibro = DB::table('autor')
                 ->join('libro','autor.id','=','libro.autor_id')
                 ->select('autor.id','autor.nombre')
                 ->first();

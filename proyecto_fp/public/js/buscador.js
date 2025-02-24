@@ -37,6 +37,7 @@ let debounceTimer;
 //                let campobusqueda = input.value;
 //                let busqueda ={'busqueda':n};
                 let url= location.origin;
+//                console.log(url);
                 fetch(url+'/libro/busqueda',{
                     method:'POST',
 //                    body:busqueda,
