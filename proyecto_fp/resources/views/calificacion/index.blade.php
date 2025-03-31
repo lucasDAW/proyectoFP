@@ -28,7 +28,7 @@
     </div>
         <div>
         @if (isset($valoracionUsuario[0]->calificacion))
-        <h5>Valoración usuario</h5>
+        <h5>Mi Valoración</h5>
         <h4>{{$valoracionUsuario[0]->calificacion}}</h4>
         @endif
     </div>

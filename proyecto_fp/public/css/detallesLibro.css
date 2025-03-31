@@ -33,7 +33,7 @@
 }
 
 .contenedor-libro-detalle .portada-libro .imagen:hover{
-    transform: scale(1.5) translate(0%,10%);
+    transform: scale(1.5) translate(0%,20%);
     
 }
 .contenedor-libro-detalle .libro-detalles{
@@ -58,8 +58,12 @@
     left: -5%;
 }
 .contenedor-libro-detalle .libro-detalles .libro-titulo span:nth-child(2){
-    color:#f7f769;
-    text-shadow:1px 1px 1px black;
+    color: #d3d32a;
+    text-shadow: 1px 1px 1px #222020, -1px -1px 1px #222020;
+    border: 5px solid;
+    padding: 3%;
+    border-radius: 50%;
+    background: #5746d9;
 }
 .contenedor-libro-detalle .libro-detalles .libro-autor{
     font-size: 0.8em;
@@ -136,12 +140,12 @@
     height: 500px;
 }
 
-.contenedor-libro-detalle .libro-detalles .portada-libro .libro-calificacion{
-    margin:15px 0;
-    font-size: 1em;
-    color:#333;
+.contenedor-libro-detalle .portada-libro .libro-calificacion{
+   
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    text-align: center
 }
 .contenedor-libro-detalle .libro-detalles .libro-acciones{
     

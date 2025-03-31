@@ -1,5 +1,5 @@
 # Proyecto de fin de ciclo Desarrollo de Aplicaciones Webs
-
+---------------------------------------------------------------
 [![portada.png](https://i.postimg.cc/CM9D3SnQ/portada.png)](https://postimg.cc/F1g7ctZy)
 # Biblioteca Digital Seneca
 Biblioteca  donde los usuario pueden comprar libros, comentar sus libros favoritos y autopublicarse
