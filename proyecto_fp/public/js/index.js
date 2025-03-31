@@ -118,7 +118,7 @@ if(li){
     
     let img = document.querySelectorAll(".libro img");
 
-    
+     
     img.forEach((imagen)=>{
         imagen.addEventListener('mouseenter',(event)=>{
             img.forEach((i)=>{
@@ -127,6 +127,8 @@ if(li){
             event.target.style.borderRadius ='50px';
             event.target.style.filter= 'blur(0px)';
             event.target.parentNode.parentNode.querySelector('.add-to-cart').style.visibility= 'hidden';
+            
+            event.target.parentNode.querySelector('h3').style.opacity=0;
 
         });
 
@@ -143,8 +145,11 @@ if(li){
             imagen.style.filter= 'blur(0px)';
              event.target.style.borderRadius ='0%';
             event.target.style.filter= 'blur(0px)';
+            
             event.target.parentNode.parentNode.querySelector('.add-to-cart').style.visibility= 'visible';
+            event.target.parentNode.querySelector('h3').style.opacity=1;
 
+            
         });
 
     });

@@ -4,7 +4,7 @@
 @section('contenido')
 
     @if (isset($libro))
-    
+   
     @auth
         @if (isset($autor) and ($autor->existe==1 or Auth::user()->role = 'admin'))
             <div class="accionesdetallelibro">

@@ -63,7 +63,7 @@ class LibroController extends Controller
     public function detalle(Libro $libro){
 //    
 //  
-        $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario,u.nombre as name,u.id as usuario_id FROM comentario c , usuario u, libro l where l.id=c.libro_id and u.id=c.usuario_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
+        $comentarios = DB::select('SELECT c.id as id,c.comentario as comentario, c.created_at as fecha,u.nombre as name,u.id as usuario_id FROM comentario c , usuario u, libro l where l.id=c.libro_id and u.id=c.usuario_id and l.id=:libro_id;', ['libro_id'=>$libro->id]);
 //        $valoracion = DB::select('SELECT c.* FROM calificaciones c, users u ,libros l where c.libro_id=l.id and u.id=c.user_id and c.libro_id=:libro_id;', ['libro_id'=>$libro->id]);
         $valoracionmedia = DB::select("SELECT round(avg(calificacion),0) as media,round(avg(calificacion),2)as mediafloat FROM calificaciones WHERE libro_id=:libro_id", ['libro_id'=>$libro->id])[0];
        if(Auth::check()){   
@@ -71,15 +71,15 @@ class LibroController extends Controller
        }else{
            $valoraciousuario=0;
        }
+       
        $autorlibro = DB::table('autor')
                 ->join('libro','autor.id','=','libro.autor_id')
-                ->select('autor.id','autor.nombre')
-                ->first();
-         $categoria = DB::table('categoria')
+                ->select('autor.id','autor.nombre')->where('autor.id','LIKE',$libro->autor_id)->first();
+       
+       $categoria = DB::table('categoria')
                 ->join('libro','categoria.id','=','libro.categoria_id')
-                ->select('categoria.id','categoria.nombre')
+                ->select('categoria.id','categoria.nombre')->where('categoria.id','LIKE',$libro->categoria_id)
                 ->first();
-        
         
         if(Auth::check()){
             $listadeseos = DB::table('listadeseos')
@@ -333,12 +333,12 @@ class LibroController extends Controller
         }
 
     }
-     /**
-     * Genera la vista para borrar un libro existente.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /**
+    * Genera la vista para borrar un libro existente.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
     public function borrar(Libro $libro,Request $request){
        return view('libro.eliminar',['libro'=>$libro->id]);
 

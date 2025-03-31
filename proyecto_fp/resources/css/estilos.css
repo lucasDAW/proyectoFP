@@ -1371,19 +1371,17 @@ form input[type='checkbox']{
     margin: 0;
     color: #555;
     line-height: 1.5;
-    display: flex;
-    justify-content: flex-start;
+    /*display: flex;*/
+    /*justify-content: flex-start;*/
+}
+
+.contenedor-libro-detalle .libro-comentarios .comentario .fecha-comentario{
+    font-style: italic;
 }
 .contenedor-libro-detalle .libro-comentarios .comentario:hover{
     background: rgba(235 204 145 / 90%);
 }
-.contenedor-libro-detalle .libro-comentarios .comentario span{
-        margin-left: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-content: center;
-}
+
 .contenedor-libro-detalle .libro-comentarios .comentario span a{
     text-decoration: none;
     color:#fff;

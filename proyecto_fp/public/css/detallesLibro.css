@@ -181,18 +181,30 @@
     line-height: 1.5;
     display: flex;
     justify-content: flex-start;
+    flex-direction: column;
     
 }
 .contenedor-libro-detalle .libro-comentarios .comentario:hover{
     background: rgba(235 204 145 / 90%);
 }
 .contenedor-libro-detalle .libro-comentarios .comentario span{
-        margin-left: auto;
+/*        margin-left: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-content: center;
-        gap:10px;
+        gap:10px;*/
+}
+.contenedor-libro-detalle .libro-comentarios .comentario .fecha-comentario{
+    font-style: italic;
+    font-size: 0.75em;
+    border-bottom: 1px solid #746e6e;
+}
+.contenedor-libro-detalle .libro-comentarios .comentario .btn-comentario{
+    border-top: 1px solid #746e6e;
+    margin: 1% 0;
+    padding: 1% 0;
+    text-align: right;
 }
 .contenedor-libro-detalle .libro-comentarios .comentario span a{
     text-decoration: none;
