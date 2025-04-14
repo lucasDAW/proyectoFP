@@ -161,14 +161,17 @@ class LibroController extends Controller
             'descripcion'=>'required',
             'fecha_lanzamiento'=>'regex:/^[0-9]{1,4}[a-z]?([\.][c][.])?$/' ,
             'precio'=>'required|min:0|numeric',
-            'archivo'=>'required|mimes:pdf'
+            'portada'=>'mimes:jpeg,jpg,png|file|max:15728640',//15MB
+            'archivo'=>'required|mimes:pdf|file|max:15728640' //15MB
         ];
         $mensajeError = [
             'required' => 'Cuidado!! el campo :attribute esta vacío',
             'integer'=>'Cuidado!! el campo :attribute debe ser un número entero',
             'numeric'=>'Cuidado!! el campo :attribute debe ser numérico(ej:10.50)',
             'regex'=>'Cuidado!! el campo :attribute ha provocado un error',
-            'mimes'=>'Cuidado!! el campo :attribute debe ser PDF',
+            'archivo.mimes'=> 'Cuidado!! el campo :attribute debe ser PDF',
+            'portada.mimes'=> 'Cuidado!! el campo :attribute debe ser JPEG,JPG o PNG',
+            'max'=>'Cuidado!! el campo :attribute debe ser menor a 15MB',
         ];
         
         //si no se rellenan los campos

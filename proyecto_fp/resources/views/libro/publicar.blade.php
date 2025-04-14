@@ -109,10 +109,10 @@
             <div class="archivos_portada">
         <label for="portada">Añadir Portada <span>&#8595;</span> </label>
                 <div>
-                    <span >Arrastra archivos </span> o <button>seleccione un archivo</button>
-                    <p>archivo de imagen.</p>
+                    <span >Arrastra archivo </span> o <button>seleccione un archivo</button>
+                    <p>Archivo de imagen.</p>
 <!--                    <input type="file" id="portada" name="portada" accept=".jpg, .jpeg, .png"/>-->
-                    <input type="file" id="portada" name="portada" accept=".jpg, .jpeg, .png" hidden/>
+                    <input type="file" id="portada" name="portada"  hidden/>
                     <ul id="documentos-imagenes"></ul>
                 </div>
             </div>
@@ -121,9 +121,9 @@
         <div class="archivos_archivo">
         <label for="archivo">Añadir Archivo<span>&#8595;</span> </label>
                 <div>
-                    <span >Arrastra archivos </span> o <button>seleccione un archivo</button>
+                    <span >Arrastra archivo </span> o <button>seleccione un archivo</button>
                     <p>Archivo PDF</p>
-                    <input type="file" id="archivo" name="archivo" accept='.pdf' hidden/>
+                    <input type="file" id="archivo" name="archivo" hidden/>
                     <ul id="documentos-imagenes"></ul>
                 </div>
             </div>
