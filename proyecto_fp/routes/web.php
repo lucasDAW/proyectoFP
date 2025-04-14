@@ -35,7 +35,7 @@ Route::prefix('/libro')->group(function () {
         //CREATE
         Route::get('/publicar',[LibroController::class,'crearVistaLibro'])->name('publicarvista');
         Route::post('/publicando',[LibroController::class,'publicarlibro'])->name('publicar');
-            //UPDATE
+        //UPDATE
         Route::get('/editar/{libro}', [LibroController::class, 'editar'])->name('editarlibro');
 
         //DELETE
