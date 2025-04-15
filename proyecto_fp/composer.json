@@ -68,7 +68,9 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "phpdocumentor/shim": true
+
         }
     },
     "minimum-stability": "stable",
