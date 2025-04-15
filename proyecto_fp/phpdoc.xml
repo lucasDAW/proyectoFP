@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor version="3.0">
+    <title>Documentación de la API de Laravel</title>
+    <paths>
+        <path>./app</path>
+        <path>./routes</path>
+        <path>./database/migrations</path>
+        <path>./database/seeders</path>
+        <path>./config</path>
+        </paths>
+    <output>
+        <format value="html"/>
+        <path>./docs</path>
+    </output>
+    <transformations>
+        <transformation writer="html"/>
+    </transformations>
+    <files>
+        <ignore>
+            <path>./public/archivos_libros</path>
+            </ignore>
+    </files>
+</phpdocumentor>

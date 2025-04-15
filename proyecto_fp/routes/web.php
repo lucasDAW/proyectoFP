@@ -22,22 +22,18 @@ Route::get('/',[LibroController::class,'index'])->name('inicio');
 
 //LIBROS
 Route::prefix('/libro')->group(function () {
-//    Route::get('/inicio',[LibroController::class,'index'])->name('todoslibros');
-//    Route::get('/busqueda',[LibroController::class,'busquedavista'])->name('busquedalibros');
 //    busqueda mediante input text sin cargr nueeva pagina solo con javascript
     Route::post('/busqueda',[LibroController::class,'busqueda']);
 //    detalle del libro
     Route::get('/detalle/{libro}',[LibroController::class,'detalle'])->name('detallelibro');
-    
     //solo los usuarios que han iniciado sesisión pueden acceder a las rutas siguientes
     Route::middleware('auth')->group(function () {
-    //    LIBROS
+    //LIBROS
         //CREATE
         Route::get('/publicar',[LibroController::class,'crearVistaLibro'])->name('publicarvista');
         Route::post('/publicando',[LibroController::class,'publicarlibro'])->name('publicar');
         //UPDATE
         Route::get('/editar/{libro}', [LibroController::class, 'editar'])->name('editarlibro');
-
         //DELETE
         Route::get('/borrar/{libro}', [LibroController::class, 'borrar'])->name('borrar');
         Route::post('/borrar/confirmar', [LibroController::class, 'borrarBBDD'])->name('confirmareliminar');
@@ -75,25 +71,16 @@ Route::middleware('auth')->group(function () {
 //    publicaciones del usuario
     Route::get('/usuario/mispublicaciones',[UsuarioController::class,'showMispublicaciones'])->name('mipublicaciones');
     //calificar libro
-    Route::match(['get', 'post'],'/usuario/libro/valorar/{comentario_id?}',[UsuarioController::class,'calificarLibro'])->name('calificarLibro');
+    Route::match(['get', 'post'],'/usuario/libro/valorar/{libro_id?}',[UsuarioController::class,'calificarLibro'])->name('calificarLibro');
 //    editar perfil usuario
     Route::get('/perfil/editar/', [UsuarioController::class, 'editarperfil'])->name('editarperfil');
     Route::post('/perfil/editar', [UsuarioController::class, 'modificarperfil'])->name('actualizarperfil');
     //eliminar usuario
     Route::get('/perfil/eliminar/{id?}', [UsuarioController::class, 'eliminar'])->name('eliminarperfil');
     Route::post('/perfil/eliminando', [UsuarioController::class, 'eliminarbbdd'])->name('confirmareliminarusuario');
-
-    
-////    LIBROS
-////  editar
-//    Route::get('/libro/editar/{libro}',[LibroController::class,'editar'])->name('editarlibro');
-////  eliminar
-//    Route::get('/libro/borrar/{id}',[LibroController::class,'borrar'])->name('borrarlibroBBDD');
-//    Route::post('/libro/borrar/confirmar',[LibroController::class,'borrarBBDD'])->name('confirmareliminar');
-    
     
     //  routes que solo pueden acceder los usuario con el rol admin    
-    Route::prefix('/administracion')->group(function () {    
+ Route::prefix('/administracion')->group(function () {    
 //        Route::get('/', [UsuarioController::class, 'accionesAdmin'])->name('inicioadmin');
 //        usuarios
         Route::get('/usuarios', [UsuarioController::class, 'showall'])->name('vertodosUsuarios');
@@ -133,9 +120,6 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-//    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
 //COMENTARIOS 
 //crear comentario
@@ -211,36 +195,4 @@ Route::get('/terminos-servicio',function(){
 Route::get('/politica-cookies',function(){
     return view('administracion.cookies');
 })->name('vercookies');
-//----------------------------------- SE PUEDE BORRAR -----------------------------------
-//
-////prueba de subir archivos
-//Route::get('/libro/subir',[LibroController::class,'publicar'])->name('subirarchivo');
-//Route::post('/libro/subir',[LibroController::class,'subir'])->name('almacenandoarchivo');
-//Route::post('/libro/bajar',[LibroController::class,'bajar'])->name('descargar');
-
-//Route::get('/nuevoregistro',[UsuarioController::class,'crear'])->name('registrousuairo');
-
-////ver factura
-//Route::get('/factura/ver',
-//        function(){
-//    
-////    return view('emails.factura');
-//    return view('emails.admin');
-//        })->name('verfactura');
-
-        
-//Route::get('documentos',[LibroController::class,'leerdocumento'])->name('leerdocumentos');
-    
-
-
-
-//verificacion por email
-
-////Route::get('/home', function () {
-////    return 'Esta página es solo para usuarios verificados';
-////})->middleware(['auth', 'verified']);
-//Route::get('/ejemplos', function () {
-//    return view('index');
-//});
-//----------------------------------- SE PUEDE BORRAR -----------------------------------
  require __DIR__.'/auth.php';

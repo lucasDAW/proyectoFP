@@ -3,12 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\Autor;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Autor>
  */
 class AutorFactory extends Factory
 {
+    
+        protected $model = Autor::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,11 +20,11 @@ class AutorFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => $this->faker->name(),
-            'descripcion' => $this->faker->paragraph(), // Descripción aleatoria
-            'fecha_nacimiento' => $this->fake()->numberBetween(0, 2025), // Descripción aleatoria
-            'referencias' => $this->faker->url(), // Referencia aleatoria
-            'foto' => $this->faker->imageUrl(), // URL de foto aleatoria
+            'nombre' => fake()->name(),
+            'descripcion' => fake()->paragraph(), // Descripción aleatoria
+            'fecha_nacimiento'=> fake()->numberBetween(0, 2025), // Descripción aleatoria
+            'referencias' => fake()->url(), // Referencia aleatoria
+//            'foto' => fake()->imageUrl(), // URL de foto aleatoria
         ];
     }
 }

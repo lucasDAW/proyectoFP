@@ -87,6 +87,7 @@ class UsuarioController extends Controller
             return redirect()->route('vertodosUsuarios')->with('mensaje', 'Se han modificado los datos del usuario correctamente');
  
         }
+        
         if(Auth::check()){
             if($request->email == Auth::user()->email){
                 $reglas=[
@@ -295,13 +296,11 @@ class UsuarioController extends Controller
         if($request->isMethod('POST')){
             
             if(Auth::check()){
-    //            //           
-
-                    DB::table('calificaciones')
-                        ->updateOrInsert(
-                         ['usuario_id' => Auth::user()->id,'libro_id' => $request->libro],
-                         ['calificacion'=>$request->valoracion,]
-                        );
+                DB::table('calificaciones')
+                    ->updateOrInsert(
+                     ['usuario_id' => Auth::user()->id,'libro_id' => $request->libro],
+                     ['calificacion'=>$request->valoracion,]
+                    );
     //            
                 return json_encode(array('mensaje'=>'calificacion OK.'));
             }
@@ -310,7 +309,7 @@ class UsuarioController extends Controller
         if($request->isMethod('GET')){
             
             DB::table('calificaciones')->where('id', '=', $request->comentario_id)->delete();
-            return redirect()->back()->with('mensaje','Se ha borrado la califacación');
+            return redirect()->back()->with('mensaje','Se ha borrado la calificación');
 
         }
         

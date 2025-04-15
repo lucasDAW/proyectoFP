@@ -365,7 +365,7 @@ class LibroController extends Controller
        
                 $libro->delete();
                 DB::table('archivos')->where('libro_id', $id)->delete();
-                $mensaje =  'Se ha eliminado el libro de forma correcta';
+                $mensaje = 'Se ha eliminado el libro de forma correcta';
             }else{
               $mensaje =  'Error al eliminar el libro.';
 

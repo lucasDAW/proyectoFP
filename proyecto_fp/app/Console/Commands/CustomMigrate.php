@@ -26,7 +26,7 @@ class CustomMigrate extends Command
     public function handle()
     {
          $this->call('migrate', ['--path' => 'database/migrations/2023_01_01_000000_create_users_table.php']);
-    $this->call('migrate', ['--path' => 'database/migrations/2023_01_02_000000_create_posts_table.php']);
+        $this->call('migrate', ['--path' => 'database/migrations/2023_01_02_000000_create_posts_table.php']);
    
     }
 }
