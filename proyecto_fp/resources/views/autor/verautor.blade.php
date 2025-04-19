@@ -25,7 +25,7 @@
             
             @foreach($autorlibros as $libro)
                 <div class='libro'>
-                        <a href="/libros/detalle/{{$libro->libro_id}}">
+                    <a href="{{route('detallelibro',['libro'=>$libro->libro_id])}}">
                             <h3>{{$libro->titulo}}</h3>
                             @if (isset($libro->imagen_url))
                                 <img src="{{$libro->imagen_url}}" alt='{{$libro->titulo}}'/>

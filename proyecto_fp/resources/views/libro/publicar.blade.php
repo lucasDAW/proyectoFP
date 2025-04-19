@@ -73,9 +73,9 @@
         <!--fecha lanzamiento-->
         <label for="fecha_lanzamiento">Fecha de lanzamiento: </label>
         @if (isset($libro))
-            <input type="text" id='fecha_lanzamiento' name="fecha_lanzamiento" placeholder="Introduzca fecha de lanzamiento..." value='{{$libro->fecha_lanzamiento}}'>
+            <input type="text" id='fecha_lanzamiento' name="fecha_lanzamiento" placeholder="Introduzca año de lanzamiento..." value='{{$libro->fecha_lanzamiento}}'>
         @else
-            <input type="text" id='fecha_lanzamiento' name="fecha_lanzamiento" placeholder="Introduzca fecha de lanzamiento..." >
+            <input type="text" id='fecha_lanzamiento' name="fecha_lanzamiento" placeholder="Introduzca año de lanzamiento..." >
         @endif
         
     </div>
